@@ -402,7 +402,90 @@ div.tocify {
 </div>
 
 
-
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This is the heart of my online journal where i will be working through problems provided by the instructor as well as practicing code on my own.</p>
+</div>
+<div id="practice" class="section level1">
+<h1>Practice</h1>
+<p>Histogram</p>
+<pre class="r"><code>samples&lt;- rnorm(100, mean=50, sd=5)
+hist(samples)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div id="easier-problems" class="section level1">
+<h1>Easier Problems</h1>
+<ol style="list-style-type: decimal">
+<li>Do simple math with numbers, addition, subtraction, multiplication and division</li>
+</ol>
+<pre class="r"><code>2+3</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>12-7</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>5*3</code></pre>
+<pre><code>## [1] 15</code></pre>
+<pre class="r"><code>25/2.5</code></pre>
+<pre><code>## [1] 10</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Put numbers into variables, do simple math on the variables</li>
+</ol>
+<pre class="r"><code>x&lt;- 22
+y&lt;- 4
+z&lt;- 6
+x-y</code></pre>
+<pre><code>## [1] 18</code></pre>
+<pre class="r"><code>y*z</code></pre>
+<pre><code>## [1] 24</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Write a code that will place the numbers 1 to 100 separately into a variable using for loop. Then again using the seq function.</li>
+</ol>
+<pre class="r"><code>a&lt;- length(100)
+for(i in 1:100){
+  a[i]&lt;- i
+}</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Find the sum of all the integer numbers from 1 to 100.</p></li>
+<li><p>Write a function to find the sum of all integers between any two values.</p></li>
+<li><p>List all of the odd numbers from 1 to 100.</p></li>
+<li><p>List all of the prime numbers from 1 to 1000.</p></li>
+<li><p>Generate 100 random numbers.</p></li>
+<li><p>Generate 100 random numbers within a specific range.</p></li>
+<li><p>Write your own functions to give descriptive statistics for a vector variable storing multiple numbers. Write functions for the following without using R intrinsics: mean, mode, median, range, standard deviation.</p></li>
+<li><p>Count the number of characters in a string variable.</p></li>
+<li><p>Count the number of words in a string variable.</p></li>
+<li><p>Count the number of sentences in a string variable.</p></li>
+<li><p>Count the number of times a specific character occurs in a string variable.</p></li>
+<li><p>Do a logical test to see if one word is found within the text of another string variable.</p></li>
+<li><p>Put the current computer time in milliseconds into a variable.</p></li>
+<li><p>Measure how long a piece of code takes to run by measuring the time before the code is run, and after the code is run, and taking the difference to find the total time.</p></li>
+<li><p>Read a .txt file or .csv file into a variable.</p></li>
+<li><p>Output the contents of a variable to a .txt file.</p></li>
+<li><p>Create a variable that stores a 20x20 matrix of random numbers.</p></li>
+<li><p>Output any matrix to a txt file using commas or tabs to separate column values, and new lines to separate row values.</p></li>
+</ol>
+</div>
+<div id="harder-problems" class="section level1">
+<h1>Harder Problems</h1>
+<ol style="list-style-type: decimal">
+<li><p>The FizzBuzz Problem. List the numbers from 1 to 100 with the following constraints. If the number can be divided by three evenly, then print Fizz instead of the number. If the number can be divided by five evenly, then print Buzz instead of the number. Finally, if the number can be divided by three and five evenly, then print FizzBuzz instead of the number.</p></li>
+<li><p>Frequency Counts Take text as input, and be able to produce a table that shows the counts for each character in the text. This problem is related to the earlier easy problem asking you to count the number of times that a single letter appears in a text. The slightly harder problem is the more general version: count the frequencies of all unique characters in a text.</p></li>
+<li><p>Test the Random Number Generator Test the random number generator for a flat distribution. Generate a few million random numbers between 0 and 100. Count the number of 0s, 1s, 2s, 3s, etc. all the way up to 100. Look at the counts for each of the numbers and determine if they are relatively equal. For example, you could plot the counts in Excel to make a histogram. If all of the bars are close to being flat, then each number had an equal chance of being selected, and the random number generator is working without bias.</p></li>
+<li><p>Create a multiplication table Generate a matrix for a multiplication table. For example, the labels for the columns could be the numbers 1 to 10, and the labels for the rows could be the numbers 1 to 10. The contents of each of the cells in the matrix should be correct answer for multiplying the column value by the row value.</p></li>
+<li><p>Encrypt and Decrypt the Alphabet Turn any normal english text into an encrypted version of the text, and be able to turn any decrypted text back into normal english text. A simple encryption would be to scramble the alphabet such that each letter corresponds to a new randomly chosen (but unique) letter.</p></li>
+<li><p>Snakes and Ladders. Your task here is to write an algorithm that can simulate playing the above depicted Snakes and Ladders board. You should assume that each roll of the dice produces a random number between 1 and 6. After you are able to simulate one played game, you will then write a loop to simulate 1000 games, and estimate the average number of dice rolls needed to successfully complete the game.</p></li>
+<li><p>Dice-rolling simulations. Assume that a pair of dice are rolled. Using monte carlo-simulation, compute the probabilities of rolling a 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, and 12, respectively.</p></li>
+<li><p>Monte Hall problem. The monte-hall problem is as follows. A contestant in a game show is presented with three closed doors. They are told that a prize is behind one door, and two goats are behind the other two doors. They are asked to choose which door contains the prize. After making their choice the game show host opens one of the remaining two doors (not chosen by the contestant), and reveals a goat. There are now two door remaining. The contestant is asked if they would like to switch their choice to the other door, or keep their initial choice. The correct answer is that the participant should switch their initial choice, and choose the other door. This will increase their odds of winning. Demonstrate by monte-carlo simulation that the odds of winning is higher if the participant switches than if the participants keeps their original choice.</p></li>
+<li><p>100 doors problem. Problem: You have 100 doors in a row that are all initially closed. You make 100 passes by the doors. The first time through, you visit every door and toggle the door (if the door is closed, you open it; if it is open, you close it). The second time you only visit every 2nd door (door 2, 4, 6, etc.). The third time, every 3rd door (door 3, 6, 9, etc.), etc, until you only visit the 100th door.</p></li>
+</ol>
+<p>Question: What state are the doors in after the last pass? Which are open, which are closed?</p>
+<ol start="10" style="list-style-type: decimal">
+<li>99 Bottles of Beer Problem In this puzzle, write code to print out the entire “99 bottles of beer on the wall”&quot; song. For those who do not know the song, the lyrics follow this form: X bottles of beer on the wall X bottles of beer Take one down, pass it around X-1 bottles of beer on the wall</li>
+</ol>
+<p>Where X and X-1 are replaced by numbers of course, from 99 all the way down to 0.</p>
+<ol start="11" style="list-style-type: decimal">
+<li>Random Tic-Tac-Toe Imagine that two players make completely random choices when playing tic-tac-toe. Each game will either end in a draw or one of the two players will win. Create a monte-carlo simulation of this “random” version of tic-tac-toe. Out 10,000 simulations, what proportion of the time is the game won versus drawn?</li>
+</ol>
+</div>
 
 
 

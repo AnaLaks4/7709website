@@ -19,9 +19,9 @@ output: html_document
 
 # **My Lab Journal**
 
-This is a template example for lab journaling. Students in Matt Crump's Human Cognition and Performance Lab will use this template to learn R, and other things. Students can replace this text with more fun things. People not in my lab can use this too.
+This is my online R journal where i keep track of my progress in Matt Crump's Psych 7709 course. It is a work in progress that started January 28, 2019. Welcome. 
 
-## How to use
+## If you want to do the same
 
 1. fork the repo for this website and follow instructions on read me to get set up. [https://github.com/CrumpLab/LabJournalWebsite](https://github.com/CrumpLab/LabJournalWebsite)
 
@@ -31,6 +31,7 @@ This is a template example for lab journaling. Students in Matt Crump's Human Co
 
 4. Change everything to make it your own.
 
+  Happy Coding. 
 
 </div>
 <div class="col-sm-6">
