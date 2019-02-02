@@ -24,6 +24,22 @@ samples<- rnorm(100, mean=50, sd=5)
 hist(samples)
 ```
 
+Rent of $750 for 12 months added using a loop
+```{r}
+b<-length(12)
+for(j in 1:12){
+  b[j]<-750
+} 
+c<- sum(b)
+print(c)
+```
+
+Average function
+```{r}
+
+```
+
+
 
 # Easier Problems
 1. Do simple math with numbers, addition, subtraction, multiplication and division
@@ -51,34 +67,70 @@ for(i in 1:100){
 }
 ```
 
+```{r}
+d<-seq(1,100,1)
+print(d)
+```
+
 4. Find the sum of all the integer numbers from 1 to 100.
 ```{r}
-
+print(sum(d))
 ```
 
 5. Write a function to find the sum of all integers between any two values. 
 ```{r}
+sum_of_integers<-function(e,f){
+  return (sum(seq(e,f,1)))
+}
 
+
+sum_of_integers(8,99)
 ```
 
 6. List all of the odd numbers from 1 to 100.
 ```{r}
-
+odd<-seq(1,100,2)
+print(odd)
 ```
 
 7. List all of the prime numbers from 1 to 1000.
 ```{r}
+for (k in 3:1000){
+  prime<-TRUE
+  
+  for (x in 2:k-1){
+    
+    if(k %% x==0){
+      prime<-FALSE
+      
+    }
+  } 
+  if(prime == TRUE){
+    print(k)
+  }  
+  }
 
 ```
 
+```{r}
+
+
+
+
+```
+
+
 8. Generate 100 random numbers.
 ```{r}
+randnum<- sample(100)
+randnum
 
 ```
 
 9. Generate 100 random numbers within a specific range.
 ```{r}
-
+randrange<- sample(1:25,100,replace=T)
+randrange
 ```
 
 10. Write your own functions to give descriptive statistics for a vector variable storing multiple numbers. Write functions for the following without using R intrinsics: mean, mode, median, range, standard deviation.
