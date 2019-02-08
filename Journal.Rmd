@@ -34,11 +34,21 @@ c<- sum(b)
 print(c)
 ```
 
-Average function
+Plot sensitivity curves for S,M & L cones
 ```{r}
+Slen<- seq(320,500,10)
+Mlen<- seq(440,650,10)
+Llen<- seq(480,680,10)
+
+Smean<- 420
+Mmean<- 530
+Lmean<- 560
+
+Sx<-dnorm(Slen,Smean,1)
+
+plot(Slen,Sx,type="n", xlab ="Wavelength", ylab = "Sensitivity", axes = TRUE)
 
 ```
-
 
 
 # Easier Problems
@@ -95,13 +105,12 @@ print(odd)
 
 7. List all of the prime numbers from 1 to 1000.
 ```{r}
-for (k in 3:1000){
-  prime<-TRUE
+for (k in 2:1000) {
+  prime<- TRUE
   
-  for (x in 2:k-1){
-    
+  for (x in 2:(k-1)){
     if(k %% x==0){
-      prime<-FALSE
+      prime<- FALSE
       
     }
   } 
@@ -112,8 +121,8 @@ for (k in 3:1000){
 
 ```
 
+ -- still not done
 ```{r}
-
 
 
 
@@ -134,9 +143,36 @@ randrange
 ```
 
 10. Write your own functions to give descriptive statistics for a vector variable storing multiple numbers. Write functions for the following without using R intrinsics: mean, mode, median, range, standard deviation.
+
+Average function
 ```{r}
+vector <- c(3,4,3,2,5,8,12)
+aver<-function(avg_vec){
+  avg_vec<- (sum(vector))/length(vector)
+  return(avg_vec)
+}
+aver(vector)
+```
+Mode
+```{r}
+mode_vec <- vector
+mode<-function(mode_vec){
+  mode_vec<- sort(table(mode_vec))
+  return(mode_vec[length(vector)])
+
+}
+mode(vector)
 
 ```
+Median
+```{r}, eval=FALSE
+median<-function(med_vec){
+  med_vec<- ((sort(vector))(vector/2))
+  return(med_vec)
+}
+median(vector)
+```
+
 
 11. Count the number of characters in a string variable.
 ```{r}
@@ -155,6 +191,8 @@ randrange
 
 14. Count the number of times a specific character occurs in a string variable.
 ```{r}
+abc <- runif(50,0,100)
+table(abc)
 
 ```
 
@@ -165,7 +203,9 @@ randrange
 
 16. Put the current computer time in milliseconds into a variable.
 ```{r}
-
+now<- Sys.time()
+options(digits.secs=6)
+now
 ```
 
 17. Measure how long a piece of code takes to run by measuring the time before the code is run, and after the code is run, and taking the difference to find the total time.
@@ -185,7 +225,7 @@ randrange
 
 20. Create a variable that stores a 20x20 matrix of random numbers.
 ```{r}
-
+zyx <- matrix(0,nrow=20,ncol=20)
 ```
 
 21. Output any matrix to a txt file using commas or tabs to separate column values, and new lines to separate row values.
