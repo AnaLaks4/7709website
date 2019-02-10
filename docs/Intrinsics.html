@@ -383,6 +383,9 @@ div.tocify {
   <a href="Journal.html">Journal</a>
 </li>
 <li>
+  <a href="Intrinsics.html">Intrinsics</a>
+</li>
+<li>
   <a href="Links.html">Links</a>
 </li>
       </ul>
@@ -402,24 +405,275 @@ div.tocify {
 </div>
 
 
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
+<p>The following is in response to our 2nd week’s assignment. Using the provided list of functions I will define each and demonstrate the function in use.</p>
+<div id="general-bits" class="section level1">
+<h1>General Bits</h1>
+<ol style="list-style-type: decimal">
+<li>help(topic) – opens the help menu to the R Documentation on topic written in the parantheses</li>
+</ol>
+<pre class="r"><code>help(plot)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>?topic – similar to help(topic), opens R Documentation</li>
+</ol>
+<pre class="r"><code>?distribution</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>ls() – shows defined variables</li>
+</ol>
+<pre class="r"><code>ls()</code></pre>
+<pre><code>## character(0)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>dir() – shows files in directory</li>
+</ol>
+<pre class="r"><code>dir()</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;               &quot;docs&quot;                   
+##  [3] &quot;images&quot;                  &quot;index.Rmd&quot;              
+##  [5] &quot;Intrinsics_cache&quot;        &quot;Intrinsics.Rmd&quot;         
+##  [7] &quot;Journal_cache&quot;           &quot;Journal_files&quot;          
+##  [9] &quot;Journal.Rmd&quot;             &quot;LabJournalWebsite.Rproj&quot;
+## [11] &quot;Links.Rmd&quot;               &quot;README.md&quot;</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>list.files() – lists the files in a directory/folder</li>
+</ol>
+<pre class="r"><code>list.files()</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;               &quot;docs&quot;                   
+##  [3] &quot;images&quot;                  &quot;index.Rmd&quot;              
+##  [5] &quot;Intrinsics_cache&quot;        &quot;Intrinsics.Rmd&quot;         
+##  [7] &quot;Journal_cache&quot;           &quot;Journal_files&quot;          
+##  [9] &quot;Journal.Rmd&quot;             &quot;LabJournalWebsite.Rproj&quot;
+## [11] &quot;Links.Rmd&quot;               &quot;README.md&quot;</code></pre>
 </div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="Intrinsics_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+<div id="input-and-output" class="section level1">
+<h1>Input and Output</h1>
+<ol style="list-style-type: decimal">
+<li>save()</li>
+</ol>
+<pre class="r"><code>red&lt;- seq(1,20,2)
+save(red,file=&quot;seq.rmd&quot;)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>load() – reloads objects or datasets that were configured with save()</li>
+</ol>
+<pre class="r"><code>load(&quot;seq.rmd&quot;)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>data() –</li>
+</ol>
+<pre class="r"><code>?data</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><p>library() –</p></li>
+<li><p>read.table() –</p></li>
+<li><p>read.csv() –</p></li>
+<li><p>scan() –</p></li>
+<li><p>print() –</p></li>
+<li><p>cat() – concatenates two separate strings</p></li>
+</ol>
+<pre class="r"><code>AL &lt;-cat(&quot;ana&quot;,&quot;.&quot;,&quot;lakshin&quot;)</code></pre>
+<pre><code>## ana . lakshin</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>write.table() –</li>
+</ol>
+<pre class="r"><code>?write.table</code></pre>
+</div>
+<div id="data-creation" class="section level1">
+<h1>Data Creation</h1>
+<ol style="list-style-type: decimal">
+<li>c()</li>
+<li>from:to (where from and to are replaced with numbers, e.g. 1:10)</li>
+<li>seq()</li>
+<li>rep()</li>
+<li>data.frame()</li>
+<li>list()</li>
+<li>matrix()</li>
+<li>factor()</li>
+<li>rbind()</li>
+<li>cbind()</li>
+</ol>
+</div>
+<div id="slicing-and-extracting-data" class="section level1">
+<h1>Slicing and Extracting Data</h1>
+<div id="indexing-vectors" class="section level2">
+<h2>Indexing vectors</h2>
+<ol style="list-style-type: decimal">
+<li>x[n] nth element</li>
+<li>x[-n] all but nth element</li>
+<li>x[1:n] first n elements</li>
+<li>x[-(1:n)] elements from n+1 to the end</li>
+<li>x[c(1,4,2)] specific elements</li>
+<li>x[“name”] elements named “name”</li>
+<li>x[x&gt;3] all elements greater than 3</li>
+<li>x[x &gt; 3 &amp; x &lt; 5] all elements between 3 and 5</li>
+<li>x[x %in% c(“a”,“and”,“the”)] all elements in given set</li>
+</ol>
+</div>
+<div id="indexing-lists" class="section level2">
+<h2>Indexing lists</h2>
+<ol style="list-style-type: decimal">
+<li>x[n] list with elements n</li>
+<li>x[[n]] nt h element of the list</li>
+<li>x[[“name”]] element of the list named “name”</li>
+<li>x$name id.</li>
+</ol>
+</div>
+<div id="indexing-matrices" class="section level2">
+<h2>Indexing matrices</h2>
+<ol style="list-style-type: decimal">
+<li>x[i,j] element at row i, column j</li>
+<li>x[i,] row i</li>
+<li>x[,j] column j</li>
+<li>x[,c(1,3)] columns 1 and 3</li>
+<li>x[“name”,] row named “name”</li>
+</ol>
+</div>
+<div id="indexing-data-frames-matrix-indexing-plus-the-following" class="section level2">
+<h2>Indexing data frames (matrix indexing plus the following)</h2>
+<ol style="list-style-type: decimal">
+<li><p>x[[“name”]] column named “name” –</p></li>
+<li><p>x$nameid. –</p></li>
+</ol>
+</div>
+</div>
+<div id="variable-conversion" class="section level1">
+<h1>Variable Conversion</h1>
+<ol style="list-style-type: decimal">
+<li><p>as.data.frame(x) –</p></li>
+<li><p>as.numeric(x) – change the composition of a vector into numbers (if possible)</p></li>
+</ol>
+<pre class="r"><code>dod &lt;- c(5,&quot;4&quot;,7)
+as.numeric(dod)</code></pre>
+<pre><code>## [1] 5 4 7</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><p>as.logical(x) –</p></li>
+<li><p>as.character(x) –</p></li>
+</ol>
+</div>
+<div id="variable-information" class="section level1">
+<h1>Variable Information</h1>
+<ol style="list-style-type: decimal">
+<li>is.na(x)</li>
+<li>is.null(x)</li>
+<li>is.data.frame(x)</li>
+<li>is.numeric(x)</li>
+<li>is.character(x)</li>
+<li>length(x)</li>
+<li>dim(x)</li>
+<li>dimnames(x)</li>
+<li>nrow(x)</li>
+<li>ncol(x)</li>
+<li>class()</li>
+<li>attributes()</li>
+</ol>
+</div>
+<div id="data-selection-and-manipulation" class="section level1">
+<h1>Data Selection and Manipulation</h1>
+<ol style="list-style-type: decimal">
+<li>which.max()</li>
+<li>which.min()</li>
+<li>which()</li>
+<li>sort()</li>
+<li>unique()</li>
+<li>table()</li>
+<li>sample()</li>
+</ol>
+</div>
+<div id="math" class="section level1">
+<h1>Math</h1>
+<ol style="list-style-type: decimal">
+<li>max() – returns the maximum number of a set or vector</li>
+</ol>
+<pre class="r"><code>felix &lt;- seq(3,56,1.2)
+max(felix)</code></pre>
+<pre><code>## [1] 55.8</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>min() – returns the minimum number of a set or vector</li>
+</ol>
+<pre class="r"><code>min(felix)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>range() – returns the minimum and maximum of a set or vector</li>
+</ol>
+<pre class="r"><code>range(felix)</code></pre>
+<pre><code>## [1]  3.0 55.8</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>sum() – calculates the sum of a number set or vector</li>
+</ol>
+<pre class="r"><code>s_u &lt;-sum(felix)
+s_u</code></pre>
+<pre><code>## [1] 1323</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>mean() – function to find the mean of a number set or vector</li>
+</ol>
+<pre class="r"><code>m_ &lt;-mean(c(3,7,12,99,23,54))
+m_</code></pre>
+<pre><code>## [1] 33</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>median() – finds the median of a number set or vector</li>
+</ol>
+<pre class="r"><code>nad&lt;- seq(1,50,3)
+z&lt;- median(nad)
+z</code></pre>
+<pre><code>## [1] 25</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>var() – computes variance</li>
+</ol>
+<pre class="r"><code>?var</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li><p>sd() – computes standard deviation</p></li>
+<li><p>cor() – computes correlation</p></li>
+<li><p>round() –</p></li>
+<li><p>abs() –</p></li>
+</ol>
+</div>
+<div id="matrices" class="section level1">
+<h1>Matrices</h1>
+<ol style="list-style-type: decimal">
+<li><p>t() –</p></li>
+<li><p>diag() –</p></li>
+<li><p>rowSums() –</p></li>
+<li><p>colSums() –</p></li>
+<li><p>rowMeans() –</p></li>
+<li><p>colMeans() –</p></li>
+</ol>
+</div>
+<div id="advanced-data-processing" class="section level1">
+<h1>Advanced Data processing</h1>
+<ol style="list-style-type: decimal">
+<li><p>apply() –</p></li>
+<li><p>aggregate() –</p></li>
+</ol>
+</div>
+<div id="strings" class="section level1">
+<h1>Strings</h1>
+<ol style="list-style-type: decimal">
+<li><p>paste() –</p></li>
+<li><p>strsplit() –</p></li>
+<li>tolower()</li>
+<li><p>toupper</p></li>
+</ol>
+</div>
+<div id="plotting" class="section level1">
+<h1>Plotting</h1>
+<ol style="list-style-type: decimal">
+<li><p>hist()</p></li>
+<li><p>plot()</p></li>
+</ol>
+<pre class="r"><code>plot(rnorm(100,mean=38,sd=2))</code></pre>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+</div>
+<div id="distributions" class="section level1">
+<h1>Distributions</h1>
+<ol style="list-style-type: decimal">
+<li>rnorm()</li>
+<li>runif()</li>
+</ol>
+</div>
+<div id="programming" class="section level1">
+<h1>Programming</h1>
+<ol style="list-style-type: decimal">
+<li>Show that you can define a function</li>
+<li>Show that you can write a for loop</li>
+<li>Show that you can write a while loop</li>
+<li>Show that you can write an if else statement</li>
+<li>Explain what return() does inside a function, show you can use it</li>
+<li>Explain what break() does, show you can use it</li>
+</ol>
 </div>
 
 

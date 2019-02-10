@@ -6,6 +6,9 @@ navbar:
       href: index.html
     - text: "Journal"
       href: Journal.html
+    - text: "Intrinsics"
+      href: Intrinsics.html
     - text: "Links"
       href: Links.html
+
 output_dir: "docs"
