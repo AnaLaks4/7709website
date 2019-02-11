@@ -454,12 +454,37 @@ save(red,file=&quot;seq.rmd&quot;)</code></pre>
 </ol>
 <pre class="r"><code>load(&quot;seq.rmd&quot;)</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>data() –</li>
+<li>data() – lists the data sets currently known or saved, loads specificed data sets</li>
 </ol>
-<pre class="r"><code>?data</code></pre>
+<pre class="r"><code>data(&quot;iris&quot;)</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li><p>library() –</p></li>
-<li><p>read.table() –</p></li>
+<li>library() – lists the packages in R’s library and can load specified packages in library</li>
+</ol>
+<pre class="r"><code>library()</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>read.table() – opens a document or file as a table</li>
+</ol>
+<pre class="r"><code>read.table(file=&quot;int_prac.rtf&quot;,sep=&quot;,&quot;)</code></pre>
+<pre><code>##                                                                                                                                         V1
+## 1                                                                                 {\\rtf1\\ansi\\ansicpg1252\\cocoartf1671\\cocoasubrtf200
+## 2                                                                                            {\\fonttbl\\f0\\fswiss\\fcharset0 Helvetica;}
+## 3                                                                                                {\\colortbl;\\red255\\green255\\blue255;}
+## 4                                                                                                                {\\*\\expandedcolortbl;;}
+## 5                                                                                 \\margl1440\\margr1440\\vieww10800\\viewh8400\\viewkind0
+## 6  \\pard\\tx720\\tx1440\\tx2160\\tx2880\\tx3600\\tx4320\\tx5040\\tx5760\\tx6480\\tx7200\\tx7920\\tx8640\\pardirnatural\\partightenfactor0
+## 7                                                                                                                    \\f0\\fs24 \\cf0 Name
+## 8                                                                                                                                    Age\\
+## 9  \\pard\\tx720\\tx1440\\tx2160\\tx2880\\tx3600\\tx4320\\tx5040\\tx5760\\tx6480\\tx7200\\tx7920\\tx8640\\pardirnatural\\partightenfactor0
+## 10                                                                                                                               \\cf0 Ana
+## 11                                                                                                                                    23\\
+## 12                                                                                                                                    Fred
+## 13                                                                                                                                    34\\
+## 14                                                                                                                                     Dan
+## 15                                                                                                                                    62\\
+## 16                                                                                                                                   David
+## 17                                                                                                                                     12}</code></pre>
+<p>– did not execute properly, don’t know what wrong.</p>
+<ol start="6" style="list-style-type: decimal">
 <li><p>read.csv() –</p></li>
 <li><p>scan() –</p></li>
 <li><p>print() –</p></li>
@@ -479,9 +504,34 @@ save(red,file=&quot;seq.rmd&quot;)</code></pre>
 <li>from:to (where from and to are replaced with numbers, e.g. 1:10)</li>
 <li>seq()</li>
 <li>rep()</li>
-<li>data.frame()</li>
-<li>list()</li>
-<li>matrix()</li>
+<li>data.frame() – converts matrices into data frames</li>
+</ol>
+<pre class="r"><code>yan &lt;- matrix(seq(1,24,1), nrow=6, ncol = 4)
+data.frame(yan)</code></pre>
+<pre><code>##   X1 X2 X3 X4
+## 1  1  7 13 19
+## 2  2  8 14 20
+## 3  3  9 15 21
+## 4  4 10 16 22
+## 5  5 11 17 23
+## 6  6 12 18 24</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>list() –</li>
+</ol>
+<pre class="r"><code>?list</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>matrix() – creates a martix with specified rows and columns</li>
+</ol>
+<pre class="r"><code>yan &lt;- matrix(seq(1,24,1), nrow=6, ncol = 4)
+yan</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    7   13   19
+## [2,]    2    8   14   20
+## [3,]    3    9   15   21
+## [4,]    4   10   16   22
+## [5,]    5   11   17   23
+## [6,]    6   12   18   24</code></pre>
+<ol start="8" style="list-style-type: decimal">
 <li>factor()</li>
 <li>rbind()</li>
 <li>cbind()</li>
@@ -644,18 +694,23 @@ z</code></pre>
 <ol style="list-style-type: decimal">
 <li><p>paste() –</p></li>
 <li><p>strsplit() –</p></li>
-<li>tolower()</li>
-<li><p>toupper</p></li>
+<li><p>tolower() –</p></li>
+<li><p>toupper –</p></li>
 </ol>
 </div>
 <div id="plotting" class="section level1">
 <h1>Plotting</h1>
 <ol style="list-style-type: decimal">
-<li><p>hist()</p></li>
-<li><p>plot()</p></li>
+<li>hist() - function for creating a histogram</li>
+</ol>
+<pre class="r"><code>uk &lt;- rnorm(50,mean=20,sd=1)
+hist(uk)</code></pre>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>plot() – function for plotting a graph</li>
 </ol>
 <pre class="r"><code>plot(rnorm(100,mean=38,sd=2))</code></pre>
-<p><img src="Intrinsics_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 </div>
 <div id="distributions" class="section level1">
 <h1>Distributions</h1>

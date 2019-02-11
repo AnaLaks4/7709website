@@ -55,20 +55,21 @@ save(red,file="seq.rmd")
 load("seq.rmd")
 ```
 
-3. data() -- 
+3. data() -- lists the data sets currently known or saved, loads specificed data sets
 ```{r}
-?data
+data("iris")
 ```
 
-4. library() --
+4. library() -- lists the packages in R's library and can load specified packages in library
 ```{r}
-
+library()
 ```
 
-5. read.table() -- 
-```{r}
-
+5. read.table() -- opens a document or file as a table
+```{r} 
+read.table(file="int_prac.rtf",sep=",")
 ```
+ -- did not execute properly, don't know what wrong.
 
 6. read.csv() -- 
 ```{r}
@@ -101,9 +102,23 @@ AL <-cat("ana",".","lakshin")
 2. from:to (where from and to are replaced with numbers, e.g. 1:10)
 3. seq()
 4. rep()
-5. data.frame()
-6. list()
-7. matrix()
+5. data.frame() -- converts matrices into data frames
+```{r}
+yan <- matrix(seq(1,24,1), nrow=6, ncol = 4)
+data.frame(yan)
+```
+
+6. list() -- 
+```{r}
+?list
+```
+
+7. matrix() -- creates a martix with specified rows and columns
+```{r}
+yan <- matrix(seq(1,24,1), nrow=6, ncol = 4)
+yan
+```
+
 8. factor()
 9. rbind()
 10. cbind()
@@ -308,16 +323,25 @@ z
 
 ```
 
-3. tolower()
-4. toupper
-
-#Plotting
-1. hist()
+3. tolower() -- 
 ```{r}
 
 ```
 
-2. plot()
+4. toupper -- 
+```{r}
+
+```
+
+
+#Plotting
+1. hist() - function for creating a histogram
+```{r}
+uk <- rnorm(50,mean=20,sd=1)
+hist(uk)
+```
+
+2. plot() -- function for plotting a graph
 ```{r}
 plot(rnorm(100,mean=38,sd=2))
 ```
