@@ -62,7 +62,7 @@ data("iris")
 
 4. library() -- lists the packages in R's library and can load specified packages in library
 ```{r}
-library()
+library(ggplot2)
 ```
 
 5. read.table() -- opens a document or file as a table
@@ -118,7 +118,7 @@ print(sam)
 
 4. rep() -- replicates values in the specified variable
 ```{r}
-rep(nad)
+rep(sam)
 ```
 
 5. data.frame() -- converts matrices into data frames

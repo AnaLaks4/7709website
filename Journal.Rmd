@@ -165,11 +165,14 @@ mode<-function(mode_vec){
 ```
 Median
 ```{r}
-median<-function(med_vec){
-  med_vec<- ((sort(vector))(vector/2))
-  return(med_vec)
+median<-function(w){
+  w<- sort(w)
+  med<- round(length(w)/2, 1)
+     return(med)
+    
 }
-
+med_vec <- c(1,2,3,4,5)
+median(med_vec)
 ```
 
 

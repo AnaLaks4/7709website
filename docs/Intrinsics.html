@@ -460,7 +460,7 @@ save(red,file=&quot;seq.rmd&quot;)</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>library() – lists the packages in R’s library and can load specified packages in library</li>
 </ol>
-<pre class="r"><code>library()</code></pre>
+<pre class="r"><code>library(ggplot2)</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li>read.table() – opens a document or file as a table</li>
 </ol>
@@ -890,10 +890,36 @@ print(ans)</code></pre>
 <div id="data-creation" class="section level1">
 <h1>Data Creation</h1>
 <ol style="list-style-type: decimal">
-<li>c()</li>
+<li>c() – combines a vector so that a single variable could be assigned a set of numbers</li>
+</ol>
+<pre class="r"><code>abs&lt;- c(2,6,9,12)</code></pre>
+<ol start="2" style="list-style-type: decimal">
 <li>from:to (where from and to are replaced with numbers, e.g. 1:10)</li>
-<li>seq()</li>
-<li>rep()</li>
+</ol>
+<div id="not-sure-what-this-means" class="section level7">
+<p>not sure what this means?</p>
+<ol start="3" style="list-style-type: decimal">
+<li>seq() – function to create a sequence of numbers</li>
+</ol>
+<pre class="r"><code>sam&lt;- seq(4,18,.25)
+print(sam)</code></pre>
+<pre><code>##  [1]  4.00  4.25  4.50  4.75  5.00  5.25  5.50  5.75  6.00  6.25  6.50
+## [12]  6.75  7.00  7.25  7.50  7.75  8.00  8.25  8.50  8.75  9.00  9.25
+## [23]  9.50  9.75 10.00 10.25 10.50 10.75 11.00 11.25 11.50 11.75 12.00
+## [34] 12.25 12.50 12.75 13.00 13.25 13.50 13.75 14.00 14.25 14.50 14.75
+## [45] 15.00 15.25 15.50 15.75 16.00 16.25 16.50 16.75 17.00 17.25 17.50
+## [56] 17.75 18.00</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>rep() – replicates values in the specified variable</li>
+</ol>
+<pre class="r"><code>rep(sam)</code></pre>
+<pre><code>##  [1]  4.00  4.25  4.50  4.75  5.00  5.25  5.50  5.75  6.00  6.25  6.50
+## [12]  6.75  7.00  7.25  7.50  7.75  8.00  8.25  8.50  8.75  9.00  9.25
+## [23]  9.50  9.75 10.00 10.25 10.50 10.75 11.00 11.25 11.50 11.75 12.00
+## [34] 12.25 12.50 12.75 13.00 13.25 13.50 13.75 14.00 14.25 14.50 14.75
+## [45] 15.00 15.25 15.50 15.75 16.00 16.25 16.50 16.75 17.00 17.25 17.50
+## [56] 17.75 18.00</code></pre>
+<ol start="5" style="list-style-type: decimal">
 <li>data.frame() – converts matrices into data frames</li>
 </ol>
 <pre class="r"><code>yan &lt;- matrix(seq(1,24,1), nrow=6, ncol = 4)
@@ -906,9 +932,12 @@ data.frame(yan)</code></pre>
 ## 5  5 11 17 23
 ## 6  6 12 18 24</code></pre>
 <ol start="6" style="list-style-type: decimal">
-<li>list() –</li>
+<li>list() – creates a list</li>
 </ol>
-<pre class="r"><code>?list</code></pre>
+<pre class="r"><code>kin&lt;- list(&quot;a&quot;=2.5, &quot;b&quot;= TRUE, &quot;c&quot;= 2:5)</code></pre>
+</div>
+<div id="howdo-you-do-this-with-names" class="section level7">
+<p>howdo you do this with names?</p>
 <ol start="7" style="list-style-type: decimal">
 <li>matrix() – creates a martix with specified rows and columns</li>
 </ol>
@@ -926,6 +955,7 @@ yan</code></pre>
 <li>rbind()</li>
 <li>cbind()</li>
 </ol>
+</div>
 </div>
 <div id="slicing-and-extracting-data" class="section level1">
 <h1>Slicing and Extracting Data</h1>
@@ -1099,12 +1129,12 @@ z</code></pre>
 </ol>
 <pre class="r"><code>uk &lt;- rnorm(50,mean=20,sd=1)
 hist(uk)</code></pre>
-<p><img src="Intrinsics_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>plot() – function for plotting a graph</li>
 </ol>
 <pre class="r"><code>plot(rnorm(100,mean=38,sd=2))</code></pre>
-<p><img src="Intrinsics_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 </div>
 <div id="distributions" class="section level1">
 <h1>Distributions</h1>
