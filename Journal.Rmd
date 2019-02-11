@@ -155,22 +155,21 @@ aver(vector)
 ```
 Mode
 ```{r}
-mode_vec <- vector
 mode<-function(mode_vec){
   mode_vec<- sort(table(mode_vec))
   return(mode_vec[length(vector)])
 
 }
-mode(vector)
+
 
 ```
 Median
-```{r}, eval=FALSE
+```{r}
 median<-function(med_vec){
   med_vec<- ((sort(vector))(vector/2))
   return(med_vec)
 }
-median(vector)
+
 ```
 
 

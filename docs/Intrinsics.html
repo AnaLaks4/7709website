@@ -485,17 +485,407 @@ save(red,file=&quot;seq.rmd&quot;)</code></pre>
 ## 17                                                                                                                                     12}</code></pre>
 <p>– did not execute properly, don’t know what wrong.</p>
 <ol start="6" style="list-style-type: decimal">
-<li><p>read.csv() –</p></li>
-<li><p>scan() –</p></li>
-<li><p>print() –</p></li>
-<li><p>cat() – concatenates two separate strings</p></li>
+<li>read.csv() –</li>
+</ol>
+<pre class="r"><code>read.csv(file=&quot;iris.csv&quot;, header=TRUE, sep=&quot;&quot;)</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+## 1            5.1         3.5          1.4         0.2     setosa
+## 2            4.9         3.0          1.4         0.2     setosa
+## 3            4.7         3.2          1.3         0.2     setosa
+## 4            4.6         3.1          1.5         0.2     setosa
+## 5            5.0         3.6          1.4         0.2     setosa
+## 6            5.4         3.9          1.7         0.4     setosa
+## 7            4.6         3.4          1.4         0.3     setosa
+## 8            5.0         3.4          1.5         0.2     setosa
+## 9            4.4         2.9          1.4         0.2     setosa
+## 10           4.9         3.1          1.5         0.1     setosa
+## 11           5.4         3.7          1.5         0.2     setosa
+## 12           4.8         3.4          1.6         0.2     setosa
+## 13           4.8         3.0          1.4         0.1     setosa
+## 14           4.3         3.0          1.1         0.1     setosa
+## 15           5.8         4.0          1.2         0.2     setosa
+## 16           5.7         4.4          1.5         0.4     setosa
+## 17           5.4         3.9          1.3         0.4     setosa
+## 18           5.1         3.5          1.4         0.3     setosa
+## 19           5.7         3.8          1.7         0.3     setosa
+## 20           5.1         3.8          1.5         0.3     setosa
+## 21           5.4         3.4          1.7         0.2     setosa
+## 22           5.1         3.7          1.5         0.4     setosa
+## 23           4.6         3.6          1.0         0.2     setosa
+## 24           5.1         3.3          1.7         0.5     setosa
+## 25           4.8         3.4          1.9         0.2     setosa
+## 26           5.0         3.0          1.6         0.2     setosa
+## 27           5.0         3.4          1.6         0.4     setosa
+## 28           5.2         3.5          1.5         0.2     setosa
+## 29           5.2         3.4          1.4         0.2     setosa
+## 30           4.7         3.2          1.6         0.2     setosa
+## 31           4.8         3.1          1.6         0.2     setosa
+## 32           5.4         3.4          1.5         0.4     setosa
+## 33           5.2         4.1          1.5         0.1     setosa
+## 34           5.5         4.2          1.4         0.2     setosa
+## 35           4.9         3.1          1.5         0.2     setosa
+## 36           5.0         3.2          1.2         0.2     setosa
+## 37           5.5         3.5          1.3         0.2     setosa
+## 38           4.9         3.6          1.4         0.1     setosa
+## 39           4.4         3.0          1.3         0.2     setosa
+## 40           5.1         3.4          1.5         0.2     setosa
+## 41           5.0         3.5          1.3         0.3     setosa
+## 42           4.5         2.3          1.3         0.3     setosa
+## 43           4.4         3.2          1.3         0.2     setosa
+## 44           5.0         3.5          1.6         0.6     setosa
+## 45           5.1         3.8          1.9         0.4     setosa
+## 46           4.8         3.0          1.4         0.3     setosa
+## 47           5.1         3.8          1.6         0.2     setosa
+## 48           4.6         3.2          1.4         0.2     setosa
+## 49           5.3         3.7          1.5         0.2     setosa
+## 50           5.0         3.3          1.4         0.2     setosa
+## 51           7.0         3.2          4.7         1.4 versicolor
+## 52           6.4         3.2          4.5         1.5 versicolor
+## 53           6.9         3.1          4.9         1.5 versicolor
+## 54           5.5         2.3          4.0         1.3 versicolor
+## 55           6.5         2.8          4.6         1.5 versicolor
+## 56           5.7         2.8          4.5         1.3 versicolor
+## 57           6.3         3.3          4.7         1.6 versicolor
+## 58           4.9         2.4          3.3         1.0 versicolor
+## 59           6.6         2.9          4.6         1.3 versicolor
+## 60           5.2         2.7          3.9         1.4 versicolor
+## 61           5.0         2.0          3.5         1.0 versicolor
+## 62           5.9         3.0          4.2         1.5 versicolor
+## 63           6.0         2.2          4.0         1.0 versicolor
+## 64           6.1         2.9          4.7         1.4 versicolor
+## 65           5.6         2.9          3.6         1.3 versicolor
+## 66           6.7         3.1          4.4         1.4 versicolor
+## 67           5.6         3.0          4.5         1.5 versicolor
+## 68           5.8         2.7          4.1         1.0 versicolor
+## 69           6.2         2.2          4.5         1.5 versicolor
+## 70           5.6         2.5          3.9         1.1 versicolor
+## 71           5.9         3.2          4.8         1.8 versicolor
+## 72           6.1         2.8          4.0         1.3 versicolor
+## 73           6.3         2.5          4.9         1.5 versicolor
+## 74           6.1         2.8          4.7         1.2 versicolor
+## 75           6.4         2.9          4.3         1.3 versicolor
+## 76           6.6         3.0          4.4         1.4 versicolor
+## 77           6.8         2.8          4.8         1.4 versicolor
+## 78           6.7         3.0          5.0         1.7 versicolor
+## 79           6.0         2.9          4.5         1.5 versicolor
+## 80           5.7         2.6          3.5         1.0 versicolor
+## 81           5.5         2.4          3.8         1.1 versicolor
+## 82           5.5         2.4          3.7         1.0 versicolor
+## 83           5.8         2.7          3.9         1.2 versicolor
+## 84           6.0         2.7          5.1         1.6 versicolor
+## 85           5.4         3.0          4.5         1.5 versicolor
+## 86           6.0         3.4          4.5         1.6 versicolor
+## 87           6.7         3.1          4.7         1.5 versicolor
+## 88           6.3         2.3          4.4         1.3 versicolor
+## 89           5.6         3.0          4.1         1.3 versicolor
+## 90           5.5         2.5          4.0         1.3 versicolor
+## 91           5.5         2.6          4.4         1.2 versicolor
+## 92           6.1         3.0          4.6         1.4 versicolor
+## 93           5.8         2.6          4.0         1.2 versicolor
+## 94           5.0         2.3          3.3         1.0 versicolor
+## 95           5.6         2.7          4.2         1.3 versicolor
+## 96           5.7         3.0          4.2         1.2 versicolor
+## 97           5.7         2.9          4.2         1.3 versicolor
+## 98           6.2         2.9          4.3         1.3 versicolor
+## 99           5.1         2.5          3.0         1.1 versicolor
+## 100          5.7         2.8          4.1         1.3 versicolor
+## 101          6.3         3.3          6.0         2.5  virginica
+## 102          5.8         2.7          5.1         1.9  virginica
+## 103          7.1         3.0          5.9         2.1  virginica
+## 104          6.3         2.9          5.6         1.8  virginica
+## 105          6.5         3.0          5.8         2.2  virginica
+## 106          7.6         3.0          6.6         2.1  virginica
+## 107          4.9         2.5          4.5         1.7  virginica
+## 108          7.3         2.9          6.3         1.8  virginica
+## 109          6.7         2.5          5.8         1.8  virginica
+## 110          7.2         3.6          6.1         2.5  virginica
+## 111          6.5         3.2          5.1         2.0  virginica
+## 112          6.4         2.7          5.3         1.9  virginica
+## 113          6.8         3.0          5.5         2.1  virginica
+## 114          5.7         2.5          5.0         2.0  virginica
+## 115          5.8         2.8          5.1         2.4  virginica
+## 116          6.4         3.2          5.3         2.3  virginica
+## 117          6.5         3.0          5.5         1.8  virginica
+## 118          7.7         3.8          6.7         2.2  virginica
+## 119          7.7         2.6          6.9         2.3  virginica
+## 120          6.0         2.2          5.0         1.5  virginica
+## 121          6.9         3.2          5.7         2.3  virginica
+## 122          5.6         2.8          4.9         2.0  virginica
+## 123          7.7         2.8          6.7         2.0  virginica
+## 124          6.3         2.7          4.9         1.8  virginica
+## 125          6.7         3.3          5.7         2.1  virginica
+## 126          7.2         3.2          6.0         1.8  virginica
+## 127          6.2         2.8          4.8         1.8  virginica
+## 128          6.1         3.0          4.9         1.8  virginica
+## 129          6.4         2.8          5.6         2.1  virginica
+## 130          7.2         3.0          5.8         1.6  virginica
+## 131          7.4         2.8          6.1         1.9  virginica
+## 132          7.9         3.8          6.4         2.0  virginica
+## 133          6.4         2.8          5.6         2.2  virginica
+## 134          6.3         2.8          5.1         1.5  virginica
+## 135          6.1         2.6          5.6         1.4  virginica
+## 136          7.7         3.0          6.1         2.3  virginica
+## 137          6.3         3.4          5.6         2.4  virginica
+## 138          6.4         3.1          5.5         1.8  virginica
+## 139          6.0         3.0          4.8         1.8  virginica
+## 140          6.9         3.1          5.4         2.1  virginica
+## 141          6.7         3.1          5.6         2.4  virginica
+## 142          6.9         3.1          5.1         2.3  virginica
+## 143          5.8         2.7          5.1         1.9  virginica
+## 144          6.8         3.2          5.9         2.3  virginica
+## 145          6.7         3.3          5.7         2.5  virginica
+## 146          6.7         3.0          5.2         2.3  virginica
+## 147          6.3         2.5          5.0         1.9  virginica
+## 148          6.5         3.0          5.2         2.0  virginica
+## 149          6.2         3.4          5.4         2.3  virginica
+## 150          5.9         3.0          5.1         1.8  virginica</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>scan() – scans a file (??)</li>
+</ol>
+<pre class="r"><code>scan(file = &quot;iris.csv&quot;, what = list(&quot;&quot;))</code></pre>
+<pre><code>## [[1]]
+##   [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot; 
+##   [5] &quot;Species&quot;      &quot;1&quot;            &quot;5.1&quot;          &quot;3.5&quot;         
+##   [9] &quot;1.4&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;2&quot;           
+##  [13] &quot;4.9&quot;          &quot;3&quot;            &quot;1.4&quot;          &quot;0.2&quot;         
+##  [17] &quot;setosa&quot;       &quot;3&quot;            &quot;4.7&quot;          &quot;3.2&quot;         
+##  [21] &quot;1.3&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;4&quot;           
+##  [25] &quot;4.6&quot;          &quot;3.1&quot;          &quot;1.5&quot;          &quot;0.2&quot;         
+##  [29] &quot;setosa&quot;       &quot;5&quot;            &quot;5&quot;            &quot;3.6&quot;         
+##  [33] &quot;1.4&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;6&quot;           
+##  [37] &quot;5.4&quot;          &quot;3.9&quot;          &quot;1.7&quot;          &quot;0.4&quot;         
+##  [41] &quot;setosa&quot;       &quot;7&quot;            &quot;4.6&quot;          &quot;3.4&quot;         
+##  [45] &quot;1.4&quot;          &quot;0.3&quot;          &quot;setosa&quot;       &quot;8&quot;           
+##  [49] &quot;5&quot;            &quot;3.4&quot;          &quot;1.5&quot;          &quot;0.2&quot;         
+##  [53] &quot;setosa&quot;       &quot;9&quot;            &quot;4.4&quot;          &quot;2.9&quot;         
+##  [57] &quot;1.4&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;10&quot;          
+##  [61] &quot;4.9&quot;          &quot;3.1&quot;          &quot;1.5&quot;          &quot;0.1&quot;         
+##  [65] &quot;setosa&quot;       &quot;11&quot;           &quot;5.4&quot;          &quot;3.7&quot;         
+##  [69] &quot;1.5&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;12&quot;          
+##  [73] &quot;4.8&quot;          &quot;3.4&quot;          &quot;1.6&quot;          &quot;0.2&quot;         
+##  [77] &quot;setosa&quot;       &quot;13&quot;           &quot;4.8&quot;          &quot;3&quot;           
+##  [81] &quot;1.4&quot;          &quot;0.1&quot;          &quot;setosa&quot;       &quot;14&quot;          
+##  [85] &quot;4.3&quot;          &quot;3&quot;            &quot;1.1&quot;          &quot;0.1&quot;         
+##  [89] &quot;setosa&quot;       &quot;15&quot;           &quot;5.8&quot;          &quot;4&quot;           
+##  [93] &quot;1.2&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;16&quot;          
+##  [97] &quot;5.7&quot;          &quot;4.4&quot;          &quot;1.5&quot;          &quot;0.4&quot;         
+## [101] &quot;setosa&quot;       &quot;17&quot;           &quot;5.4&quot;          &quot;3.9&quot;         
+## [105] &quot;1.3&quot;          &quot;0.4&quot;          &quot;setosa&quot;       &quot;18&quot;          
+## [109] &quot;5.1&quot;          &quot;3.5&quot;          &quot;1.4&quot;          &quot;0.3&quot;         
+## [113] &quot;setosa&quot;       &quot;19&quot;           &quot;5.7&quot;          &quot;3.8&quot;         
+## [117] &quot;1.7&quot;          &quot;0.3&quot;          &quot;setosa&quot;       &quot;20&quot;          
+## [121] &quot;5.1&quot;          &quot;3.8&quot;          &quot;1.5&quot;          &quot;0.3&quot;         
+## [125] &quot;setosa&quot;       &quot;21&quot;           &quot;5.4&quot;          &quot;3.4&quot;         
+## [129] &quot;1.7&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;22&quot;          
+## [133] &quot;5.1&quot;          &quot;3.7&quot;          &quot;1.5&quot;          &quot;0.4&quot;         
+## [137] &quot;setosa&quot;       &quot;23&quot;           &quot;4.6&quot;          &quot;3.6&quot;         
+## [141] &quot;1&quot;            &quot;0.2&quot;          &quot;setosa&quot;       &quot;24&quot;          
+## [145] &quot;5.1&quot;          &quot;3.3&quot;          &quot;1.7&quot;          &quot;0.5&quot;         
+## [149] &quot;setosa&quot;       &quot;25&quot;           &quot;4.8&quot;          &quot;3.4&quot;         
+## [153] &quot;1.9&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;26&quot;          
+## [157] &quot;5&quot;            &quot;3&quot;            &quot;1.6&quot;          &quot;0.2&quot;         
+## [161] &quot;setosa&quot;       &quot;27&quot;           &quot;5&quot;            &quot;3.4&quot;         
+## [165] &quot;1.6&quot;          &quot;0.4&quot;          &quot;setosa&quot;       &quot;28&quot;          
+## [169] &quot;5.2&quot;          &quot;3.5&quot;          &quot;1.5&quot;          &quot;0.2&quot;         
+## [173] &quot;setosa&quot;       &quot;29&quot;           &quot;5.2&quot;          &quot;3.4&quot;         
+## [177] &quot;1.4&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;30&quot;          
+## [181] &quot;4.7&quot;          &quot;3.2&quot;          &quot;1.6&quot;          &quot;0.2&quot;         
+## [185] &quot;setosa&quot;       &quot;31&quot;           &quot;4.8&quot;          &quot;3.1&quot;         
+## [189] &quot;1.6&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;32&quot;          
+## [193] &quot;5.4&quot;          &quot;3.4&quot;          &quot;1.5&quot;          &quot;0.4&quot;         
+## [197] &quot;setosa&quot;       &quot;33&quot;           &quot;5.2&quot;          &quot;4.1&quot;         
+## [201] &quot;1.5&quot;          &quot;0.1&quot;          &quot;setosa&quot;       &quot;34&quot;          
+## [205] &quot;5.5&quot;          &quot;4.2&quot;          &quot;1.4&quot;          &quot;0.2&quot;         
+## [209] &quot;setosa&quot;       &quot;35&quot;           &quot;4.9&quot;          &quot;3.1&quot;         
+## [213] &quot;1.5&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;36&quot;          
+## [217] &quot;5&quot;            &quot;3.2&quot;          &quot;1.2&quot;          &quot;0.2&quot;         
+## [221] &quot;setosa&quot;       &quot;37&quot;           &quot;5.5&quot;          &quot;3.5&quot;         
+## [225] &quot;1.3&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;38&quot;          
+## [229] &quot;4.9&quot;          &quot;3.6&quot;          &quot;1.4&quot;          &quot;0.1&quot;         
+## [233] &quot;setosa&quot;       &quot;39&quot;           &quot;4.4&quot;          &quot;3&quot;           
+## [237] &quot;1.3&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;40&quot;          
+## [241] &quot;5.1&quot;          &quot;3.4&quot;          &quot;1.5&quot;          &quot;0.2&quot;         
+## [245] &quot;setosa&quot;       &quot;41&quot;           &quot;5&quot;            &quot;3.5&quot;         
+## [249] &quot;1.3&quot;          &quot;0.3&quot;          &quot;setosa&quot;       &quot;42&quot;          
+## [253] &quot;4.5&quot;          &quot;2.3&quot;          &quot;1.3&quot;          &quot;0.3&quot;         
+## [257] &quot;setosa&quot;       &quot;43&quot;           &quot;4.4&quot;          &quot;3.2&quot;         
+## [261] &quot;1.3&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;44&quot;          
+## [265] &quot;5&quot;            &quot;3.5&quot;          &quot;1.6&quot;          &quot;0.6&quot;         
+## [269] &quot;setosa&quot;       &quot;45&quot;           &quot;5.1&quot;          &quot;3.8&quot;         
+## [273] &quot;1.9&quot;          &quot;0.4&quot;          &quot;setosa&quot;       &quot;46&quot;          
+## [277] &quot;4.8&quot;          &quot;3&quot;            &quot;1.4&quot;          &quot;0.3&quot;         
+## [281] &quot;setosa&quot;       &quot;47&quot;           &quot;5.1&quot;          &quot;3.8&quot;         
+## [285] &quot;1.6&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;48&quot;          
+## [289] &quot;4.6&quot;          &quot;3.2&quot;          &quot;1.4&quot;          &quot;0.2&quot;         
+## [293] &quot;setosa&quot;       &quot;49&quot;           &quot;5.3&quot;          &quot;3.7&quot;         
+## [297] &quot;1.5&quot;          &quot;0.2&quot;          &quot;setosa&quot;       &quot;50&quot;          
+## [301] &quot;5&quot;            &quot;3.3&quot;          &quot;1.4&quot;          &quot;0.2&quot;         
+## [305] &quot;setosa&quot;       &quot;51&quot;           &quot;7&quot;            &quot;3.2&quot;         
+## [309] &quot;4.7&quot;          &quot;1.4&quot;          &quot;versicolor&quot;   &quot;52&quot;          
+## [313] &quot;6.4&quot;          &quot;3.2&quot;          &quot;4.5&quot;          &quot;1.5&quot;         
+## [317] &quot;versicolor&quot;   &quot;53&quot;           &quot;6.9&quot;          &quot;3.1&quot;         
+## [321] &quot;4.9&quot;          &quot;1.5&quot;          &quot;versicolor&quot;   &quot;54&quot;          
+## [325] &quot;5.5&quot;          &quot;2.3&quot;          &quot;4&quot;            &quot;1.3&quot;         
+## [329] &quot;versicolor&quot;   &quot;55&quot;           &quot;6.5&quot;          &quot;2.8&quot;         
+## [333] &quot;4.6&quot;          &quot;1.5&quot;          &quot;versicolor&quot;   &quot;56&quot;          
+## [337] &quot;5.7&quot;          &quot;2.8&quot;          &quot;4.5&quot;          &quot;1.3&quot;         
+## [341] &quot;versicolor&quot;   &quot;57&quot;           &quot;6.3&quot;          &quot;3.3&quot;         
+## [345] &quot;4.7&quot;          &quot;1.6&quot;          &quot;versicolor&quot;   &quot;58&quot;          
+## [349] &quot;4.9&quot;          &quot;2.4&quot;          &quot;3.3&quot;          &quot;1&quot;           
+## [353] &quot;versicolor&quot;   &quot;59&quot;           &quot;6.6&quot;          &quot;2.9&quot;         
+## [357] &quot;4.6&quot;          &quot;1.3&quot;          &quot;versicolor&quot;   &quot;60&quot;          
+## [361] &quot;5.2&quot;          &quot;2.7&quot;          &quot;3.9&quot;          &quot;1.4&quot;         
+## [365] &quot;versicolor&quot;   &quot;61&quot;           &quot;5&quot;            &quot;2&quot;           
+## [369] &quot;3.5&quot;          &quot;1&quot;            &quot;versicolor&quot;   &quot;62&quot;          
+## [373] &quot;5.9&quot;          &quot;3&quot;            &quot;4.2&quot;          &quot;1.5&quot;         
+## [377] &quot;versicolor&quot;   &quot;63&quot;           &quot;6&quot;            &quot;2.2&quot;         
+## [381] &quot;4&quot;            &quot;1&quot;            &quot;versicolor&quot;   &quot;64&quot;          
+## [385] &quot;6.1&quot;          &quot;2.9&quot;          &quot;4.7&quot;          &quot;1.4&quot;         
+## [389] &quot;versicolor&quot;   &quot;65&quot;           &quot;5.6&quot;          &quot;2.9&quot;         
+## [393] &quot;3.6&quot;          &quot;1.3&quot;          &quot;versicolor&quot;   &quot;66&quot;          
+## [397] &quot;6.7&quot;          &quot;3.1&quot;          &quot;4.4&quot;          &quot;1.4&quot;         
+## [401] &quot;versicolor&quot;   &quot;67&quot;           &quot;5.6&quot;          &quot;3&quot;           
+## [405] &quot;4.5&quot;          &quot;1.5&quot;          &quot;versicolor&quot;   &quot;68&quot;          
+## [409] &quot;5.8&quot;          &quot;2.7&quot;          &quot;4.1&quot;          &quot;1&quot;           
+## [413] &quot;versicolor&quot;   &quot;69&quot;           &quot;6.2&quot;          &quot;2.2&quot;         
+## [417] &quot;4.5&quot;          &quot;1.5&quot;          &quot;versicolor&quot;   &quot;70&quot;          
+## [421] &quot;5.6&quot;          &quot;2.5&quot;          &quot;3.9&quot;          &quot;1.1&quot;         
+## [425] &quot;versicolor&quot;   &quot;71&quot;           &quot;5.9&quot;          &quot;3.2&quot;         
+## [429] &quot;4.8&quot;          &quot;1.8&quot;          &quot;versicolor&quot;   &quot;72&quot;          
+## [433] &quot;6.1&quot;          &quot;2.8&quot;          &quot;4&quot;            &quot;1.3&quot;         
+## [437] &quot;versicolor&quot;   &quot;73&quot;           &quot;6.3&quot;          &quot;2.5&quot;         
+## [441] &quot;4.9&quot;          &quot;1.5&quot;          &quot;versicolor&quot;   &quot;74&quot;          
+## [445] &quot;6.1&quot;          &quot;2.8&quot;          &quot;4.7&quot;          &quot;1.2&quot;         
+## [449] &quot;versicolor&quot;   &quot;75&quot;           &quot;6.4&quot;          &quot;2.9&quot;         
+## [453] &quot;4.3&quot;          &quot;1.3&quot;          &quot;versicolor&quot;   &quot;76&quot;          
+## [457] &quot;6.6&quot;          &quot;3&quot;            &quot;4.4&quot;          &quot;1.4&quot;         
+## [461] &quot;versicolor&quot;   &quot;77&quot;           &quot;6.8&quot;          &quot;2.8&quot;         
+## [465] &quot;4.8&quot;          &quot;1.4&quot;          &quot;versicolor&quot;   &quot;78&quot;          
+## [469] &quot;6.7&quot;          &quot;3&quot;            &quot;5&quot;            &quot;1.7&quot;         
+## [473] &quot;versicolor&quot;   &quot;79&quot;           &quot;6&quot;            &quot;2.9&quot;         
+## [477] &quot;4.5&quot;          &quot;1.5&quot;          &quot;versicolor&quot;   &quot;80&quot;          
+## [481] &quot;5.7&quot;          &quot;2.6&quot;          &quot;3.5&quot;          &quot;1&quot;           
+## [485] &quot;versicolor&quot;   &quot;81&quot;           &quot;5.5&quot;          &quot;2.4&quot;         
+## [489] &quot;3.8&quot;          &quot;1.1&quot;          &quot;versicolor&quot;   &quot;82&quot;          
+## [493] &quot;5.5&quot;          &quot;2.4&quot;          &quot;3.7&quot;          &quot;1&quot;           
+## [497] &quot;versicolor&quot;   &quot;83&quot;           &quot;5.8&quot;          &quot;2.7&quot;         
+## [501] &quot;3.9&quot;          &quot;1.2&quot;          &quot;versicolor&quot;   &quot;84&quot;          
+## [505] &quot;6&quot;            &quot;2.7&quot;          &quot;5.1&quot;          &quot;1.6&quot;         
+## [509] &quot;versicolor&quot;   &quot;85&quot;           &quot;5.4&quot;          &quot;3&quot;           
+## [513] &quot;4.5&quot;          &quot;1.5&quot;          &quot;versicolor&quot;   &quot;86&quot;          
+## [517] &quot;6&quot;            &quot;3.4&quot;          &quot;4.5&quot;          &quot;1.6&quot;         
+## [521] &quot;versicolor&quot;   &quot;87&quot;           &quot;6.7&quot;          &quot;3.1&quot;         
+## [525] &quot;4.7&quot;          &quot;1.5&quot;          &quot;versicolor&quot;   &quot;88&quot;          
+## [529] &quot;6.3&quot;          &quot;2.3&quot;          &quot;4.4&quot;          &quot;1.3&quot;         
+## [533] &quot;versicolor&quot;   &quot;89&quot;           &quot;5.6&quot;          &quot;3&quot;           
+## [537] &quot;4.1&quot;          &quot;1.3&quot;          &quot;versicolor&quot;   &quot;90&quot;          
+## [541] &quot;5.5&quot;          &quot;2.5&quot;          &quot;4&quot;            &quot;1.3&quot;         
+## [545] &quot;versicolor&quot;   &quot;91&quot;           &quot;5.5&quot;          &quot;2.6&quot;         
+## [549] &quot;4.4&quot;          &quot;1.2&quot;          &quot;versicolor&quot;   &quot;92&quot;          
+## [553] &quot;6.1&quot;          &quot;3&quot;            &quot;4.6&quot;          &quot;1.4&quot;         
+## [557] &quot;versicolor&quot;   &quot;93&quot;           &quot;5.8&quot;          &quot;2.6&quot;         
+## [561] &quot;4&quot;            &quot;1.2&quot;          &quot;versicolor&quot;   &quot;94&quot;          
+## [565] &quot;5&quot;            &quot;2.3&quot;          &quot;3.3&quot;          &quot;1&quot;           
+## [569] &quot;versicolor&quot;   &quot;95&quot;           &quot;5.6&quot;          &quot;2.7&quot;         
+## [573] &quot;4.2&quot;          &quot;1.3&quot;          &quot;versicolor&quot;   &quot;96&quot;          
+## [577] &quot;5.7&quot;          &quot;3&quot;            &quot;4.2&quot;          &quot;1.2&quot;         
+## [581] &quot;versicolor&quot;   &quot;97&quot;           &quot;5.7&quot;          &quot;2.9&quot;         
+## [585] &quot;4.2&quot;          &quot;1.3&quot;          &quot;versicolor&quot;   &quot;98&quot;          
+## [589] &quot;6.2&quot;          &quot;2.9&quot;          &quot;4.3&quot;          &quot;1.3&quot;         
+## [593] &quot;versicolor&quot;   &quot;99&quot;           &quot;5.1&quot;          &quot;2.5&quot;         
+## [597] &quot;3&quot;            &quot;1.1&quot;          &quot;versicolor&quot;   &quot;100&quot;         
+## [601] &quot;5.7&quot;          &quot;2.8&quot;          &quot;4.1&quot;          &quot;1.3&quot;         
+## [605] &quot;versicolor&quot;   &quot;101&quot;          &quot;6.3&quot;          &quot;3.3&quot;         
+## [609] &quot;6&quot;            &quot;2.5&quot;          &quot;virginica&quot;    &quot;102&quot;         
+## [613] &quot;5.8&quot;          &quot;2.7&quot;          &quot;5.1&quot;          &quot;1.9&quot;         
+## [617] &quot;virginica&quot;    &quot;103&quot;          &quot;7.1&quot;          &quot;3&quot;           
+## [621] &quot;5.9&quot;          &quot;2.1&quot;          &quot;virginica&quot;    &quot;104&quot;         
+## [625] &quot;6.3&quot;          &quot;2.9&quot;          &quot;5.6&quot;          &quot;1.8&quot;         
+## [629] &quot;virginica&quot;    &quot;105&quot;          &quot;6.5&quot;          &quot;3&quot;           
+## [633] &quot;5.8&quot;          &quot;2.2&quot;          &quot;virginica&quot;    &quot;106&quot;         
+## [637] &quot;7.6&quot;          &quot;3&quot;            &quot;6.6&quot;          &quot;2.1&quot;         
+## [641] &quot;virginica&quot;    &quot;107&quot;          &quot;4.9&quot;          &quot;2.5&quot;         
+## [645] &quot;4.5&quot;          &quot;1.7&quot;          &quot;virginica&quot;    &quot;108&quot;         
+## [649] &quot;7.3&quot;          &quot;2.9&quot;          &quot;6.3&quot;          &quot;1.8&quot;         
+## [653] &quot;virginica&quot;    &quot;109&quot;          &quot;6.7&quot;          &quot;2.5&quot;         
+## [657] &quot;5.8&quot;          &quot;1.8&quot;          &quot;virginica&quot;    &quot;110&quot;         
+## [661] &quot;7.2&quot;          &quot;3.6&quot;          &quot;6.1&quot;          &quot;2.5&quot;         
+## [665] &quot;virginica&quot;    &quot;111&quot;          &quot;6.5&quot;          &quot;3.2&quot;         
+## [669] &quot;5.1&quot;          &quot;2&quot;            &quot;virginica&quot;    &quot;112&quot;         
+## [673] &quot;6.4&quot;          &quot;2.7&quot;          &quot;5.3&quot;          &quot;1.9&quot;         
+## [677] &quot;virginica&quot;    &quot;113&quot;          &quot;6.8&quot;          &quot;3&quot;           
+## [681] &quot;5.5&quot;          &quot;2.1&quot;          &quot;virginica&quot;    &quot;114&quot;         
+## [685] &quot;5.7&quot;          &quot;2.5&quot;          &quot;5&quot;            &quot;2&quot;           
+## [689] &quot;virginica&quot;    &quot;115&quot;          &quot;5.8&quot;          &quot;2.8&quot;         
+## [693] &quot;5.1&quot;          &quot;2.4&quot;          &quot;virginica&quot;    &quot;116&quot;         
+## [697] &quot;6.4&quot;          &quot;3.2&quot;          &quot;5.3&quot;          &quot;2.3&quot;         
+## [701] &quot;virginica&quot;    &quot;117&quot;          &quot;6.5&quot;          &quot;3&quot;           
+## [705] &quot;5.5&quot;          &quot;1.8&quot;          &quot;virginica&quot;    &quot;118&quot;         
+## [709] &quot;7.7&quot;          &quot;3.8&quot;          &quot;6.7&quot;          &quot;2.2&quot;         
+## [713] &quot;virginica&quot;    &quot;119&quot;          &quot;7.7&quot;          &quot;2.6&quot;         
+## [717] &quot;6.9&quot;          &quot;2.3&quot;          &quot;virginica&quot;    &quot;120&quot;         
+## [721] &quot;6&quot;            &quot;2.2&quot;          &quot;5&quot;            &quot;1.5&quot;         
+## [725] &quot;virginica&quot;    &quot;121&quot;          &quot;6.9&quot;          &quot;3.2&quot;         
+## [729] &quot;5.7&quot;          &quot;2.3&quot;          &quot;virginica&quot;    &quot;122&quot;         
+## [733] &quot;5.6&quot;          &quot;2.8&quot;          &quot;4.9&quot;          &quot;2&quot;           
+## [737] &quot;virginica&quot;    &quot;123&quot;          &quot;7.7&quot;          &quot;2.8&quot;         
+## [741] &quot;6.7&quot;          &quot;2&quot;            &quot;virginica&quot;    &quot;124&quot;         
+## [745] &quot;6.3&quot;          &quot;2.7&quot;          &quot;4.9&quot;          &quot;1.8&quot;         
+## [749] &quot;virginica&quot;    &quot;125&quot;          &quot;6.7&quot;          &quot;3.3&quot;         
+## [753] &quot;5.7&quot;          &quot;2.1&quot;          &quot;virginica&quot;    &quot;126&quot;         
+## [757] &quot;7.2&quot;          &quot;3.2&quot;          &quot;6&quot;            &quot;1.8&quot;         
+## [761] &quot;virginica&quot;    &quot;127&quot;          &quot;6.2&quot;          &quot;2.8&quot;         
+## [765] &quot;4.8&quot;          &quot;1.8&quot;          &quot;virginica&quot;    &quot;128&quot;         
+## [769] &quot;6.1&quot;          &quot;3&quot;            &quot;4.9&quot;          &quot;1.8&quot;         
+## [773] &quot;virginica&quot;    &quot;129&quot;          &quot;6.4&quot;          &quot;2.8&quot;         
+## [777] &quot;5.6&quot;          &quot;2.1&quot;          &quot;virginica&quot;    &quot;130&quot;         
+## [781] &quot;7.2&quot;          &quot;3&quot;            &quot;5.8&quot;          &quot;1.6&quot;         
+## [785] &quot;virginica&quot;    &quot;131&quot;          &quot;7.4&quot;          &quot;2.8&quot;         
+## [789] &quot;6.1&quot;          &quot;1.9&quot;          &quot;virginica&quot;    &quot;132&quot;         
+## [793] &quot;7.9&quot;          &quot;3.8&quot;          &quot;6.4&quot;          &quot;2&quot;           
+## [797] &quot;virginica&quot;    &quot;133&quot;          &quot;6.4&quot;          &quot;2.8&quot;         
+## [801] &quot;5.6&quot;          &quot;2.2&quot;          &quot;virginica&quot;    &quot;134&quot;         
+## [805] &quot;6.3&quot;          &quot;2.8&quot;          &quot;5.1&quot;          &quot;1.5&quot;         
+## [809] &quot;virginica&quot;    &quot;135&quot;          &quot;6.1&quot;          &quot;2.6&quot;         
+## [813] &quot;5.6&quot;          &quot;1.4&quot;          &quot;virginica&quot;    &quot;136&quot;         
+## [817] &quot;7.7&quot;          &quot;3&quot;            &quot;6.1&quot;          &quot;2.3&quot;         
+## [821] &quot;virginica&quot;    &quot;137&quot;          &quot;6.3&quot;          &quot;3.4&quot;         
+## [825] &quot;5.6&quot;          &quot;2.4&quot;          &quot;virginica&quot;    &quot;138&quot;         
+## [829] &quot;6.4&quot;          &quot;3.1&quot;          &quot;5.5&quot;          &quot;1.8&quot;         
+## [833] &quot;virginica&quot;    &quot;139&quot;          &quot;6&quot;            &quot;3&quot;           
+## [837] &quot;4.8&quot;          &quot;1.8&quot;          &quot;virginica&quot;    &quot;140&quot;         
+## [841] &quot;6.9&quot;          &quot;3.1&quot;          &quot;5.4&quot;          &quot;2.1&quot;         
+## [845] &quot;virginica&quot;    &quot;141&quot;          &quot;6.7&quot;          &quot;3.1&quot;         
+## [849] &quot;5.6&quot;          &quot;2.4&quot;          &quot;virginica&quot;    &quot;142&quot;         
+## [853] &quot;6.9&quot;          &quot;3.1&quot;          &quot;5.1&quot;          &quot;2.3&quot;         
+## [857] &quot;virginica&quot;    &quot;143&quot;          &quot;5.8&quot;          &quot;2.7&quot;         
+## [861] &quot;5.1&quot;          &quot;1.9&quot;          &quot;virginica&quot;    &quot;144&quot;         
+## [865] &quot;6.8&quot;          &quot;3.2&quot;          &quot;5.9&quot;          &quot;2.3&quot;         
+## [869] &quot;virginica&quot;    &quot;145&quot;          &quot;6.7&quot;          &quot;3.3&quot;         
+## [873] &quot;5.7&quot;          &quot;2.5&quot;          &quot;virginica&quot;    &quot;146&quot;         
+## [877] &quot;6.7&quot;          &quot;3&quot;            &quot;5.2&quot;          &quot;2.3&quot;         
+## [881] &quot;virginica&quot;    &quot;147&quot;          &quot;6.3&quot;          &quot;2.5&quot;         
+## [885] &quot;5&quot;            &quot;1.9&quot;          &quot;virginica&quot;    &quot;148&quot;         
+## [889] &quot;6.5&quot;          &quot;3&quot;            &quot;5.2&quot;          &quot;2&quot;           
+## [893] &quot;virginica&quot;    &quot;149&quot;          &quot;6.2&quot;          &quot;3.4&quot;         
+## [897] &quot;5.4&quot;          &quot;2.3&quot;          &quot;virginica&quot;    &quot;150&quot;         
+## [901] &quot;5.9&quot;          &quot;3&quot;            &quot;5.1&quot;          &quot;1.8&quot;         
+## [905] &quot;virginica&quot;</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>print() – prints the content of specificed variable onto screen</li>
+</ol>
+<pre class="r"><code>ans&lt;- 5*8
+print(ans)</code></pre>
+<pre><code>## [1] 40</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>cat() – concatenates two separate strings</li>
 </ol>
 <pre class="r"><code>AL &lt;-cat(&quot;ana&quot;,&quot;.&quot;,&quot;lakshin&quot;)</code></pre>
 <pre><code>## ana . lakshin</code></pre>
 <ol start="10" style="list-style-type: decimal">
-<li>write.table() –</li>
+<li>write.table() – exports R data as a readable and downloadable file</li>
 </ol>
-<pre class="r"><code>?write.table</code></pre>
+<pre class="r"><code>write.table(iris,file=&quot;iris.csv&quot;,row.names = TRUE)</code></pre>
 </div>
 <div id="data-creation" class="section level1">
 <h1>Data Creation</h1>
@@ -607,7 +997,11 @@ as.numeric(dod)</code></pre>
 <li>dimnames(x)</li>
 <li>nrow(x)</li>
 <li>ncol(x)</li>
-<li>class()</li>
+<li>class() – states a variable’s class i.e. char, num, integer</li>
+</ol>
+<pre class="r"><code>class(ans)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<ol start="12" style="list-style-type: decimal">
 <li>attributes()</li>
 </ol>
 </div>
@@ -705,12 +1099,12 @@ z</code></pre>
 </ol>
 <pre class="r"><code>uk &lt;- rnorm(50,mean=20,sd=1)
 hist(uk)</code></pre>
-<p><img src="Intrinsics_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>plot() – function for plotting a graph</li>
 </ol>
 <pre class="r"><code>plot(rnorm(100,mean=38,sd=2))</code></pre>
-<p><img src="Intrinsics_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 </div>
 <div id="distributions" class="section level1">
 <h1>Distributions</h1>

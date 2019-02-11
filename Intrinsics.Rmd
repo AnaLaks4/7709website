@@ -73,17 +73,18 @@ read.table(file="int_prac.rtf",sep=",")
 
 6. read.csv() -- 
 ```{r}
-
+read.csv(file="iris.csv", header=TRUE, sep="")
 ```
 
-7. scan() -- 
+7. scan() -- scans a file (??)
 ```{r}
-
+scan(file = "iris.csv", what = list(""))
 ```
 
-8. print() -- 
+8. print() -- prints the content of specificed variable onto   screen  
 ```{r}
-
+ans<- 5*8
+print(ans)
 ```
 
 9. cat() -- concatenates two separate strings 
@@ -91,27 +92,46 @@ read.table(file="int_prac.rtf",sep=",")
 AL <-cat("ana",".","lakshin")
 ```
 
-10. write.table() -- 
+10. write.table() -- exports R data as a readable and downloadable file
 ```{r}
-?write.table
+write.table(iris,file="iris.csv",row.names = TRUE)
 ```
 
 
 #Data Creation
-1. c()
-2. from:to (where from and to are replaced with numbers, e.g. 1:10)
-3. seq()
-4. rep()
+1. c() -- combines a vector so that a single variable could be assigned a set of numbers
+```{r}
+abs<- c(2,6,9,12)
+```
+
+2. from:to (where from and to are replaced with numbers, e.g. 1:10)    
+```{r}
+
+```
+#######not sure what this means?
+
+3. seq() -- function to create a sequence of numbers
+```{r}
+sam<- seq(4,18,.25)
+print(sam)
+```
+
+4. rep() -- replicates values in the specified variable
+```{r}
+rep(nad)
+```
+
 5. data.frame() -- converts matrices into data frames
 ```{r}
 yan <- matrix(seq(1,24,1), nrow=6, ncol = 4)
 data.frame(yan)
 ```
 
-6. list() -- 
+6. list() -- creates a list
 ```{r}
-?list
+kin<- list("a"=2.5, "b"= TRUE, "c"= 2:5)
 ```
+#######howdo you do this with names?
 
 7. matrix() -- creates a martix with specified rows and columns
 ```{r}
@@ -194,7 +214,11 @@ as.numeric(dod)
 8. dimnames(x)
 9. nrow(x)
 10. ncol(x)
-11. class()
+11. class() -- states a variable's class i.e. char, num, integer
+```{r}
+class(ans)
+```
+
 12. attributes()
 
 #Data Selection and Manipulation

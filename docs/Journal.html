@@ -715,16 +715,16 @@ aver&lt;-function(avg_vec){
 aver(vector)</code></pre>
 <pre><code>## [1] 5.285714</code></pre>
 <p>Mode</p>
-<pre class="r"><code>mode_vec &lt;- vector
-mode&lt;-function(mode_vec){
+<pre class="r"><code>mode&lt;-function(mode_vec){
   mode_vec&lt;- sort(table(mode_vec))
   return(mode_vec[length(vector)])
 
-}
-mode(vector)</code></pre>
-<pre><code>## &lt;NA&gt; 
-##   NA</code></pre>
-<p>Median <code>{r}, eval=FALSE median&lt;-function(med_vec){   med_vec&lt;- ((sort(vector))(vector/2))   return(med_vec) } median(vector)</code></p>
+}</code></pre>
+<p>Median</p>
+<pre class="r"><code>median&lt;-function(med_vec){
+  med_vec&lt;- ((sort(vector))(vector/2))
+  return(med_vec)
+}</code></pre>
 <ol start="11" style="list-style-type: decimal">
 <li><p>Count the number of characters in a string variable.</p></li>
 <li><p>Count the number of words in a string variable.</p></li>
@@ -767,7 +767,7 @@ table(abc)</code></pre>
 <pre class="r"><code>now&lt;- Sys.time()
 options(digits.secs=6)
 now</code></pre>
-<pre><code>## [1] &quot;2019-02-08 14:31:09.872162 EST&quot;</code></pre>
+<pre><code>## [1] &quot;2019-02-11 01:05:46.228372 EST&quot;</code></pre>
 <ol start="17" style="list-style-type: decimal">
 <li><p>Measure how long a piece of code takes to run by measuring the time before the code is run, and after the code is run, and taking the difference to find the total time.</p></li>
 <li><p>Read a .txt file or .csv file into a variable.</p></li>
