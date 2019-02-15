@@ -445,7 +445,7 @@ div.tocify {
 <div id="input-and-output" class="section level1">
 <h1>Input and Output</h1>
 <ol style="list-style-type: decimal">
-<li>save()</li>
+<li>save() – function to save data created in R in a specific file</li>
 </ol>
 <pre class="r"><code>red&lt;- seq(1,20,2)
 save(red,file=&quot;seq.rmd&quot;)</code></pre>
@@ -485,7 +485,7 @@ save(red,file=&quot;seq.rmd&quot;)</code></pre>
 ## 17                                                                                                                                     12}</code></pre>
 <p>– did not execute properly, don’t know what wrong.</p>
 <ol start="6" style="list-style-type: decimal">
-<li>read.csv() –</li>
+<li>read.csv() – function to read a csv file and convert to R</li>
 </ol>
 <pre class="r"><code>read.csv(file=&quot;iris.csv&quot;, header=TRUE, sep=&quot;&quot;)</code></pre>
 <pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
@@ -894,8 +894,12 @@ print(ans)</code></pre>
 </ol>
 <pre class="r"><code>abs&lt;- c(2,6,9,12)</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>from:to (where from and to are replaced with numbers, e.g. 1:10)</li>
+<li>from:to (where from and to are replaced with numbers, e.g. 1:10) – create a sequence of numbers</li>
 </ol>
+<pre class="r"><code>bc &lt;- 12:4
+cd &lt;- bc + 2
+2:5 *2</code></pre>
+<pre><code>## [1]  4  6  8 10</code></pre>
 <div id="not-sure-what-this-means" class="section level7">
 <p>not sure what this means?</p>
 <ol start="3" style="list-style-type: decimal">
@@ -912,13 +916,8 @@ print(sam)</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>rep() – replicates values in the specified variable</li>
 </ol>
-<pre class="r"><code>rep(sam)</code></pre>
-<pre><code>##  [1]  4.00  4.25  4.50  4.75  5.00  5.25  5.50  5.75  6.00  6.25  6.50
-## [12]  6.75  7.00  7.25  7.50  7.75  8.00  8.25  8.50  8.75  9.00  9.25
-## [23]  9.50  9.75 10.00 10.25 10.50 10.75 11.00 11.25 11.50 11.75 12.00
-## [34] 12.25 12.50 12.75 13.00 13.25 13.50 13.75 14.00 14.25 14.50 14.75
-## [45] 15.00 15.25 15.50 15.75 16.00 16.25 16.50 16.75 17.00 17.25 17.50
-## [56] 17.75 18.00</code></pre>
+<pre class="r"><code>rep(6:9, times=2)</code></pre>
+<pre><code>## [1] 6 7 8 9 6 7 8 9</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li>data.frame() – converts matrices into data frames</li>
 </ol>
@@ -942,19 +941,43 @@ data.frame(yan)</code></pre>
 <li>matrix() – creates a martix with specified rows and columns</li>
 </ol>
 <pre class="r"><code>yan &lt;- matrix(seq(1,24,1), nrow=6, ncol = 4)
-yan</code></pre>
-<pre><code>##      [,1] [,2] [,3] [,4]
-## [1,]    1    7   13   19
-## [2,]    2    8   14   20
-## [3,]    3    9   15   21
-## [4,]    4   10   16   22
-## [5,]    5   11   17   23
-## [6,]    6   12   18   24</code></pre>
+yan2 &lt;- matrix(seq(25,50,1), nrow=6, ncol = 4)</code></pre>
 <ol start="8" style="list-style-type: decimal">
-<li>factor()</li>
-<li>rbind()</li>
-<li>cbind()</li>
+<li>factor() – converts vector into factor (?)</li>
 </ol>
+<pre class="r"><code>STEM&lt;- c(&quot;science&quot;,&quot;math&quot;, &quot;technology&quot;, &quot;engineering&quot;,&quot;math&quot;)
+STEM_factor &lt;- factor(STEM)
+print(STEM_factor)</code></pre>
+<pre><code>## [1] science     math        technology  engineering math       
+## Levels: engineering math science technology</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>rbind() – combines two separate data matrices by row, has to be of same dataset or else combination meaningless</li>
+</ol>
+<pre class="r"><code>rbind(yan,yan2)</code></pre>
+<pre><code>##       [,1] [,2] [,3] [,4]
+##  [1,]    1    7   13   19
+##  [2,]    2    8   14   20
+##  [3,]    3    9   15   21
+##  [4,]    4   10   16   22
+##  [5,]    5   11   17   23
+##  [6,]    6   12   18   24
+##  [7,]   25   31   37   43
+##  [8,]   26   32   38   44
+##  [9,]   27   33   39   45
+## [10,]   28   34   40   46
+## [11,]   29   35   41   47
+## [12,]   30   36   42   48</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>cbind() – combines two separate data matrices by column, has to be of same dataset or else combination meaningless</li>
+</ol>
+<pre class="r"><code>cbind(yan, yan2)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## [1,]    1    7   13   19   25   31   37   43
+## [2,]    2    8   14   20   26   32   38   44
+## [3,]    3    9   15   21   27   33   39   45
+## [4,]    4   10   16   22   28   34   40   46
+## [5,]    5   11   17   23   29   35   41   47
+## [6,]    6   12   18   24   30   36   42   48</code></pre>
 </div>
 </div>
 <div id="slicing-and-extracting-data" class="section level1">
@@ -962,14 +985,62 @@ yan</code></pre>
 <div id="indexing-vectors" class="section level2">
 <h2>Indexing vectors</h2>
 <ol style="list-style-type: decimal">
-<li>x[n] nth element</li>
-<li>x[-n] all but nth element</li>
-<li>x[1:n] first n elements</li>
-<li>x[-(1:n)] elements from n+1 to the end</li>
-<li>x[c(1,4,2)] specific elements</li>
+<li>x[n] nth element – indexes the number or character by its position within the vector or matrix as specified by number in bracket</li>
+</ol>
+<pre class="r"><code>g &lt;- matrix(1:20, nrow = 2, ncol = 10)
+g[2]</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>h &lt;- c(4,8,21,34,51,83)
+h [4]</code></pre>
+<pre><code>## [1] 34</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>x[-n] all but nth element – indexes entire vector or matrix except the specified element</li>
+</ol>
+<pre class="r"><code>g[-7]</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>x[1:n] first n elements – indexes the sequence of numbers specified within the brackets from a vector or matrix</li>
+</ol>
+<pre class="r"><code>g[2:4]</code></pre>
+<pre><code>## [1] 2 3 4</code></pre>
+<pre class="r"><code>h[1:3]</code></pre>
+<pre><code>## [1]  4  8 21</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>x[-(1:n)] elements from n+1 to the end – indexes all elements of a vector or matrix except those specified within the parentheses.</li>
+</ol>
+<pre class="r"><code>h[-(2:4)]</code></pre>
+<pre><code>## [1]  4 51 83</code></pre>
+<pre class="r"><code>g[-(5:10)]</code></pre>
+<pre><code>##  [1]  1  2  3  4 11 12 13 14 15 16 17 18 19 20</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>x[c(1,4,2)] specific elements – indexes specific (combinations of) numbers from a vector or matrix</li>
+</ol>
+<pre class="r"><code>h[c(1,5)]</code></pre>
+<pre><code>## [1]  4 51</code></pre>
+<pre class="r"><code>g[c(2,6,20)]</code></pre>
+<pre><code>## [1]  2  6 20</code></pre>
+<ol start="6" style="list-style-type: decimal">
 <li>x[“name”] elements named “name”</li>
-<li>x[x&gt;3] all elements greater than 3</li>
-<li>x[x &gt; 3 &amp; x &lt; 5] all elements between 3 and 5</li>
+</ol>
+<pre class="r"><code>j &lt;- c(&quot;john&quot;, &quot;emily&quot;, &quot;ana&quot;, &quot;frank&quot;, &quot;cam&quot;)
+j[&quot;ana&quot;]</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code># not sure why this isn&#39;t working</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>x[x&gt;3] all elements greater than 3 – indexes numbers either greater than or less than the specified number</li>
+</ol>
+<pre class="r"><code>g[g&gt;12]</code></pre>
+<pre><code>## [1] 13 14 15 16 17 18 19 20</code></pre>
+<pre class="r"><code>h[h&lt;50]</code></pre>
+<pre><code>## [1]  4  8 21 34</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>x[x &gt; 3 &amp; x &lt; 5] all elements between 3 and 5 – indexes numbers with logical statements</li>
+</ol>
+<pre class="r"><code>g[g &gt; 6 &amp; g&lt; 12]</code></pre>
+<pre><code>## [1]  7  8  9 10 11</code></pre>
+<pre class="r"><code>h[h &gt; 20 &amp; h &lt; 40]</code></pre>
+<pre><code>## [1] 21 34</code></pre>
+<ol start="9" style="list-style-type: decimal">
 <li>x[x %in% c(“a”,“and”,“the”)] all elements in given set</li>
 </ol>
 </div>
@@ -1032,8 +1103,11 @@ as.numeric(dod)</code></pre>
 <pre class="r"><code>class(ans)</code></pre>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 <ol start="12" style="list-style-type: decimal">
-<li>attributes()</li>
+<li>attributes() – displays attributs of object</li>
 </ol>
+<pre class="r"><code>attributes(yan)</code></pre>
+<pre><code>## $dim
+## [1] 6 4</code></pre>
 </div>
 <div id="data-selection-and-manipulation" class="section level1">
 <h1>Data Selection and Manipulation</h1>
@@ -1087,9 +1161,15 @@ z</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>var() – computes variance</li>
 </ol>
-<pre class="r"><code>?var</code></pre>
+<pre class="r"><code>bs &lt;- seq(7,48,1.2)
+var(bs)</code></pre>
+<pre><code>## [1] 151.2</code></pre>
 <ol start="8" style="list-style-type: decimal">
-<li><p>sd() – computes standard deviation</p></li>
+<li>sd() – computes standard deviation</li>
+</ol>
+<pre class="r"><code>sd(bs)</code></pre>
+<pre><code>## [1] 12.29634</code></pre>
+<ol start="9" style="list-style-type: decimal">
 <li><p>cor() – computes correlation</p></li>
 <li><p>round() –</p></li>
 <li><p>abs() –</p></li>
@@ -1116,11 +1196,26 @@ z</code></pre>
 <div id="strings" class="section level1">
 <h1>Strings</h1>
 <ol style="list-style-type: decimal">
-<li><p>paste() –</p></li>
+<li>paste() –</li>
+</ol>
+<pre class="r"><code>rat1 &lt;- &quot;17R1&quot;
+paste(rat1, &quot;box&quot;, sep = &quot; is in &quot;)</code></pre>
+<pre><code>## [1] &quot;17R1 is in box&quot;</code></pre>
+<ol start="2" style="list-style-type: decimal">
 <li><p>strsplit() –</p></li>
 <li><p>tolower() –</p></li>
-<li><p>toupper –</p></li>
 </ol>
+<pre class="r"><code>alpha&lt;- LETTERS
+tolower(alpha)</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot;
+## [18] &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>toupper –</li>
+</ol>
+<pre class="r"><code>alphab&lt;- letters
+toupper(alphab)</code></pre>
+<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot;
+## [18] &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
 </div>
 <div id="plotting" class="section level1">
 <h1>Plotting</h1>
@@ -1129,12 +1224,12 @@ z</code></pre>
 </ol>
 <pre class="r"><code>uk &lt;- rnorm(50,mean=20,sd=1)
 hist(uk)</code></pre>
-<p><img src="Intrinsics_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>plot() – function for plotting a graph</li>
 </ol>
 <pre class="r"><code>plot(rnorm(100,mean=38,sd=2))</code></pre>
-<p><img src="Intrinsics_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
 <div id="distributions" class="section level1">
 <h1>Distributions</h1>

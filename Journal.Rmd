@@ -53,6 +53,7 @@ plot(Slen,Sx,type="n", xlab ="Wavelength", ylab = "Sensitivity", axes = TRUE)
 
 # Easier Problems
 1. Do simple math with numbers, addition, subtraction, multiplication and division
+
 ```{r}
 2+3
 12-7
@@ -166,12 +167,12 @@ mode<-function(mode_vec){
 Median
 ```{r}
 median<-function(w){
-  w<- sort(w)
-  med<- round(length(w)/2, 1)
-     return(med)
+  med<- sort(w) #maybe make it proportion?
+  n<- (length(med) +1 /2)
+     return(med[n])
     
 }
-med_vec <- c(1,2,3,4,5)
+med_vec <- c(3,9,4,2,6,8)
 median(med_vec)
 ```
 

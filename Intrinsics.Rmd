@@ -43,7 +43,7 @@ list.files()
 ```
 
 #Input and Output
-1. save()
+1. save() -- function to save data created in R in a specific file
 ```{r}
 red<- seq(1,20,2)
 save(red,file="seq.rmd")
@@ -71,7 +71,7 @@ read.table(file="int_prac.rtf",sep=",")
 ```
  -- did not execute properly, don't know what wrong.
 
-6. read.csv() -- 
+6. read.csv() -- function to read a csv file and convert to R 
 ```{r}
 read.csv(file="iris.csv", header=TRUE, sep="")
 ```
@@ -104,9 +104,11 @@ write.table(iris,file="iris.csv",row.names = TRUE)
 abs<- c(2,6,9,12)
 ```
 
-2. from:to (where from and to are replaced with numbers, e.g. 1:10)    
+2. from:to (where from and to are replaced with numbers, e.g. 1:10)     -- create a sequence of numbers
 ```{r}
-
+bc <- 12:4
+cd <- bc + 2
+2:5 *2
 ```
 #######not sure what this means?
 
@@ -118,7 +120,7 @@ print(sam)
 
 4. rep() -- replicates values in the specified variable
 ```{r}
-rep(sam)
+rep(6:9, times=2)
 ```
 
 5. data.frame() -- converts matrices into data frames
@@ -136,24 +138,86 @@ kin<- list("a"=2.5, "b"= TRUE, "c"= 2:5)
 7. matrix() -- creates a martix with specified rows and columns
 ```{r}
 yan <- matrix(seq(1,24,1), nrow=6, ncol = 4)
-yan
+yan2 <- matrix(seq(25,50,1), nrow=6, ncol = 4)
 ```
 
-8. factor()
-9. rbind()
-10. cbind()
+8. factor() -- converts vector into factor (?)
+```{r}
+STEM<- c("science","math", "technology", "engineering","math")
+STEM_factor <- factor(STEM)
+print(STEM_factor)
+
+```
+
+9. rbind() -- combines two separate data matrices by row, has to be of same dataset or else combination meaningless
+```{r}
+rbind(yan,yan2)
+```
+
+10. cbind() -- combines two separate data matrices by column, has to be of same dataset or else combination meaningless
+```{r}
+cbind(yan, yan2)
+```
+
 
 #Slicing and Extracting Data
 ##Indexing vectors
-1. x[n] nth element
-2. x[-n] all but nth element
-3. x[1:n] first n elements
-4. x[-(1:n)] elements from n+1 to the end
-5. x[c(1,4,2)] specific elements
+1. x[n] nth element -- indexes the number or character by its position within the vector or matrix as specified by number in bracket
+```{r}
+g <- matrix(1:20, nrow = 2, ncol = 10)
+g[2]
+h <- c(4,8,21,34,51,83)
+h [4]
+```
+
+2. x[-n] all but nth element -- indexes entire vector or matrix except the specified element
+```{r}
+g[-7]
+```
+
+3. x[1:n] first n elements -- indexes the sequence of numbers specified within the brackets from a vector or matrix
+```{r}
+g[2:4]
+h[1:3]
+```
+
+4. x[-(1:n)] elements from n+1 to the end -- indexes all elements of a vector or matrix except those specified within the parentheses.
+```{r}
+h[-(2:4)]
+g[-(5:10)]
+```
+
+5. x[c(1,4,2)] specific elements -- indexes specific (combinations of) numbers from a vector or matrix
+```{r}
+h[c(1,5)]
+g[c(2,6,20)]
+```
+
 6. x[“name”] elements named “name”
-7. x[x>3] all elements greater than 3
-8. x[x > 3 & x < 5] all elements between 3 and 5
+```{r}
+j <- c("john", "emily", "ana", "frank", "cam")
+j["ana"]
+# not sure why this isn't working
+```
+
+7. x[x>3] all elements greater than 3 -- indexes numbers either greater than or less than the specified number
+```{r}
+g[g>12]
+h[h<50]
+```
+
+8. x[x > 3 & x < 5] all elements between 3 and 5 -- indexes numbers with logical statements
+```{r}
+g[g > 6 & g< 12]
+h[h > 20 & h < 40]
+```
+
 9. x[x %in% c(“a”,“and”,“the”)] all elements in given set
+```{r}
+#?
+
+```
+
 
 ## Indexing lists
 1. x[n] list with elements n
@@ -219,7 +283,11 @@ as.numeric(dod)
 class(ans)
 ```
 
-12. attributes()
+12. attributes() -- displays attributs of object
+```{r}
+attributes(yan)
+```
+
 
 #Data Selection and Manipulation
 1. which.max()
@@ -268,16 +336,18 @@ z
 
 7. var() -- computes variance 
 ```{r}
-?var
+bs <- seq(7,48,1.2)
+var(bs)
 ```
 
 8. sd() -- computes standard deviation 
 ```{r}
-
+sd(bs)
 ```
 
 9. cor() -- computes correlation 
 ```{r}
+
 
 ```
 
@@ -339,7 +409,8 @@ z
 #Strings
 1. paste() -- 
 ```{r}
-
+rat1 <- "17R1"
+paste(rat1, "box", sep = " is in ")
 ```
 
 2. strsplit() -- 
@@ -349,12 +420,14 @@ z
 
 3. tolower() -- 
 ```{r}
-
+alpha<- LETTERS
+tolower(alpha)
 ```
 
 4. toupper -- 
 ```{r}
-
+alphab<- letters
+toupper(alphab)
 ```
 
 

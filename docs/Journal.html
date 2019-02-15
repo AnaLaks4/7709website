@@ -721,10 +721,15 @@ aver(vector)</code></pre>
 
 }</code></pre>
 <p>Median</p>
-<pre class="r"><code>median&lt;-function(med_vec){
-  med_vec&lt;- ((sort(vector))(vector/2))
-  return(med_vec)
-}</code></pre>
+<pre class="r"><code>median&lt;-function(w){
+  med&lt;- sort(w) #maybe make it proportion?
+  n&lt;- (length(med) +1 /2)
+     return(med[n])
+    
+}
+med_vec &lt;- c(3,9,4,2,6,8)
+median(med_vec)</code></pre>
+<pre><code>## [1] 9</code></pre>
 <ol start="11" style="list-style-type: decimal">
 <li><p>Count the number of characters in a string variable.</p></li>
 <li><p>Count the number of words in a string variable.</p></li>
