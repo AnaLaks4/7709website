@@ -110,7 +110,6 @@ bc <- 12:4
 cd <- bc + 2
 2:5 *2
 ```
-#######not sure what this means?
 
 3. seq() -- function to create a sequence of numbers
 ```{r}
@@ -141,7 +140,7 @@ yan <- matrix(seq(1,24,1), nrow=6, ncol = 4)
 yan2 <- matrix(seq(25,50,1), nrow=6, ncol = 4)
 ```
 
-8. factor() -- converts vector into factor (?)
+8. factor() -- converts vector into factor, finds unique characters/strings & sorts alphabetically
 ```{r}
 STEM<- c("science","math", "technology", "engineering","math")
 STEM_factor <- factor(STEM)
@@ -220,10 +219,39 @@ h[h > 20 & h < 40]
 
 
 ## Indexing lists
+```{r}
+song<- list("Hotel California", 378, 4)
+
+names(song) <- c("title", "duration", "track")
+
+similar_song <- list (title = "Misery Business", duration= 190, track = 5)
+
+song<- list (title = "Hotel California", duration = 378, track = 4, similar = similar_song)
+
+str(song)
+
+```
+
 1. x[n] list with elements n
+```{r}
+song[2]
+```
+
 2. x[[n]] nt h element of the list
+```{r}
+song[[4]][1]
+```
+
 3. x[[“name”]] element of the list named “name”
+```{r}
+song[["similar"]]["duration"]
+```
+
 4. x$name id.
+```{r}
+
+```
+
 
 ## Indexing matrices
 1. x[i,j] element at row i, column j
@@ -268,7 +296,13 @@ as.numeric(dod)
 
 
 #Variable Information 
-1. is.na(x)
+1. is.na(x) -- determines if any values are missing or not available (??)
+```{r}
+?is.na
+na <- c(4,7,NA,21)
+is.na(na)
+```
+
 2. is.null(x)
 3. is.data.frame(x)
 4. is.numeric(x)
@@ -334,21 +368,23 @@ z<- median(nad)
 z
 ```
 
+
 7. var() -- computes variance 
 ```{r}
-bs <- seq(7,48,1.2)
-var(bs)
+ka <- c(1,5,3)
+an <- c(4,5,8)
+
+var(ka)
 ```
 
 8. sd() -- computes standard deviation 
 ```{r}
-sd(bs)
+sd(an)
 ```
 
 9. cor() -- computes correlation 
 ```{r}
-
-
+cor(ka,an)
 ```
 
 10. round() --
@@ -407,7 +443,7 @@ sd(bs)
 
 
 #Strings
-1. paste() -- 
+1. paste() -- similar to concatenate, has separators
 ```{r}
 rat1 <- "17R1"
 paste(rat1, "box", sep = " is in ")
@@ -446,7 +482,16 @@ plot(rnorm(100,mean=38,sd=2))
 
 #Distributions
 1. rnorm()
-2. runif()
+```{r}
+q<- rnorm(20, mean = 5, sd = 2)
+plot(q)
+```
+
+2. runif() -- generates random numbers (how many, min, max)
+```{r}
+runif(10,5,50)
+```
+
 
 #Programming
 1. Show that you can define a function

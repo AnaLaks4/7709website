@@ -900,8 +900,6 @@ print(ans)</code></pre>
 cd &lt;- bc + 2
 2:5 *2</code></pre>
 <pre><code>## [1]  4  6  8 10</code></pre>
-<div id="not-sure-what-this-means" class="section level7">
-<p>not sure what this means?</p>
 <ol start="3" style="list-style-type: decimal">
 <li>seq() – function to create a sequence of numbers</li>
 </ol>
@@ -934,7 +932,6 @@ data.frame(yan)</code></pre>
 <li>list() – creates a list</li>
 </ol>
 <pre class="r"><code>kin&lt;- list(&quot;a&quot;=2.5, &quot;b&quot;= TRUE, &quot;c&quot;= 2:5)</code></pre>
-</div>
 <div id="howdo-you-do-this-with-names" class="section level7">
 <p>howdo you do this with names?</p>
 <ol start="7" style="list-style-type: decimal">
@@ -943,7 +940,7 @@ data.frame(yan)</code></pre>
 <pre class="r"><code>yan &lt;- matrix(seq(1,24,1), nrow=6, ncol = 4)
 yan2 &lt;- matrix(seq(25,50,1), nrow=6, ncol = 4)</code></pre>
 <ol start="8" style="list-style-type: decimal">
-<li>factor() – converts vector into factor (?)</li>
+<li>factor() – converts vector into factor, finds unique characters/strings &amp; sorts alphabetically</li>
 </ol>
 <pre class="r"><code>STEM&lt;- c(&quot;science&quot;,&quot;math&quot;, &quot;technology&quot;, &quot;engineering&quot;,&quot;math&quot;)
 STEM_factor &lt;- factor(STEM)
@@ -1043,13 +1040,46 @@ j[&quot;ana&quot;]</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>x[x %in% c(“a”,“and”,“the”)] all elements in given set</li>
 </ol>
+<pre class="r"><code>#?</code></pre>
 </div>
 <div id="indexing-lists" class="section level2">
 <h2>Indexing lists</h2>
+<pre class="r"><code>song&lt;- list(&quot;Hotel California&quot;, 378, 4)
+
+names(song) &lt;- c(&quot;title&quot;, &quot;duration&quot;, &quot;track&quot;)
+
+similar_song &lt;- list (title = &quot;Misery Business&quot;, duration= 190, track = 5)
+
+song&lt;- list (title = &quot;Hotel California&quot;, duration = 378, track = 4, similar = similar_song)
+
+str(song)</code></pre>
+<pre><code>## List of 4
+##  $ title   : chr &quot;Hotel California&quot;
+##  $ duration: num 378
+##  $ track   : num 4
+##  $ similar :List of 3
+##   ..$ title   : chr &quot;Misery Business&quot;
+##   ..$ duration: num 190
+##   ..$ track   : num 5</code></pre>
 <ol style="list-style-type: decimal">
 <li>x[n] list with elements n</li>
+</ol>
+<pre class="r"><code>song[2]</code></pre>
+<pre><code>## $duration
+## [1] 378</code></pre>
+<ol start="2" style="list-style-type: decimal">
 <li>x[[n]] nt h element of the list</li>
+</ol>
+<pre class="r"><code>song[[4]][1]</code></pre>
+<pre><code>## $title
+## [1] &quot;Misery Business&quot;</code></pre>
+<ol start="3" style="list-style-type: decimal">
 <li>x[[“name”]] element of the list named “name”</li>
+</ol>
+<pre class="r"><code>song[[&quot;similar&quot;]][&quot;duration&quot;]</code></pre>
+<pre><code>## $duration
+## [1] 190</code></pre>
+<ol start="4" style="list-style-type: decimal">
 <li>x$name id.</li>
 </ol>
 </div>
@@ -1088,7 +1118,13 @@ as.numeric(dod)</code></pre>
 <div id="variable-information" class="section level1">
 <h1>Variable Information</h1>
 <ol style="list-style-type: decimal">
-<li>is.na(x)</li>
+<li>is.na(x) – determines if any values are missing or not available (??)</li>
+</ol>
+<pre class="r"><code>?is.na
+na &lt;- c(4,7,NA,21)
+is.na(na)</code></pre>
+<pre><code>## [1] FALSE FALSE  TRUE FALSE</code></pre>
+<ol start="2" style="list-style-type: decimal">
 <li>is.null(x)</li>
 <li>is.data.frame(x)</li>
 <li>is.numeric(x)</li>
@@ -1157,20 +1193,26 @@ m_</code></pre>
 <pre class="r"><code>nad&lt;- seq(1,50,3)
 z&lt;- median(nad)
 z</code></pre>
-<pre><code>## [1] 25</code></pre>
+<pre><code>## [1] 8.5</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>var() – computes variance</li>
 </ol>
-<pre class="r"><code>bs &lt;- seq(7,48,1.2)
-var(bs)</code></pre>
-<pre><code>## [1] 151.2</code></pre>
+<pre class="r"><code>ka &lt;- c(1,5,3)
+an &lt;- c(4,5,8)
+
+var(ka)</code></pre>
+<pre><code>## [1] 4</code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li>sd() – computes standard deviation</li>
 </ol>
-<pre class="r"><code>sd(bs)</code></pre>
-<pre><code>## [1] 12.29634</code></pre>
+<pre class="r"><code>sd(an)</code></pre>
+<pre><code>## [1] 2.081666</code></pre>
 <ol start="9" style="list-style-type: decimal">
-<li><p>cor() – computes correlation</p></li>
+<li>cor() – computes correlation</li>
+</ol>
+<pre class="r"><code>cor(ka,an)</code></pre>
+<pre><code>## [1] 0.2401922</code></pre>
+<ol start="10" style="list-style-type: decimal">
 <li><p>round() –</p></li>
 <li><p>abs() –</p></li>
 </ol>
@@ -1196,7 +1238,7 @@ var(bs)</code></pre>
 <div id="strings" class="section level1">
 <h1>Strings</h1>
 <ol style="list-style-type: decimal">
-<li>paste() –</li>
+<li>paste() – similar to concatenate, has separators</li>
 </ol>
 <pre class="r"><code>rat1 &lt;- &quot;17R1&quot;
 paste(rat1, &quot;box&quot;, sep = &quot; is in &quot;)</code></pre>
@@ -1224,19 +1266,27 @@ toupper(alphab)</code></pre>
 </ol>
 <pre class="r"><code>uk &lt;- rnorm(50,mean=20,sd=1)
 hist(uk)</code></pre>
-<p><img src="Intrinsics_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>plot() – function for plotting a graph</li>
 </ol>
 <pre class="r"><code>plot(rnorm(100,mean=38,sd=2))</code></pre>
-<p><img src="Intrinsics_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
 </div>
 <div id="distributions" class="section level1">
 <h1>Distributions</h1>
 <ol style="list-style-type: decimal">
 <li>rnorm()</li>
-<li>runif()</li>
 </ol>
+<pre class="r"><code>q&lt;- rnorm(20, mean = 5, sd = 2)
+plot(q)</code></pre>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>runif() – generates random numbers (how many, min, max)</li>
+</ol>
+<pre class="r"><code>runif(10,5,50)</code></pre>
+<pre><code>##  [1] 27.664404 18.902980  7.660412 34.680979 26.728741  5.814441  7.256444
+##  [8] 41.461858 16.927687  5.734346</code></pre>
 </div>
 <div id="programming" class="section level1">
 <h1>Programming</h1>

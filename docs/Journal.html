@@ -787,9 +787,110 @@ now</code></pre>
 <div id="harder-problems" class="section level1">
 <h1>Harder Problems</h1>
 <ol style="list-style-type: decimal">
-<li><p>The FizzBuzz Problem. List the numbers from 1 to 100 with the following constraints. If the number can be divided by three evenly, then print Fizz instead of the number. If the number can be divided by five evenly, then print Buzz instead of the number. Finally, if the number can be divided by three and five evenly, then print FizzBuzz instead of the number.</p></li>
+<li>The FizzBuzz Problem. List the numbers from 1 to 100 with the following constraints. If the number can be divided by three evenly, then print Fizz instead of the number. If the number can be divided by five evenly, then print Buzz instead of the number. Finally, if the number can be divided by three and five evenly, then print FizzBuzz instead of the number.</li>
+</ol>
+<pre class="r"><code>num &lt;- 1:100
+for (fb in num) {
+  if ((num[fb]%%3==0) &amp;&amp; (num[fb]%%5==0))
+    print(&quot;FizzBuzz&quot;) 
+
+  if (num[fb]%%3 == 0)
+    print(&quot;Fizz&quot;) 
+
+  if (num[fb]%%5 == 0)
+    print(&quot;Buzz&quot;) 
+ 
+
+}</code></pre>
+<pre><code>## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;FizzBuzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;FizzBuzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;FizzBuzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;FizzBuzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;FizzBuzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;FizzBuzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;</code></pre>
+<pre class="r"><code>fb_ &lt;- 1:100
+FIZZ &lt;- fb_%%3
+BUZZ &lt;- fb_%%5
+FIZZBUZZ &lt;- fb_%%3 &amp; fb_%%5</code></pre>
+<ol start="2" style="list-style-type: decimal">
 <li><p>Frequency Counts Take text as input, and be able to produce a table that shows the counts for each character in the text. This problem is related to the earlier easy problem asking you to count the number of times that a single letter appears in a text. The slightly harder problem is the more general version: count the frequencies of all unique characters in a text.</p></li>
 <li><p>Test the Random Number Generator Test the random number generator for a flat distribution. Generate a few million random numbers between 0 and 100. Count the number of 0s, 1s, 2s, 3s, etc. all the way up to 100. Look at the counts for each of the numbers and determine if they are relatively equal. For example, you could plot the counts in Excel to make a histogram. If all of the bars are close to being flat, then each number had an equal chance of being selected, and the random number generator is working without bias.</p></li>
+</ol>
+<pre class="r"><code>milli &lt;-floor(runif(5000000, 0,100))
+table(milli)</code></pre>
+<pre><code>## milli
+##     0     1     2     3     4     5     6     7     8     9    10    11 
+## 49901 49856 50115 49984 50218 50039 50092 49900 49650 49748 49975 49948 
+##    12    13    14    15    16    17    18    19    20    21    22    23 
+## 49739 49661 50095 50130 50077 49834 49944 50296 50216 50258 49985 50146 
+##    24    25    26    27    28    29    30    31    32    33    34    35 
+## 49964 49976 49889 50306 49766 49761 50104 50075 50142 49892 49893 50109 
+##    36    37    38    39    40    41    42    43    44    45    46    47 
+## 49876 49978 49614 50519 49796 49770 50242 49857 50058 49766 50008 50229 
+##    48    49    50    51    52    53    54    55    56    57    58    59 
+## 50208 49766 49758 49640 49384 50260 50070 50053 49603 50409 50015 50097 
+##    60    61    62    63    64    65    66    67    68    69    70    71 
+## 50130 49884 50220 49688 49874 49779 50244 50148 50020 49989 50281 49980 
+##    72    73    74    75    76    77    78    79    80    81    82    83 
+## 50123 49902 50037 49847 49812 50150 50399 49853 50485 50308 50432 50112 
+##    84    85    86    87    88    89    90    91    92    93    94    95 
+## 50212 49644 49857 50206 49947 50370 49996 49793 49410 50277 49945 49842 
+##    96    97    98    99 
+## 49930 49609 50406 50199</code></pre>
+<ol start="4" style="list-style-type: decimal">
 <li><p>Create a multiplication table Generate a matrix for a multiplication table. For example, the labels for the columns could be the numbers 1 to 10, and the labels for the rows could be the numbers 1 to 10. The contents of each of the cells in the matrix should be correct answer for multiplying the column value by the row value.</p></li>
 <li><p>Encrypt and Decrypt the Alphabet Turn any normal english text into an encrypted version of the text, and be able to turn any decrypted text back into normal english text. A simple encryption would be to scramble the alphabet such that each letter corresponds to a new randomly chosen (but unique) letter.</p></li>
 <li><p>Snakes and Ladders. Your task here is to write an algorithm that can simulate playing the above depicted Snakes and Ladders board. You should assume that each roll of the dice produces a random number between 1 and 6. After you are able to simulate one played game, you will then write a loop to simulate 1000 games, and estimate the average number of dice rolls needed to successfully complete the game.</p></li>
