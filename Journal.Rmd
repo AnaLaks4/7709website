@@ -238,26 +238,34 @@ zyx <- matrix(0,nrow=20,ncol=20)
 
 # Harder Problems
 1. The FizzBuzz Problem. List the numbers from 1 to 100 with the following constraints. If the number can be divided by three evenly, then print Fizz instead of the number. If the number can be divided by five evenly, then print Buzz instead of the number. Finally, if the number can be divided by three and five evenly, then print FizzBuzz instead of the number.
-```{r, eval = FALSE}
+```{r}
 num <- 1:100
 for (fb in num) {
-  if ((num[fb]%%3==0) & (num[fb]%%5==0)){
-    print("FizzBuzz")
-    else if (print(num[fb]))
+  
+  if((num[fb]%%3==0) && (num[fb]%%5==0)){
+        print("FizzBuzz")
+        next()
   }
-
-  if (num[fb]%%3 == 0){
-       print("Fizz") 
-  else if (print(num[fb])) 
+ 
+  if (num[fb]%%3==0){
+      print("Fizz") 
+      next()
   }
+  
+#      ifelse((num[fb]%%3==0) && (num[fb]%%5==0),1,0)
+  #        print("FizzBuzz")
 
-  if (num[fb]%%5 == 0){
-        print(num)("Buzz") 
-  else if (print(num[fb]))
-    
-  }
+     
 
+ if (num[fb]%%5==0){
+   print("Buzz") 
+   next()
 }
+
+   else{
+     (print(num[fb]))
+   }        
+ }
 
 ```
 ```{r}
