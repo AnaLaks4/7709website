@@ -123,8 +123,16 @@ for (k in 2:1000) {
 ```
 
  -- still not done
-```{r}
+```{r, eval = FALSE}
+prime_ <- seq(1,1000,2)
+for (p in prime_){
+  if ((prime_[p]%%3==0) & (prime_[p]!=3){
+      prime_[p]<-0  
+  
+  next()
+      }
 
+}
 
 
 ```
@@ -268,13 +276,6 @@ for (fb in num) {
  }
 
 ```
-```{r}
-fb_ <- 1:100
-FIZZ <- fb_%%3
-BUZZ <- fb_%%5
-FIZZBUZZ <- fb_%%3 & fb_%%5
-```
-
 
 2. Frequency Counts Take text as input, and be able to produce a table that shows the counts for each character in the text. This problem is related to the earlier easy problem asking you to count the number of times that a single letter appears in a text. The slightly harder problem is the more general version: count the frequencies of all unique characters in a text.
 ```{r}

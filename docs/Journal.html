@@ -682,6 +682,15 @@ print(odd)</code></pre>
 ## [1] 991
 ## [1] 997</code></pre>
 <p>– still not done</p>
+<pre class="r"><code>prime_ &lt;- seq(1,1000,2)
+for (p in prime_){
+  if ((prime_[p]%%3==0) &amp; (prime_[p]!=3){
+      prime_[p]&lt;-0  
+  
+  next()
+      }
+
+}</code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li>Generate 100 random numbers.</li>
 </ol>
@@ -916,10 +925,6 @@ for (fb in num) {
 ## [1] 98
 ## [1] &quot;Fizz&quot;
 ## [1] &quot;Buzz&quot;</code></pre>
-<pre class="r"><code>fb_ &lt;- 1:100
-FIZZ &lt;- fb_%%3
-BUZZ &lt;- fb_%%5
-FIZZBUZZ &lt;- fb_%%3 &amp; fb_%%5</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li><p>Frequency Counts Take text as input, and be able to produce a table that shows the counts for each character in the text. This problem is related to the earlier easy problem asking you to count the number of times that a single letter appears in a text. The slightly harder problem is the more general version: count the frequencies of all unique characters in a text.</p></li>
 <li><p>Test the Random Number Generator Test the random number generator for a flat distribution. Generate a few million random numbers between 0 and 100. Count the number of 0s, 1s, 2s, 3s, etc. all the way up to 100. Look at the counts for each of the numbers and determine if they are relatively equal. For example, you could plot the counts in Excel to make a histogram. If all of the bars are close to being flat, then each number had an equal chance of being selected, and the random number generator is working without bias.</p></li>
