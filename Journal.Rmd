@@ -18,6 +18,17 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 This is the heart of my online journal where i will be working through problems provided by the instructor as well as practicing code on my own.
 
 # Practice
+
+```{r}
+first <- c("ja","we", "uj", "wx", "he")
+last <- c("kjf", "sGsd", "asfhb", "jasd", "sdkjfg")
+age <- c(34,645,23,85,1234)
+
+sd<- list(First=first, Last=last, C=age)
+names(sd)[3]<- "DOB"
+```
+
+
 Histogram
 ```{r}
 samples<- rnorm(100, mean=50, sd=5)
@@ -122,19 +133,9 @@ for (k in 2:1000) {
 
 ```
 
- -- still not done
-```{r, eval = FALSE}
-prime_ <- seq(1,1000,2)
-for (p in prime_){
-  if ((prime_[p]%%3==0) & (prime_[p]!=3){
-      prime_[p]<-0  
-  
-  next()
-      }
-
-}
-
-
+```{r}
+Prime<-1:1000
+which(Prime%%Prime != 0)
 ```
 
 
@@ -166,11 +167,12 @@ Mode
 ```{r}
 mode<-function(mode_vec){
   mode_vec<- sort(table(mode_vec))
-  return(mode_vec[length(vector)])
+  return(which.max(mode_vec))
 
 }
-
-
+de <- c(4,4,5,7,2,2,1)
+mode(de)
+# ?
 ```
 Median
 ```{r}
@@ -184,19 +186,45 @@ med_vec <- c(3,9,4,2,6,8)
 median(med_vec)
 ```
 
+Mean (take 2)
+```{r}
+vector <- c(3,4,3,2,5,8,12)
+mean<-function(x){
+  return((sum(x))/length(x))
+}
+mean(vector)
+```
+
+Range
+```{r}
+range<-function(x){
+  sort(x)
+  return((max(x))-min(x))
+}
+```
+
+Standard Deviation
+```{r}
+std<-function(x){
+  return(sqrt((sum((x-mean(x))^2))/length(x)))
+}
+```
+
 
 11. Count the number of characters in a string variable.
 ```{r}
-
+nchar("ejsbfn;sl")
 ```
 
 12. Count the number of words in a string variable.
 ```{r}
-
+d<- "i was going to the bank when i saw a bird"
+sapply(strsplit(d," "),length)
 ```
 
 13. Count the number of sentences in a string variable.
 ```{r}
+e<- "sdsdf. gdg. ragrg. sgdthrtngf. gnfghnn"
 
 ```
 

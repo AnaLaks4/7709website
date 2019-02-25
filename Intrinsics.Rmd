@@ -196,7 +196,15 @@ g[c(2,6,20)]
 ```{r}
 j <- c("john", "emily", "ana", "frank", "cam")
 j["ana"]
-# not sure why this isn't working
+class(j)
+
+beb<- table(j)
+b<- rep(beb,5)  # ???? not replicating?!
+names(b)
+
+b["john"]
+# wont work as a vector. make it a table first
+#or names function
 ```
 
 7. x[x>3] all elements greater than 3 -- indexes numbers either greater than or less than the specified number
@@ -213,7 +221,9 @@ h[h > 20 & h < 40]
 
 9. x[x %in% c(“a”,“and”,“the”)] all elements in given set
 ```{r}
-#?
+"ana" %in% j
+
+"john" %in% b == FALSE
 
 ```
 
@@ -230,16 +240,18 @@ song<- list (title = "Hotel California", duration = 378, track = 4, similar = si
 
 str(song)
 
+#https://www.youtube.com/watch?v=Px9VNWHja4M
 ```
 
-1. x[n] list with elements n
+1. x[n] list with elements n -- indexes main list's nth item
 ```{r}
 song[2]
 ```
 
-2. x[[n]] nt h element of the list
+2. x[[n]] nt h element of the list 
 ```{r}
 song[[4]][1]
+#2nd song
 ```
 
 3. x[[“name”]] element of the list named “name”
@@ -249,33 +261,76 @@ song[["similar"]]["duration"]
 
 4. x$name id.
 ```{r}
+song$similar$duration
 
+#how do i get to the 2nd "song" 
 ```
 
 
 ## Indexing matrices
-1. x[i,j] element at row i, column j
-2. x[i,] row i
-3. x[,j] column j
-4. x[,c(1,3)] columns 1 and 3
-5. x[“name”,] row named “name”
-
-## Indexing data frames (matrix indexing plus the following)
-1. x[[“name”]] column named “name” -- 
 ```{r}
+as<- c(31,123,67,1123,987)
+ss<- c(122,56,897,32,45)
+sb<- list(as,ss)
+sbb<-matrix(data=as & ss, nrow=5, ncol = 2, byrow=FALSE, dimnames = NULL)
 
+#why doesnt a list work in a matrix if they're both numeric
 ```
 
-2. x$nameid. -- 
+1. x[i,j] element at row i, column j
 ```{r}
+sbb[1,2]
+```
 
+2. x[i,] row i
+```{r}
+sbb[4]
+```
+
+3. x[,j] column j
+```{r}
+sbb[,2]
+```
+
+4. x[,c(1,3)] columns 1 and 3
+```{r}
+sbb[c(2,3)]
+```
+
+5. x[“name”,] row named “name”
+```{r}
+first<-matrix(1:9, nrow=3)
+rownames(first)<-(c("a","b","c"))
+
+first["c",]
+```
+
+
+## Indexing data frames (matrix indexing plus the following)
+```{r}
+name<- c("ana","pete", "dave")
+age<- c(22,32,45)
+pass<-c(TRUE,FALSE,FALSE)
+
+nap<-data.frame(name,age,pass)
+nap
+```
+
+1. x[[“name”]] column named “name” -- indexes variables within specified column
+```{r}
+nap[["age"]]
+```
+
+2. x$nameid. -- indexes variables within specified column
+```{r}
+nap$pass
 ```
 
 
 # Variable Conversion 
-1. as.data.frame(x) -- 
+1. as.data.frame(x) -- converts r objects into data frame format
 ```{r}
-
+as.data.frame(name)
 ```
 
 2. as.numeric(x) -- change the composition of a vector into       numbers (if possible)
@@ -284,34 +339,72 @@ dod <- c(5,"4",7)
 as.numeric(dod)
 ```
 
-3. as.logical(x) -- 
+3. as.logical(x) -- converts all non-zero numbers to True and all zeros as false
 ```{r}
-
+ll<- c(0,4,7,2,0,1)
+as.logical(ll)
 ```
 
-4. as.character(x) -- 
+4. as.character(x) -- converts numbers into characters
 ```{r}
-
+cob<- 5.692
+cob<- as.character(cob)
 ```
 
 
 #Variable Information 
 1. is.na(x) -- determines if any values are missing or not available (??)
 ```{r}
-?is.na
 na <- c(4,7,NA,21)
 is.na(na)
 ```
 
-2. is.null(x)
-3. is.data.frame(x)
-4. is.numeric(x)
-5. is.character(x)
-6. length(x)
-7. dim(x)
-8. dimnames(x)
-9. nrow(x)
-10. ncol(x)
+2. is.null(x) -- checks if there is a null variable
+```{r}
+is.null(age)
+```
+
+3. is.data.frame(x) -- checks if object is in a data frame format
+```{r}
+is.data.frame(nap)
+```
+
+
+4. is.numeric(x) -- checks if variable/object is a number (returns logical)
+```{r}
+is.numeric(cob)
+```
+
+5. is.character(x) -- checks if variable/item is a character class
+```{r}
+is.character(cob)
+```
+
+6. length(x) -- returns length of vector
+```{r}
+length(a)
+```
+
+7. dim(x) -- returns dimension of object(vector/list/matrix etc)
+```{r}
+dim(nap)
+```
+
+8. dimnames(x) -- lists dimensions/columns and their names
+```{r}
+dimnames(nap)
+```
+
+9. nrow(x) -- returns how many rows are in a matrix/dataframe & sets number of rows 
+```{r}
+nrow(nap)
+```
+
+10. ncol(x) -- returns number of columns in a matrix/dataframe & sets number of columns
+```{r}
+ncol(nap)
+```
+
 11. class() -- states a variable's class i.e. char, num, integer
 ```{r}
 class(ans)
@@ -324,13 +417,44 @@ attributes(yan)
 
 
 #Data Selection and Manipulation
-1. which.max()
-2. which.min()
-3. which()
-4. sort()
-5. unique()
-6. table()
-7. sample()
+1. which.max() -- returns position of the highest value
+```{r}
+which.max(a)
+```
+
+2. which.min() -- returns position of the lowest value
+```{r}
+which.min(a)
+```
+
+3. which() -- returns position of which numbers fit whatever criteria you provide
+```{r}
+v <- c(6,3,7,1,8)
+which(v %% 2 ==0)
+```
+
+4. sort() -- sorts a vector from lowest to highest
+```{r}
+sort(v)
+```
+
+5. unique() -- returns the unique values within a vector/list/matrix
+```{r}
+w <- c(1,1,3,6,6,3,4,4)
+unique(w)
+```
+
+6. table() -- creates a table that keeps a count of the frequency of unique characters 
+```{r}
+vef<-c("sd","asf","ag","sd","rg","asf")
+table(vef)
+```
+
+7. sample() -- takes a sample of numbers, random numbers under specified restrictions. 
+```{r}
+sample(100, 10, replace=FALSE)
+```
+
 
 #Math
 1. max() -- returns the maximum number of a set or vector
@@ -387,58 +511,64 @@ sd(an)
 cor(ka,an)
 ```
 
-10. round() --
+10. round() -- rounds the value of input
 ```{r}
-
+round(9/2)
 ```
 
-11. abs() --
+11. abs() -- returns absolute value
 ```{r}
-
+abs(-5)
 ```
 
 
 #Matrices
-1. t() -- 
 ```{r}
-
+gre<-matrix(2:20, nrow=5)
 ```
 
-2. diag() -- 
+1. t() -- transposes matrix
 ```{r}
-
+t(first)
 ```
 
-3. rowSums() -- 
+2. diag() -- returns numbers within the matrix that are in diagonal positions
 ```{r}
-
+diag(first)
 ```
 
-4. colSums() --
+3. rowSums() -- returns sums of the rows
 ```{r}
-
+rowSums(gre)
 ```
 
-5. rowMeans() --
+4. colSums() -- returns sums of the columns
 ```{r}
-
+colSums(gre)
 ```
 
-6. colMeans() --
+5. rowMeans() -- returns means of the rows
 ```{r}
+rowMeans(gre)
+```
 
+6. colMeans() -- returns means of the columns
+```{r}
+colMeans(gre)
 ```
 
 
 #Advanced Data processing
-1. apply() -- 
+1. apply() -- applies specified functions on matrices. 2nd number is margin 1=rows, 2=columns
 ```{r}
-
+gre
+apply(gre,2,sum)
 ```
 
-2. aggregate() --
-```{r}
-
+2. aggregate() --?
+```{r, eval = FALSE}
+aggregate(gre)
+#dont understand the function
 ```
 
 
@@ -495,13 +625,59 @@ runif(10,5,50)
 
 #Programming
 1. Show that you can define a function
+```{r}
+mult4<- function(m)
+  return(m*4)
+
+mult4(10)
+```
+
 2. Show that you can write a for loop
+```{r}
+d<- c(81,21,52,36,19,22)
+for(s in 1:4)
+  d[s]<-d[s]+1
+print(d)
+```
+
 3. Show that you can write a while loop
+```{r}
+dud<- c("hello","R")
+ded<- 4:12
+while(ded>10){
+    print(dud)
+    ded=ded+1
+}
+
+```
+
 4. Show that you can write an if else statement
+```{r}
+a <- c(6,1,4,9)
+ifelse(a%%2 == 0, "even","odd")
+```
+
 5. Explain what return() does inside a function, show you can use it
+Return is used within functions to assign a number, value, r object to be brought back after the function completes. 
+```{r}
+add2<-function(x)
+  return(x+2)
+add2(5)
+``` 
+
 6. Explain what break() does, show you can use it
+Break is a function that controls the flow of a loop, it stops the iterations and flows out. Inside nested loops the flow exists the innermost loop.
+```{r}
+f<- c(3,1,5,32,11,42)
+for(g in f_num){
+  if(f[g]<30){
+    f[g]<- f[g]+3
+}
+  if(f[g]>30){
+    break
+    
+  }
+  }
 
-
-
-
-
+print(f[g])
+```
