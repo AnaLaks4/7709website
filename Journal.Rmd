@@ -225,36 +225,42 @@ sapply(strsplit(d," "),length)
 13. Count the number of sentences in a string variable.
 ```{r}
 e<- "sdsdf. gdg. ragrg. sgdthrtngf. gnfghnn"
-
+#stuck
 ```
 
 14. Count the number of times a specific character occurs in a string variable.
 ```{r}
-abc <- runif(50,0,100)
+abc <- 
 table(abc)
 
 ```
 
 15. Do a logical test to see if one word is found within the text of another string variable.
 ```{r}
+h<-"bdaj jhsf dkjn fcjb fjkb"
+h<-strsplit(h,split = " ")
+h
+"dkjn" %in% h
+
+#not working
 
 ```
 
 16. Put the current computer time in milliseconds into a variable.
 ```{r}
 now<- Sys.time()
-options(digits.secs=6)
-now
+print(as.numeric(now))
+#?
 ```
 
 17. Measure how long a piece of code takes to run by measuring the time before the code is run, and after the code is run, and taking the difference to find the total time.
 ```{r}
-
+?Sys.time
 ```
 
 18. Read a .txt file or .csv file into a variable.
 ```{r}
-
+as.data.frame(read.table(flatfile_grades,header=TRUE,sep=","))
 ```
 
 19. Output the contents of a variable to a .txt file.
@@ -307,17 +313,24 @@ for (fb in num) {
 
 2. Frequency Counts Take text as input, and be able to produce a table that shows the counts for each character in the text. This problem is related to the earlier easy problem asking you to count the number of times that a single letter appears in a text. The slightly harder problem is the more general version: count the frequencies of all unique characters in a text.
 ```{r}
-
+bah<-"hello and welcome to R"
+b<-unique(unlist(strsplit(bah,split="")))
+#bb<-data.frame(b,)
+print(b)
 ```
 
 3. Test the Random Number Generator Test the random number generator for a flat distribution. Generate a few million random numbers between 0 and 100. Count the number of 0s, 1s, 2s, 3s, etc. all the way up to 100. Look at the counts for each of the numbers and determine if they are relatively equal. For example, you could plot the counts in Excel to make a histogram. If all of the bars are close to being flat, then each number had an equal chance of being selected, and the random number generator is working without bias.
 ```{r}
 milli <-floor(runif(5000000, 0,100))
 table(milli)
+hist(milli)
 ```
 
 4. Create a multiplication table Generate a matrix for a multiplication table. For example, the labels for the columns could be the numbers 1 to 10, and the labels for the rows could be the numbers 1 to 10. The contents of each of the cells in the matrix should be correct answer for multiplying the column value by the row value.
 ```{r}
+r<-1:10
+c<-1:10
+matrix(r*c, nrow = 10, ncol = 10, byrow = TRUE )
 
 ```
 
@@ -328,6 +341,42 @@ table(milli)
 
 6. Snakes and Ladders. Your task here is to write an algorithm that can simulate playing the above depicted Snakes and Ladders board. You should assume that each roll of the dice produces a random number between 1 and 6. After you are able to simulate one played game, you will then write a loop to simulate 1000 games, and estimate the average number of dice rolls needed to successfully complete the game.
 ```{r}
+rolldice<-(sample(1:6,1))
+m<-rolldice
+SnL<-function(rolldice){
+     m<- rolldice+rolldice
+while(m<=25)
+  m
+  if(m == 3){
+    m<-11
+  }
+  if(m==6){
+    m<-17
+  }
+  if(m==9){
+    m<-18
+  }
+  if(m == 10){
+    m<- 12
+  }
+  if(m==14){
+    m<-4
+  }
+  if(m==19){
+    m<-8
+  }
+  if(m==22){
+    m<-20
+  }
+  if(m==24){
+    m<-16
+  }
+else(print(m))
+}
+
+ 
+
+
 
 ```
 
@@ -354,6 +403,10 @@ X bottles of beer on the wall X bottles of beer Take one down, pass it around X-
 
 Where X and X-1 are replaced by numbers of course, from 99 all the way down to 0.
 ```{r}
+X<-99
+for(x in 1:99)
+  print(X bottles of beer on the wall X bottles of beer Take one down, pass it around X-1 bottles of beer on the wall)
+  
 
 ```
 

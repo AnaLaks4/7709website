@@ -411,10 +411,16 @@ div.tocify {
 </div>
 <div id="practice" class="section level1">
 <h1>Practice</h1>
+<pre class="r"><code>first &lt;- c(&quot;ja&quot;,&quot;we&quot;, &quot;uj&quot;, &quot;wx&quot;, &quot;he&quot;)
+last &lt;- c(&quot;kjf&quot;, &quot;sGsd&quot;, &quot;asfhb&quot;, &quot;jasd&quot;, &quot;sdkjfg&quot;)
+age &lt;- c(34,645,23,85,1234)
+
+sd&lt;- list(First=first, Last=last, C=age)
+names(sd)[3]&lt;- &quot;DOB&quot;</code></pre>
 <p>Histogram</p>
 <pre class="r"><code>samples&lt;- rnorm(100, mean=50, sd=5)
 hist(samples)</code></pre>
-<p><img src="Journal_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="Journal_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Rent of $750 for 12 months added using a loop</p>
 <pre class="r"><code>b&lt;-length(12)
 for(j in 1:12){
@@ -435,7 +441,7 @@ Lmean&lt;- 560
 Sx&lt;-dnorm(Slen,Smean,1)
 
 plot(Slen,Sx,type=&quot;n&quot;, xlab =&quot;Wavelength&quot;, ylab = &quot;Sensitivity&quot;, axes = TRUE)</code></pre>
-<p><img src="Journal_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="Journal_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="easier-problems" class="section level1">
 <h1>Easier Problems</h1>
@@ -681,37 +687,30 @@ print(odd)</code></pre>
 ## [1] 983
 ## [1] 991
 ## [1] 997</code></pre>
-<p>– still not done</p>
-<pre class="r"><code>prime_ &lt;- seq(1,1000,2)
-for (p in prime_){
-  if ((prime_[p]%%3==0) &amp; (prime_[p]!=3){
-      prime_[p]&lt;-0  
-  
-  next()
-      }
-
-}</code></pre>
+<pre class="r"><code>Prime&lt;-1:1000
+which(Prime%%Prime != 0)</code></pre>
+<pre><code>## integer(0)</code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li>Generate 100 random numbers.</li>
 </ol>
 <pre class="r"><code>randnum&lt;- sample(100)
 randnum</code></pre>
-<pre><code>##   [1]  72  11  78  75  97  22  50  55  54  16  69  80  15   5  57  39  73
-##  [18]  41  23  34  88  52  66  38  64  77  96  56  30  43   2 100  49  98
-##  [35]  76  29   4  32  33  12  61  46  67   6   1  47  86  53  85  59  91
-##  [52]   3  27  36  10  65  48  82  35  37  74  40  31  42  44  45  71  19
-##  [69]  25  90  92  62  51  18  87   8  89  68  94   9  99  14   7  93  95
-##  [86]  13  84  28  70  83  81  60  26  79  63  21  17  58  24  20</code></pre>
+<pre><code>##   [1]  23  99  33  49  13  66  81  90  18  70  96   1  83   9  17  54  11
+##  [18]   2  86  16  51  85  22  10  12  60  79  31  27  80  56  67  62  53
+##  [35]  52  73   3  39  37  40  43  42  14  91  34  58  35  69  77  47  57
+##  [52]  44   4  71  36  94  64  48  55  78  26  28  29  15  97  41   6  19
+##  [69]  89  46 100  59  98  93  45  63  87  30  74  72  20   5  95  32  65
+##  [86]  75  24  50   7  38  68  92  82  21  76  25   8  61  84  88</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>Generate 100 random numbers within a specific range.</li>
 </ol>
 <pre class="r"><code>randrange&lt;- sample(1:25,100,replace=T)
 randrange</code></pre>
-<pre><code>##   [1]  2  9  5 17 18  4 16  6 18 23 25  2 23  5 18 18  8 23 19  3 25  3 19
-##  [24] 10 15  8  7  7  3  4  7 12  2 14 18  7  7  3 20  2 25  8  2 20  4  6
-##  [47] 23  6  8  9  8 11  4 18 11 14 18 14  4  8 13 11 20 25 10 16  5 11  5
-##  [70] 25 18  2 18 24  7 23  6  7 11 15  7 22  8 18 18 22  7 11 20 13 21 12
-##  [93]  6  5 19 10 22 21  4  7</code></pre>
+<pre><code>##   [1]  7 13 21 20  8  4  9  5 13 19  9 11 15 11 13  8 21  9  1 19 19 19 18
+##  [24] 13 21 13 24 11 20 19 18 22 14  5 10 21  4 25  4  3  8 12 10  1  6  4
+##  [47]  3  8  9  7  7  8 18 19  5 14  9  6 15  4  2 10 12 13 16 21  3 25  8
+##  [70]  8 17  6  3 12 20 14 11 12  1 15 19 14 15  5  8  9  9  5  1  9 15  3
+##  [93] 12  2  7 11 16 22  6  5</code></pre>
 <ol start="10" style="list-style-type: decimal">
 <li>Write your own functions to give descriptive statistics for a vector variable storing multiple numbers. Write functions for the following without using R intrinsics: mean, mode, median, range, standard deviation.</li>
 </ol>
@@ -726,9 +725,14 @@ aver(vector)</code></pre>
 <p>Mode</p>
 <pre class="r"><code>mode&lt;-function(mode_vec){
   mode_vec&lt;- sort(table(mode_vec))
-  return(mode_vec[length(vector)])
+  return(which.max(mode_vec))
 
-}</code></pre>
+}
+de &lt;- c(4,4,5,7,2,2,1)
+mode(de)</code></pre>
+<pre><code>## 2 
+## 4</code></pre>
+<pre class="r"><code># ?</code></pre>
 <p>Median</p>
 <pre class="r"><code>median&lt;-function(w){
   med&lt;- sort(w) #maybe make it proportion?
@@ -739,41 +743,77 @@ aver(vector)</code></pre>
 med_vec &lt;- c(3,9,4,2,6,8)
 median(med_vec)</code></pre>
 <pre><code>## [1] 9</code></pre>
+<p>Mean (take 2)</p>
+<pre class="r"><code>vector &lt;- c(3,4,3,2,5,8,12)
+mean&lt;-function(x){
+  return((sum(x))/length(x))
+}
+mean(vector)</code></pre>
+<pre><code>## [1] 5.285714</code></pre>
+<p>Range</p>
+<pre class="r"><code>range&lt;-function(x){
+  sort(x)
+  return((max(x))-min(x))
+}</code></pre>
+<p>Standard Deviation</p>
+<pre class="r"><code>std&lt;-function(x){
+  return(sqrt((sum((x-mean(x))^2))/length(x)))
+}</code></pre>
 <ol start="11" style="list-style-type: decimal">
-<li><p>Count the number of characters in a string variable.</p></li>
-<li><p>Count the number of words in a string variable.</p></li>
-<li><p>Count the number of sentences in a string variable.</p></li>
-<li><p>Count the number of times a specific character occurs in a string variable.</p></li>
+<li>Count the number of characters in a string variable.</li>
+</ol>
+<pre class="r"><code>nchar(&quot;ejsbfn;sl&quot;)</code></pre>
+<pre><code>## [1] 9</code></pre>
+<ol start="12" style="list-style-type: decimal">
+<li>Count the number of words in a string variable.</li>
+</ol>
+<pre class="r"><code>d&lt;- &quot;i was going to the bank when i saw a bird&quot;
+sapply(strsplit(d,&quot; &quot;),length)</code></pre>
+<pre><code>## [1] 11</code></pre>
+<ol start="13" style="list-style-type: decimal">
+<li>Count the number of sentences in a string variable.</li>
+</ol>
+<pre class="r"><code>e&lt;- &quot;sdsdf. gdg. ragrg. sgdthrtngf. gnfghnn&quot;</code></pre>
+<ol start="14" style="list-style-type: decimal">
+<li>Count the number of times a specific character occurs in a string variable.</li>
 </ol>
 <pre class="r"><code>abc &lt;- runif(50,0,100)
 table(abc)</code></pre>
 <pre><code>## abc
-## 0.591811002232134  2.18807018827647  2.29474371299148  3.04959455970675 
-##                 1                 1                 1                 1 
-##  3.10386780183762  5.10059716179967  6.64958299603313  15.4871289851144 
-##                 1                 1                 1                 1 
-##  16.8852454749867  17.6863784436136  18.8037310261279  19.5640118559822 
-##                 1                 1                 1                 1 
-##  21.2253275094554  23.7797224428505  25.7517669349909  28.0566642526537 
-##                 1                 1                 1                 1 
-##  29.1189848212525  29.3358262162656  29.4846658594906  29.6770381042734 
-##                 1                 1                 1                 1 
-##  30.0107251154259  32.9273877898231  33.2099458668381  39.2161073628813 
-##                 1                 1                 1                 1 
-##  39.4359487574548  39.4514336483553  42.8741470910609  44.3575877230614 
-##                 1                 1                 1                 1 
-##  44.7991502238438  48.0610689381137  49.0614628186449  51.7001506406814 
-##                 1                 1                 1                 1 
-##  51.7961941659451  52.6753795798868   53.837736742571  57.7092589344829 
-##                 1                 1                 1                 1 
-##  62.2311447979882  69.5377143332735  71.0379907861352  71.8747370643541 
-##                 1                 1                 1                 1 
-##  74.6409280924127  77.5325136724859  79.4678525300696  86.2593355122954 
-##                 1                 1                 1                 1 
-##  86.8967106565833  88.8576443539932   93.120338069275  95.1310646953061 
-##                 1                 1                 1                 1 
-##  96.9914657529444  98.0180695885792 
-##                 1                 1</code></pre>
+## 0.0491955550387502   1.18247829377651     2.982586924918 
+##                  1                  1                  1 
+##   4.00091775227338   9.26295444369316   9.29110809229314 
+##                  1                  1                  1 
+##   12.2604608535767   16.8426308315247    17.733442876488 
+##                  1                  1                  1 
+##     18.84811129421   21.4881007093936   21.6596747050062 
+##                  1                  1                  1 
+##   22.6229687221348   24.5459568221122   24.9118067324162 
+##                  1                  1                  1 
+##   25.8820980321616    26.869882340543   27.6271122507751 
+##                  1                  1                  1 
+##   27.7016010135412   34.5315824029967   34.8854004405439 
+##                  1                  1                  1 
+##   37.8056141547859   38.1068906979635   38.5371309472248 
+##                  1                  1                  1 
+##   40.6613999046385   43.4039533836767   43.5815115924925 
+##                  1                  1                  1 
+##   46.1650856770575   46.3040375616401   55.8428712189198 
+##                  1                  1                  1 
+##    56.388797913678   57.2436825139448   57.4127634754404 
+##                  1                  1                  1 
+##   59.3878481071442   61.2458166200668   61.4621632732451 
+##                  1                  1                  1 
+##   62.9030537093058   70.5253861378878   73.4861393226311 
+##                  1                  1                  1 
+##   73.7684477353469   76.2461812933907   84.6512580057606 
+##                  1                  1                  1 
+##   86.1343618482351   86.8237535003573   87.9721835721284 
+##                  1                  1                  1 
+##    91.393243521452   92.2023189254105   95.4185616225004 
+##                  1                  1                  1 
+##   97.0031079370528   98.3606319874525 
+##                  1                  1</code></pre>
 <ol start="15" style="list-style-type: decimal">
 <li><p>Do a logical test to see if one word is found within the text of another string variable.</p></li>
 <li><p>Put the current computer time in milliseconds into a variable.</p></li>
@@ -781,7 +821,7 @@ table(abc)</code></pre>
 <pre class="r"><code>now&lt;- Sys.time()
 options(digits.secs=6)
 now</code></pre>
-<pre><code>## [1] &quot;2019-02-11 01:05:46.228372 EST&quot;</code></pre>
+<pre><code>## [1] &quot;2019-02-24 22:37:05.474745 EST&quot;</code></pre>
 <ol start="17" style="list-style-type: decimal">
 <li><p>Measure how long a piece of code takes to run by measuring the time before the code is run, and after the code is run, and taking the difference to find the total time.</p></li>
 <li><p>Read a .txt file or .csv file into a variable.</p></li>

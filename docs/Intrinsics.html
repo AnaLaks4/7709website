@@ -1022,7 +1022,20 @@ h [4]</code></pre>
 <pre class="r"><code>j &lt;- c(&quot;john&quot;, &quot;emily&quot;, &quot;ana&quot;, &quot;frank&quot;, &quot;cam&quot;)
 j[&quot;ana&quot;]</code></pre>
 <pre><code>## [1] NA</code></pre>
-<pre class="r"><code># not sure why this isn&#39;t working</code></pre>
+<pre class="r"><code>class(j)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>beb&lt;- table(j)
+b&lt;- rep(beb,5)  # ???? not replicating?!
+names(b)</code></pre>
+<pre><code>##  [1] &quot;ana&quot;   &quot;cam&quot;   &quot;emily&quot; &quot;frank&quot; &quot;john&quot;  &quot;ana&quot;   &quot;cam&quot;   &quot;emily&quot;
+##  [9] &quot;frank&quot; &quot;john&quot;  &quot;ana&quot;   &quot;cam&quot;   &quot;emily&quot; &quot;frank&quot; &quot;john&quot;  &quot;ana&quot;  
+## [17] &quot;cam&quot;   &quot;emily&quot; &quot;frank&quot; &quot;john&quot;  &quot;ana&quot;   &quot;cam&quot;   &quot;emily&quot; &quot;frank&quot;
+## [25] &quot;john&quot;</code></pre>
+<pre class="r"><code>b[&quot;john&quot;]</code></pre>
+<pre><code>## john 
+##    1</code></pre>
+<pre class="r"><code># wont work as a vector. make it a table first
+#or names function</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>x[x&gt;3] all elements greater than 3 – indexes numbers either greater than or less than the specified number</li>
 </ol>
@@ -1040,7 +1053,10 @@ j[&quot;ana&quot;]</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>x[x %in% c(“a”,“and”,“the”)] all elements in given set</li>
 </ol>
-<pre class="r"><code>#?</code></pre>
+<pre class="r"><code>&quot;ana&quot; %in% j</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>&quot;john&quot; %in% b == FALSE</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="indexing-lists" class="section level2">
 <h2>Indexing lists</h2>
@@ -1063,7 +1079,7 @@ str(song)</code></pre>
 ##   ..$ track   : num 5</code></pre>
 <pre class="r"><code>#https://www.youtube.com/watch?v=Px9VNWHja4M</code></pre>
 <ol style="list-style-type: decimal">
-<li>x[n] list with elements n</li>
+<li>x[n] list with elements n – indexes main list’s nth item</li>
 </ol>
 <pre class="r"><code>song[2]</code></pre>
 <pre><code>## $duration
@@ -1074,6 +1090,7 @@ str(song)</code></pre>
 <pre class="r"><code>song[[4]][1]</code></pre>
 <pre><code>## $title
 ## [1] &quot;Misery Business&quot;</code></pre>
+<pre class="r"><code>#2nd song</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>x[[“name”]] element of the list named “name”</li>
 </ol>
@@ -1083,58 +1100,157 @@ str(song)</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>x$name id.</li>
 </ol>
+<pre class="r"><code>song$similar$duration</code></pre>
+<pre><code>## [1] 190</code></pre>
+<pre class="r"><code>#how do i get to the 2nd &quot;song&quot; </code></pre>
 </div>
 <div id="indexing-matrices" class="section level2">
 <h2>Indexing matrices</h2>
+<pre class="r"><code>as&lt;- c(31,123,67,1123,987)
+ss&lt;- c(122,56,897,32,45)
+sb&lt;- list(as,ss)
+sbb&lt;-matrix(data=as &amp; ss, nrow=5, ncol = 2, byrow=FALSE, dimnames = NULL)
+
+#why doesnt a list work in a matrix if they&#39;re both numeric</code></pre>
 <ol style="list-style-type: decimal">
 <li>x[i,j] element at row i, column j</li>
+</ol>
+<pre class="r"><code>sbb[1,2]</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<ol start="2" style="list-style-type: decimal">
 <li>x[i,] row i</li>
+</ol>
+<pre class="r"><code>sbb[4]</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<ol start="3" style="list-style-type: decimal">
 <li>x[,j] column j</li>
+</ol>
+<pre class="r"><code>sbb[,2]</code></pre>
+<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE</code></pre>
+<ol start="4" style="list-style-type: decimal">
 <li>x[,c(1,3)] columns 1 and 3</li>
+</ol>
+<pre class="r"><code>sbb[c(2,3)]</code></pre>
+<pre><code>## [1] TRUE TRUE</code></pre>
+<ol start="5" style="list-style-type: decimal">
 <li>x[“name”,] row named “name”</li>
 </ol>
+<pre class="r"><code>first&lt;-matrix(1:9, nrow=3)
+rownames(first)&lt;-(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;))
+
+first[&quot;c&quot;,]</code></pre>
+<pre><code>## [1] 3 6 9</code></pre>
 </div>
 <div id="indexing-data-frames-matrix-indexing-plus-the-following" class="section level2">
 <h2>Indexing data frames (matrix indexing plus the following)</h2>
+<pre class="r"><code>name&lt;- c(&quot;ana&quot;,&quot;pete&quot;, &quot;dave&quot;)
+age&lt;- c(22,32,45)
+pass&lt;-c(TRUE,FALSE,FALSE)
+
+nap&lt;-data.frame(name,age,pass)
+nap</code></pre>
+<pre><code>##   name age  pass
+## 1  ana  22  TRUE
+## 2 pete  32 FALSE
+## 3 dave  45 FALSE</code></pre>
 <ol style="list-style-type: decimal">
-<li><p>x[[“name”]] column named “name” –</p></li>
-<li><p>x$nameid. –</p></li>
+<li>x[[“name”]] column named “name” – indexes variables within specified column</li>
 </ol>
+<pre class="r"><code>nap[[&quot;age&quot;]]</code></pre>
+<pre><code>## [1] 22 32 45</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>x$nameid. – indexes variables within specified column</li>
+</ol>
+<pre class="r"><code>nap$pass</code></pre>
+<pre><code>## [1]  TRUE FALSE FALSE</code></pre>
 </div>
 </div>
 <div id="variable-conversion" class="section level1">
 <h1>Variable Conversion</h1>
 <ol style="list-style-type: decimal">
-<li><p>as.data.frame(x) –</p></li>
-<li><p>as.numeric(x) – change the composition of a vector into numbers (if possible)</p></li>
+<li>as.data.frame(x) – converts r objects into data frame format</li>
+</ol>
+<pre class="r"><code>as.data.frame(name)</code></pre>
+<pre><code>##   name
+## 1  ana
+## 2 pete
+## 3 dave</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>as.numeric(x) – change the composition of a vector into numbers (if possible)</li>
 </ol>
 <pre class="r"><code>dod &lt;- c(5,&quot;4&quot;,7)
 as.numeric(dod)</code></pre>
 <pre><code>## [1] 5 4 7</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li><p>as.logical(x) –</p></li>
-<li><p>as.character(x) –</p></li>
+<li>as.logical(x) – converts all non-zero numbers to True and all zeros as false</li>
 </ol>
+<pre class="r"><code>ll&lt;- c(0,4,7,2,0,1)
+as.logical(ll)</code></pre>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>as.character(x) – converts numbers into characters</li>
+</ol>
+<pre class="r"><code>cob&lt;- 5.692
+cob&lt;- as.character(cob)</code></pre>
 </div>
 <div id="variable-information" class="section level1">
 <h1>Variable Information</h1>
 <ol style="list-style-type: decimal">
 <li>is.na(x) – determines if any values are missing or not available (??)</li>
 </ol>
-<pre class="r"><code>?is.na
-na &lt;- c(4,7,NA,21)
+<pre class="r"><code>na &lt;- c(4,7,NA,21)
 is.na(na)</code></pre>
 <pre><code>## [1] FALSE FALSE  TRUE FALSE</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>is.null(x)</li>
-<li>is.data.frame(x)</li>
-<li>is.numeric(x)</li>
-<li>is.character(x)</li>
-<li>length(x)</li>
-<li>dim(x)</li>
-<li>dimnames(x)</li>
-<li>nrow(x)</li>
-<li>ncol(x)</li>
+<li>is.null(x) – checks if there is a null variable</li>
+</ol>
+<pre class="r"><code>is.null(age)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>is.data.frame(x) – checks if object is in a data frame format</li>
+</ol>
+<pre class="r"><code>is.data.frame(nap)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>is.numeric(x) – checks if variable/object is a number (returns logical)</li>
+</ol>
+<pre class="r"><code>is.numeric(cob)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>is.character(x) – checks if variable/item is a character class</li>
+</ol>
+<pre class="r"><code>is.character(cob)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>length(x) – returns length of vector</li>
+</ol>
+<pre class="r"><code>length(a)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>dim(x) – returns dimension of object(vector/list/matrix etc)</li>
+</ol>
+<pre class="r"><code>dim(nap)</code></pre>
+<pre><code>## [1] 3 3</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>dimnames(x) – lists dimensions/columns and their names</li>
+</ol>
+<pre class="r"><code>dimnames(nap)</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;
+## 
+## [[2]]
+## [1] &quot;name&quot; &quot;age&quot;  &quot;pass&quot;</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>nrow(x) – returns how many rows are in a matrix/dataframe &amp; sets number of rows</li>
+</ol>
+<pre class="r"><code>nrow(nap)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>ncol(x) – returns number of columns in a matrix/dataframe &amp; sets number of columns</li>
+</ol>
+<pre class="r"><code>ncol(nap)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<ol start="11" style="list-style-type: decimal">
 <li>class() – states a variable’s class i.e. char, num, integer</li>
 </ol>
 <pre class="r"><code>class(ans)</code></pre>
@@ -1149,14 +1265,45 @@ is.na(na)</code></pre>
 <div id="data-selection-and-manipulation" class="section level1">
 <h1>Data Selection and Manipulation</h1>
 <ol style="list-style-type: decimal">
-<li>which.max()</li>
-<li>which.min()</li>
-<li>which()</li>
-<li>sort()</li>
-<li>unique()</li>
-<li>table()</li>
-<li>sample()</li>
+<li>which.max() – returns position of the highest value</li>
 </ol>
+<pre class="r"><code>which.max(a)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>which.min() – returns position of the lowest value</li>
+</ol>
+<pre class="r"><code>which.min(a)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>which() – returns position of which numbers fit whatever criteria you provide</li>
+</ol>
+<pre class="r"><code>v &lt;- c(6,3,7,1,8)
+which(v %% 2 ==0)</code></pre>
+<pre><code>## [1] 1 5</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>sort() – sorts a vector from lowest to highest</li>
+</ol>
+<pre class="r"><code>sort(v)</code></pre>
+<pre><code>## [1] 1 3 6 7 8</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>unique() – returns the unique values within a vector/list/matrix</li>
+</ol>
+<pre class="r"><code>w &lt;- c(1,1,3,6,6,3,4,4)
+unique(w)</code></pre>
+<pre><code>## [1] 1 3 6 4</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>table() – creates a table that keeps a count of the frequency of unique characters</li>
+</ol>
+<pre class="r"><code>vef&lt;-c(&quot;sd&quot;,&quot;asf&quot;,&quot;ag&quot;,&quot;sd&quot;,&quot;rg&quot;,&quot;asf&quot;)
+table(vef)</code></pre>
+<pre><code>## vef
+##  ag asf  rg  sd 
+##   1   2   1   2</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>sample() – takes a sample of numbers, random numbers under specified restrictions.</li>
+</ol>
+<pre class="r"><code>sample(100, 10, replace=FALSE)</code></pre>
+<pre><code>##  [1] 65 32 40 83 55 50 16 43 58 86</code></pre>
 </div>
 <div id="math" class="section level1">
 <h1>Math</h1>
@@ -1175,7 +1322,7 @@ max(felix)</code></pre>
 <li>range() – returns the minimum and maximum of a set or vector</li>
 </ol>
 <pre class="r"><code>range(felix)</code></pre>
-<pre><code>## [1]  3.0 55.8</code></pre>
+<pre><code>## [1] 52.8</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>sum() – calculates the sum of a number set or vector</li>
 </ol>
@@ -1194,7 +1341,7 @@ m_</code></pre>
 <pre class="r"><code>nad&lt;- seq(1,50,3)
 z&lt;- median(nad)
 z</code></pre>
-<pre><code>## [1] 8.5</code></pre>
+<pre><code>## [1] 25</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>var() – computes variance</li>
 </ol>
@@ -1214,27 +1361,72 @@ var(ka)</code></pre>
 <pre class="r"><code>cor(ka,an)</code></pre>
 <pre><code>## [1] 0.2401922</code></pre>
 <ol start="10" style="list-style-type: decimal">
-<li><p>round() –</p></li>
-<li><p>abs() –</p></li>
+<li>round() – rounds the value of input</li>
 </ol>
+<pre class="r"><code>round(9/2)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<ol start="11" style="list-style-type: decimal">
+<li>abs() – returns absolute value</li>
+</ol>
+<pre class="r"><code>abs(-5)</code></pre>
+<pre><code>## [1] 5</code></pre>
 </div>
 <div id="matrices" class="section level1">
 <h1>Matrices</h1>
+<pre class="r"><code>gre&lt;-matrix(2:20, nrow=5)</code></pre>
 <ol style="list-style-type: decimal">
-<li><p>t() –</p></li>
-<li><p>diag() –</p></li>
-<li><p>rowSums() –</p></li>
-<li><p>colSums() –</p></li>
-<li><p>rowMeans() –</p></li>
-<li><p>colMeans() –</p></li>
+<li>t() – transposes matrix</li>
 </ol>
+<pre class="r"><code>t(first)</code></pre>
+<pre><code>##      a b c
+## [1,] 1 2 3
+## [2,] 4 5 6
+## [3,] 7 8 9</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>diag() – returns numbers within the matrix that are in diagonal positions</li>
+</ol>
+<pre class="r"><code>diag(first)</code></pre>
+<pre><code>## [1] 1 5 9</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>rowSums() – returns sums of the rows</li>
+</ol>
+<pre class="r"><code>rowSums(gre)</code></pre>
+<pre><code>## [1] 38 42 46 50 35</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>colSums() – returns sums of the columns</li>
+</ol>
+<pre class="r"><code>colSums(gre)</code></pre>
+<pre><code>## [1] 20 45 70 76</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>rowMeans() – returns means of the rows</li>
+</ol>
+<pre class="r"><code>rowMeans(gre)</code></pre>
+<pre><code>## [1]  9.50 10.50 11.50 12.50  8.75</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>colMeans() – returns means of the columns</li>
+</ol>
+<pre class="r"><code>colMeans(gre)</code></pre>
+<pre><code>## [1]  4.0  9.0 14.0 15.2</code></pre>
 </div>
 <div id="advanced-data-processing" class="section level1">
 <h1>Advanced Data processing</h1>
 <ol style="list-style-type: decimal">
-<li><p>apply() –</p></li>
-<li><p>aggregate() –</p></li>
+<li>apply() – applies specified functions on matrices. 2nd number is margin 1=rows, 2=columns</li>
 </ol>
+<pre class="r"><code>gre</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    2    7   12   17
+## [2,]    3    8   13   18
+## [3,]    4    9   14   19
+## [4,]    5   10   15   20
+## [5,]    6   11   16    2</code></pre>
+<pre class="r"><code>apply(gre,2,sum)</code></pre>
+<pre><code>## [1] 20 45 70 76</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>aggregate() –?</li>
+</ol>
+<pre class="r"><code>aggregate(gre)
+#dont understand the function</code></pre>
 </div>
 <div id="strings" class="section level1">
 <h1>Strings</h1>
@@ -1267,12 +1459,12 @@ toupper(alphab)</code></pre>
 </ol>
 <pre class="r"><code>uk &lt;- rnorm(50,mean=20,sd=1)
 hist(uk)</code></pre>
-<p><img src="Intrinsics_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>plot() – function for plotting a graph</li>
 </ol>
 <pre class="r"><code>plot(rnorm(100,mean=38,sd=2))</code></pre>
-<p><img src="Intrinsics_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
 </div>
 <div id="distributions" class="section level1">
 <h1>Distributions</h1>
@@ -1281,24 +1473,71 @@ hist(uk)</code></pre>
 </ol>
 <pre class="r"><code>q&lt;- rnorm(20, mean = 5, sd = 2)
 plot(q)</code></pre>
-<p><img src="Intrinsics_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p><img src="Intrinsics_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>runif() – generates random numbers (how many, min, max)</li>
 </ol>
 <pre class="r"><code>runif(10,5,50)</code></pre>
-<pre><code>##  [1] 27.664404 18.902980  7.660412 34.680979 26.728741  5.814441  7.256444
-##  [8] 41.461858 16.927687  5.734346</code></pre>
+<pre><code>##  [1] 44.092221 25.278331 21.340110 14.973972 40.459667 10.419702 35.577748
+##  [8]  7.832178 13.582619  7.840849</code></pre>
 </div>
 <div id="programming" class="section level1">
 <h1>Programming</h1>
 <ol style="list-style-type: decimal">
 <li>Show that you can define a function</li>
-<li>Show that you can write a for loop</li>
-<li>Show that you can write a while loop</li>
-<li>Show that you can write an if else statement</li>
-<li>Explain what return() does inside a function, show you can use it</li>
-<li>Explain what break() does, show you can use it</li>
 </ol>
+<pre class="r"><code>mult4&lt;- function(m)
+  return(m*4)
+
+mult4(10)</code></pre>
+<pre><code>## [1] 40</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Show that you can write a for loop</li>
+</ol>
+<pre class="r"><code>d&lt;- c(81,21,52,36,19,22)
+for(s in 1:4)
+  d[s]&lt;-d[s]+1
+print(d)</code></pre>
+<pre><code>## [1] 82 22 53 37 19 22</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Show that you can write a while loop</li>
+</ol>
+<pre class="r"><code>dud&lt;- c(&quot;hello&quot;,&quot;R&quot;)
+ded&lt;- 4:12
+while(ded&gt;10){
+    print(dud)
+    ded=ded+1
+}</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Show that you can write an if else statement</li>
+</ol>
+<pre class="r"><code>a &lt;- c(6,1,4,9)
+ifelse(a%%2 == 0, &quot;even&quot;,&quot;odd&quot;)</code></pre>
+<pre><code>## [1] &quot;even&quot; &quot;odd&quot;  &quot;even&quot; &quot;odd&quot;</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Explain what return() does inside a function, show you can use it Return is used within functions to assign a number, value, r object to be brought back after the function completes.</li>
+</ol>
+<pre class="r"><code>add2&lt;-function(x)
+  return(x+2)
+add2(5)</code></pre>
+<pre><code>## [1] 7</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Explain what break() does, show you can use it Break is a function that controls the flow of a loop, it stops the iterations and flows out. Inside nested loops the flow exists the innermost loop.</li>
+</ol>
+<pre class="r"><code>f&lt;- c(3,1,5,32,11,42)
+f_num&lt;-1:length(f)
+for(g in f_num){
+  if(f[g]&lt;30){
+    f[g]&lt;- f[g]+3
+}
+  if(f[g]&gt;30){
+    break
+    
+  }
+  }
+
+print(f[g])</code></pre>
+<pre><code>## [1] 32</code></pre>
 </div>
 
 

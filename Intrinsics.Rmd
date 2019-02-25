@@ -122,7 +122,7 @@ print(sam)
 rep(6:9, times=2)
 ```
 
-5. data.frame() -- converts matrices into data frames
+5. data.frame() -- converts matrices into data frames, creates data frames
 ```{r}
 yan <- matrix(seq(1,24,1), nrow=6, ncol = 4)
 data.frame(yan)
@@ -131,8 +131,10 @@ data.frame(yan)
 6. list() -- creates a list
 ```{r}
 kin<- list("a"=2.5, "b"= TRUE, "c"= 2:5)
+
+#howdo you do this with names?
+
 ```
-#######howdo you do this with names?
 
 7. matrix() -- creates a martix with specified rows and columns
 ```{r}
@@ -660,8 +662,9 @@ ifelse(a%%2 == 0, "even","odd")
 5. Explain what return() does inside a function, show you can use it
 Return is used within functions to assign a number, value, r object to be brought back after the function completes. 
 ```{r}
-add2<-function(x)
-  return(x+2)
+add2<-function(x){
+    return(x+2)
+}
 add2(5)
 ``` 
 
@@ -669,6 +672,7 @@ add2(5)
 Break is a function that controls the flow of a loop, it stops the iterations and flows out. Inside nested loops the flow exists the innermost loop.
 ```{r}
 f<- c(3,1,5,32,11,42)
+f_num<-1:length(f)
 for(g in f_num){
   if(f[g]<30){
     f[g]<- f[g]+3
