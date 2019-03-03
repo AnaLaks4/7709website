@@ -1,13 +1,17 @@
-name: "MyLabJournal"
+name: "Ana'sOnlineRJournal"
 navbar:
-  title: "MyLabJournal"
+  title: "Ana'sOnlineRJournal"
   left:
     - text: "Home"
       href: index.html
-    - text: "Journal"
-      href: Journal.html
+    - text: "Class Notes"
+      href: Class Notes.html
+    - text: "Solving Problems"
+      href: Solving Problems.html
     - text: "Intrinsics"
       href: Intrinsics.html
+    - text: "GGPlot"
+      href: GGPlot.html
     - text: "Links"
       href: Links.html
 

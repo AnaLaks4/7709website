@@ -372,7 +372,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">MyLabJournal</a>
+      <a class="navbar-brand" href="index.html">Ana'sOnlineRJournal</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -380,10 +380,16 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="Journal.html">Journal</a>
+  <a href="Class Notes.html">Class Notes</a>
+</li>
+<li>
+  <a href="Solving Problems.html">Solving Problems</a>
 </li>
 <li>
   <a href="Intrinsics.html">Intrinsics</a>
+</li>
+<li>
+  <a href="GGPlot.html">GGPlot</a>
 </li>
 <li>
   <a href="Links.html">Links</a>
@@ -917,7 +923,7 @@ print(sam)</code></pre>
 <pre class="r"><code>rep(6:9, times=2)</code></pre>
 <pre><code>## [1] 6 7 8 9 6 7 8 9</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li>data.frame() – converts matrices into data frames</li>
+<li>data.frame() – converts matrices into data frames, creates data frames</li>
 </ol>
 <pre class="r"><code>yan &lt;- matrix(seq(1,24,1), nrow=6, ncol = 4)
 data.frame(yan)</code></pre>
@@ -931,9 +937,9 @@ data.frame(yan)</code></pre>
 <ol start="6" style="list-style-type: decimal">
 <li>list() – creates a list</li>
 </ol>
-<pre class="r"><code>kin&lt;- list(&quot;a&quot;=2.5, &quot;b&quot;= TRUE, &quot;c&quot;= 2:5)</code></pre>
-<div id="howdo-you-do-this-with-names" class="section level7">
-<p>howdo you do this with names?</p>
+<pre class="r"><code>kin&lt;- list(&quot;a&quot;=2.5, &quot;b&quot;= TRUE, &quot;c&quot;= 2:5)
+
+#howdo you do this with names?</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>matrix() – creates a martix with specified rows and columns</li>
 </ol>
@@ -975,7 +981,6 @@ print(STEM_factor)</code></pre>
 ## [4,]    4   10   16   22   28   34   40   46
 ## [5,]    5   11   17   23   29   35   41   47
 ## [6,]    6   12   18   24   30   36   42   48</code></pre>
-</div>
 </div>
 <div id="slicing-and-extracting-data" class="section level1">
 <h1>Slicing and Extracting Data</h1>
@@ -1517,8 +1522,9 @@ ifelse(a%%2 == 0, &quot;even&quot;,&quot;odd&quot;)</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li>Explain what return() does inside a function, show you can use it Return is used within functions to assign a number, value, r object to be brought back after the function completes.</li>
 </ol>
-<pre class="r"><code>add2&lt;-function(x)
-  return(x+2)
+<pre class="r"><code>add2&lt;-function(x){
+    return(x+2)
+}
 add2(5)</code></pre>
 <pre><code>## [1] 7</code></pre>
 <ol start="6" style="list-style-type: decimal">

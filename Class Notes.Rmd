@@ -1,0 +1,188 @@
+---
+title: "Class Notes"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+```
+
+#02/25/18
+##GGplot2 & dataframes
+
+Table for a data frame:
+srt dim age subject live
+200 dim 17  1     bk
+300 bright
+
+```{r, eval = FALSE}
+Namess<- c("peter","paul","mary",NA)
+Ages <- c(1000,1200,100,50) #if you have a 4th variable in only one category then you have to add NA in the others so it equals in length
+Sex<- c("M","M","F",NA)
+
+my_df<-data.frame(Names = Namess,
+                  Age = Ages,
+                  Sex = Sex)
+#my_df$ #gives you all the columns
+
+#names is saved as a factor
+
+#my_df$Namess<-as.character(my_df$Namess)
+```
+
+once you get data into a long format table, the graph is easy
+```{r, eval = FALSE}
+# Create dataframe
+a <- c(1,2,3,2,3,4,5,4)
+b <- c(4,3,4,3,2,1,2,3)
+plot_df <- data.frame(a,b)
+
+# basic scatterplot
+ggplot(data =plot_df, aes(x=a,y=b))+
+  geom_point()
+
+```
+
+```{r, eval = FALSE}
+# customize, add regression line
+ggplot(data = plot_df, aes(x=a,y=b))+
+  geom_point(size=2)+
+  geom_smooth(method=lm)+
+  coord_cartesian(xlim=c(0,7),ylim=c(0,10))+  #controls the range of the graph (left to right)
+  xlab("x-axis label")+
+  ylab("y-axis label")+
+  ggtitle("I made a scatterplot")+
+  theme_classic(base_size=12)+  #changes the background & controls the font size, guaranteeing that it will stay that way.
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+
+
+```{r, eval = FALSE}
+#Create a dataframe
+factor_one <- as.factor(c("A","B","C"))
+dv_means <- c(20,30,40)
+dv_SEs   <- c(4,3.4,4)
+plot_df <- data.frame(factor_one,
+                      dv_means,
+                      dv_SEs)
+
+# basic bar graph
+
+ggplot(plot_df, aes(x=factor_one,y=dv_means))+ #set what will be x axis and what will be the y axis. have a plus to tell it you're adding another layer
+  geom_bar(stat="identity") #stat = identity means dont touch the data statistically just plot it as is.
+```
+
+
+```{r, eval = FALSE}
+# adding error bars, customizing
+
+ggplot(plot_df, aes(x=factor_one,y=dv_means))+
+  geom_bar(stat="identity")+
+  geom_errorbar(aes(ymin=dv_means-dv_SEs,
+                    ymax=dv_means+dv_SEs),
+                width=.2)+
+  coord_cartesian(ylim=c(0,100))+
+  xlab("x-axis label")+
+  ylab("y-axis label")+
+  ggtitle("I made a bar graph")+
+  theme_classic(base_size=12)+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+```{r, eval = FALSE}
+#Create a dataframe
+factor_one <- rep(as.factor(c("A","B","C")),2)
+factor_two <- rep(as.factor(c("IIA","IIB")),3)
+dv_means <- c(20,30,40,20,40,40)
+dv_SEs   <- c(4,3.4,4,3,2,4)
+plot_df <- data.frame(factor_one,
+                      factor_two,
+                      dv_means,
+                      dv_SEs)
+
+# basic bar graph
+
+ggplot(plot_df, aes(x=factor_one,y=dv_means,
+                    group=factor_two,
+                    color=factor_two, # color = only for border
+                    fill=factor_two))+
+  geom_bar(stat="identity", position="dodge",color="black") #dodge makes the bars next to each other, without dodge theyre on top of each other
+
+```
+
+
+```{r, eval = FALSE}
+# adding error bars, customizing
+
+ggplot(plot_df, aes(x=factor_one,y=dv_means,
+                    group=factor_two,
+                    color=factor_two,
+                    fill=factor_two))+
+  geom_bar(stat="identity", position="dodge")+
+  geom_errorbar(aes(ymin=dv_means-dv_SEs,
+                    ymax=dv_means+dv_SEs),
+                position=position_dodge(width=0.9), #important to make error bars look right
+                width=.2,
+                color="black")+
+  coord_cartesian(ylim=c(0,100))+
+  xlab("x-axis label")+
+  ylab("y-axis label")+
+  ggtitle("Bar graph 2 factors")+
+  theme_classic(base_size=12)+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+```{r, eval = FALSE}
+#Create a dataframe
+factor_one <- rep(rep(as.factor(c("A","B","C")),2),2)
+factor_two <- rep(rep(as.factor(c("IIA","IIB")),3),2)
+factor_three <- rep(as.factor(c("IIIA","IIIB")),each=6)
+dv_means <- c(20,30,40,20,40,40,
+              10,20,50,50,10,10)
+dv_SEs   <- c(4,3.4,4,3,2,4,
+              1,2,1,2,3,2)
+plot_df <- data.frame(factor_one,
+                      factor_two,
+                      factor_three,
+                      dv_means,
+                      dv_SEs)
+
+# basic bar graph
+
+ggplot(plot_df, aes(x=factor_one,y=dv_means,
+                    group=factor_two,
+                    color=factor_two))+
+  geom_bar(stat="identity", position="dodge")+
+  facet_wrap(~factor_three) # breaks it into 2 graphs
+```
+
+
+```{r, eval = FALSE}
+Namez<- rep(c("Dara","Azalea","Barbi","Rowena","Fiona" ),each=2)
+MF <- rnorm(10,45,25)
+Condition <- rep(c("Social", "Nonsocial"),5)
+Aversion <- rep(c("A","N_A"),times=c(4,6))
+plot_df<- data.frame(Namez,MF,Condition,Aversion)
+
+ggplot(plot_df, aes(x=Condition, y=MF, group=Namez,linetype=Aversion))+
+  geom_line()+
+  geom_text(label=Namez)+
+  theme_classic()
+
+```
+
+
+
+
+

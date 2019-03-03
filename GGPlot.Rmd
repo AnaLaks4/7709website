@@ -1,0 +1,42 @@
+---
+title: "GGPlot"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+```
+
+We will be learning how to create professional looking graphs using the package "GGPlot 2"
+
+
+```{r, eval = FALSE}
+#Scatterplot (w best fitting regression line)
+
+avg_freq_nr <- c(0,1,3,5,28,48,52,60)
+avg_freq_r <- c(4,12,31,40,47,48,57,60)
+
+plot_freq_soc <- data.frame(avg_freq_r,avg_freq_nr)
+
+ggplot(data=plot_freq_soc, aes(x=avg_freq_nr,y=avg_freq_r))+
+  geom_point()+
+  geom_smooth(method = "lm", se=FALSE, color='BLACK')+
+  coord_cartesian(xlim=c(0,70),ylim=c(0,70))+
+  xlab("Average Frequency of Nonsocial Risk")+
+  ylab("Average Frequency of Social Risk")+
+  theme_classic()+
+  ggtitle("Figure 6")
+```
+
+
+```{r}
+
+```
+
