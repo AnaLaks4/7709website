@@ -22,7 +22,7 @@ srt dim age subject live
 200 dim 17  1     bk
 300 bright
 
-```{r, eval = FALSE}
+```{r}
 Namess<- c("peter","paul","mary",NA)
 Ages <- c(1000,1200,100,50) #if you have a 4th variable in only one category then you have to add NA in the others so it equals in length
 Sex<- c("M","M","F",NA)
@@ -38,7 +38,8 @@ my_df<-data.frame(Names = Namess,
 ```
 
 once you get data into a long format table, the graph is easy
-```{r, eval = FALSE}
+```{r}
+library(ggplot2)
 # Create dataframe
 a <- c(1,2,3,2,3,4,5,4)
 b <- c(4,3,4,3,2,1,2,3)
@@ -50,7 +51,7 @@ ggplot(data =plot_df, aes(x=a,y=b))+
 
 ```
 
-```{r, eval = FALSE}
+```{r}
 # customize, add regression line
 ggplot(data = plot_df, aes(x=a,y=b))+
   geom_point(size=2)+
@@ -66,7 +67,7 @@ ggplot(data = plot_df, aes(x=a,y=b))+
 
 
 
-```{r, eval = FALSE}
+```{r}
 #Create a dataframe
 factor_one <- as.factor(c("A","B","C"))
 dv_means <- c(20,30,40)
@@ -82,7 +83,7 @@ ggplot(plot_df, aes(x=factor_one,y=dv_means))+ #set what will be x axis and what
 ```
 
 
-```{r, eval = FALSE}
+```{r}
 # adding error bars, customizing
 
 ggplot(plot_df, aes(x=factor_one,y=dv_means))+
@@ -99,7 +100,7 @@ ggplot(plot_df, aes(x=factor_one,y=dv_means))+
 ```
 
 
-```{r, eval = FALSE}
+```{r}
 #Create a dataframe
 factor_one <- rep(as.factor(c("A","B","C")),2)
 factor_two <- rep(as.factor(c("IIA","IIB")),3)
@@ -121,7 +122,7 @@ ggplot(plot_df, aes(x=factor_one,y=dv_means,
 ```
 
 
-```{r, eval = FALSE}
+```{r}
 # adding error bars, customizing
 
 ggplot(plot_df, aes(x=factor_one,y=dv_means,
@@ -143,7 +144,7 @@ ggplot(plot_df, aes(x=factor_one,y=dv_means,
 ```
 
 
-```{r, eval = FALSE}
+```{r}
 #Create a dataframe
 factor_one <- rep(rep(as.factor(c("A","B","C")),2),2)
 factor_two <- rep(rep(as.factor(c("IIA","IIB")),3),2)
@@ -168,7 +169,7 @@ ggplot(plot_df, aes(x=factor_one,y=dv_means,
 ```
 
 
-```{r, eval = FALSE}
+```{r}
 Namez<- rep(c("Dara","Azalea","Barbi","Rowena","Fiona" ),each=2)
 MF <- rnorm(10,45,25)
 Condition <- rep(c("Social", "Nonsocial"),5)

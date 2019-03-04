@@ -429,7 +429,8 @@ my_df&lt;-data.frame(Names = Namess,
 
 #my_df$Namess&lt;-as.character(my_df$Namess)</code></pre>
 <p>once you get data into a long format table, the graph is easy</p>
-<pre class="r"><code># Create dataframe
+<pre class="r"><code>library(ggplot2)
+# Create dataframe
 a &lt;- c(1,2,3,2,3,4,5,4)
 b &lt;- c(4,3,4,3,2,1,2,3)
 plot_df &lt;- data.frame(a,b)
@@ -437,6 +438,7 @@ plot_df &lt;- data.frame(a,b)
 # basic scatterplot
 ggplot(data =plot_df, aes(x=a,y=b))+
   geom_point()</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <pre class="r"><code># customize, add regression line
 ggplot(data = plot_df, aes(x=a,y=b))+
   geom_point(size=2)+
@@ -447,6 +449,7 @@ ggplot(data = plot_df, aes(x=a,y=b))+
   ggtitle(&quot;I made a scatterplot&quot;)+
   theme_classic(base_size=12)+  #changes the background &amp; controls the font size, guaranteeing that it will stay that way.
   theme(plot.title = element_text(hjust = 0.5))</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code>#Create a dataframe
 factor_one &lt;- as.factor(c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;))
 dv_means &lt;- c(20,30,40)
@@ -459,6 +462,7 @@ plot_df &lt;- data.frame(factor_one,
 
 ggplot(plot_df, aes(x=factor_one,y=dv_means))+ #set what will be x axis and what will be the y axis. have a plus to tell it you&#39;re adding another layer
   geom_bar(stat=&quot;identity&quot;) #stat = identity means dont touch the data statistically just plot it as is.</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <pre class="r"><code># adding error bars, customizing
 
 ggplot(plot_df, aes(x=factor_one,y=dv_means))+
@@ -472,6 +476,7 @@ ggplot(plot_df, aes(x=factor_one,y=dv_means))+
   ggtitle(&quot;I made a bar graph&quot;)+
   theme_classic(base_size=12)+
   theme(plot.title = element_text(hjust = 0.5))</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>#Create a dataframe
 factor_one &lt;- rep(as.factor(c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;)),2)
 factor_two &lt;- rep(as.factor(c(&quot;IIA&quot;,&quot;IIB&quot;)),3)
@@ -489,6 +494,7 @@ ggplot(plot_df, aes(x=factor_one,y=dv_means,
                     color=factor_two, # color = only for border
                     fill=factor_two))+
   geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;,color=&quot;black&quot;) #dodge makes the bars next to each other, without dodge theyre on top of each other</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code># adding error bars, customizing
 
 ggplot(plot_df, aes(x=factor_one,y=dv_means,
@@ -507,6 +513,7 @@ ggplot(plot_df, aes(x=factor_one,y=dv_means,
   ggtitle(&quot;Bar graph 2 factors&quot;)+
   theme_classic(base_size=12)+
   theme(plot.title = element_text(hjust = 0.5))</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <pre class="r"><code>#Create a dataframe
 factor_one &lt;- rep(rep(as.factor(c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;)),2),2)
 factor_two &lt;- rep(rep(as.factor(c(&quot;IIA&quot;,&quot;IIB&quot;)),3),2)
@@ -528,6 +535,7 @@ ggplot(plot_df, aes(x=factor_one,y=dv_means,
                     color=factor_two))+
   geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;)+
   facet_wrap(~factor_three) # breaks it into 2 graphs</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre class="r"><code>Namez&lt;- rep(c(&quot;Dara&quot;,&quot;Azalea&quot;,&quot;Barbi&quot;,&quot;Rowena&quot;,&quot;Fiona&quot; ),each=2)
 MF &lt;- rnorm(10,45,25)
 Condition &lt;- rep(c(&quot;Social&quot;, &quot;Nonsocial&quot;),5)
@@ -538,6 +546,7 @@ ggplot(plot_df, aes(x=Condition, y=MF, group=Namez,linetype=Aversion))+
   geom_line()+
   geom_text(label=Namez)+
   theme_classic()</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 </div>
 
