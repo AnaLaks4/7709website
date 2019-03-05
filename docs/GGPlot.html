@@ -440,7 +440,7 @@ person&lt;- rep(c(&quot;Man Communicated with ATC&quot;,&quot;Woman Communicated
 evalopX &lt;- data.frame(evalp,target,person)
 
 ggplot(data = evalopX, aes(x=evalp,y=target,group=person))+
-  geom_smooth(method=lm,size=2)+
+  geom_smooth(method=lm,size=2,show.legend = TRUE)+
   xlab(&quot;Evaluation of Person X&quot;)+
   ylab(&quot;P(Target = Pilot)&quot;)+
   ggtitle(&quot;Fig. 4 Results from Study 5&quot;)+
@@ -479,6 +479,19 @@ ggplot(data=Fig5, aes(x=Condition,y=MF,group=Namez, linetype=Aversion))+ #parant
   theme_classic()+
   ylab(&quot;Mean Frequency of Risky Choice&quot;)</code></pre>
 <p><img src="GGPlot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>f1 &lt;- rep(c(&quot;Emotional Stability&quot;, &quot;Extraversion&quot;, &quot;Openness/Intellect&quot;, &quot;Agreeableness&quot;, &quot;Conscientiousness&quot;), 
+          each = 4)
+f2 &lt;- c(-.1,-.2,.1,-.2,-.2,-.2,-.15,.2,-.5,-.2,-.2,-.02,.08,.00,-.08,.01,.25,.7,.4,.4)
+f3 &lt;- rep(c(&quot;Family&quot;,&quot;Friends&quot;,&quot;Colleagues&quot;,&quot;Strangers&quot;),5)
+meandif&lt;-data.frame(f1,f2,f3)
+
+ggplot(meandif, aes(x=f1,y=f2,group=f3))+
+  geom_line()+
+  ggtitle(&quot;Fig1 Mean difference in effect size&quot;)+
+  ylab(&quot;Mean Difference&quot;)+
+  scale_x_discrete(limits = c(&quot;Emotional Stability&quot;, &quot;Extraversion&quot;, &quot;Openness/Intellect&quot;,&quot;Agreeableness&quot;,&quot;Conscientiousness&quot;))</code></pre>
+<p><img src="GGPlot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>#dataframe needs equal values in each variable, so how do you get y axis to have all the categories once, not repeated</code></pre>
 
 
 

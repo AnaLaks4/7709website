@@ -51,11 +51,13 @@ person<- rep(c("Man Communicated with ATC","Woman Communicated with ATC"),times=
 evalopX <- data.frame(evalp,target,person)
 
 ggplot(data = evalopX, aes(x=evalp,y=target,group=person))+
-  geom_smooth(method=lm,size=2)+
+  geom_smooth(method=lm,size=2,show.legend = TRUE)+
   xlab("Evaluation of Person X")+
   ylab("P(Target = Pilot)")+
   ggtitle("Fig. 4 Results from Study 5")+
   theme_classic(base_size=11)
+  #theme(axis.ticks.x = 1:7) -- "must be a element_line object?"
+  #theme(axis.ticks.length = 1.00)
   
 
 
@@ -109,12 +111,22 @@ ggplot(data=Fig5, aes(x=Condition,y=MF,group=Namez, linetype=Aversion))+ #parant
 
 
 ```{r}
+f1 <- rep(c("Emotional Stability", "Extraversion", "Openness/Intellect", "Agreeableness", "Conscientiousness"),4)
+f2 <- c(-.1,-.2,.1,-.2,-.2,-.2,-.15,.2,-.5,-.2,-.2,-.02,.08,.00,-.08,.01,.25,.7,.4,.4)
+f3 <- rep(c("Family","Friends","Colleagues","Strangers"),5)
+meandif<-data.frame(f1,f2,f3)
+
+ggplot(meandif, aes(x=f1,y=f2,group=f3))+
+  geom_line()+
+  ggtitle("Fig1 Mean difference in effect size")+
+  ylab("Mean Difference")+
+  scale_x_discrete(limits = c("Emotional Stability", "Extraversion", "Openness/Intellect","Agreeableness","Conscientiousness"))+
+  theme_classic()
+  #theme(axis.line.x.top = 0)
 
 
 
-
-
-
+#dataframe needs equal values in each variable, so how do you get y axis to have all the categories once, not repeated
 ```
 
 
