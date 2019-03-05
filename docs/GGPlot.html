@@ -421,30 +421,35 @@ avg_freq_r &lt;- c(4,12,31,40,47,48,57,60)
 plot_freq_soc &lt;- data.frame(avg_freq_r,avg_freq_nr)
 
 ggplot(data=plot_freq_soc, aes(x=avg_freq_nr,y=avg_freq_r))+
-  geom_point()+
+  geom_point(size=1)+
   geom_smooth(method = &quot;lm&quot;, se=FALSE, color=&#39;BLACK&#39;)+
   coord_cartesian(xlim=c(0,70),ylim=c(0,70))+
   xlab(&quot;Average Frequency of Nonsocial Risk&quot;)+
   ylab(&quot;Average Frequency of Social Risk&quot;)+
-  theme_classic()+
+  theme_classic(base_size=12)+
   ggtitle(&quot;Figure 6&quot;)</code></pre>
 <p><img src="GGPlot_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <pre class="r"><code>#how do you get regression line at zero &amp; 70 to show... control the ticks?</code></pre>
 <pre class="r"><code>#figure 4 evaluation of person X; man &amp; woman communicated w ATC
 library(ggplot2)
-evalp&lt;- c(1,2,3,4,5,6,7)
-man &lt;- c(91, 90, 89, 89, 88, 88, 87)
-woman&lt;- c(82, 74, 68, 65, 55, 50, 45)
-target &lt;- c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
-evalopX &lt;- data.frame(evalp,man,woman)
+evalp&lt;- rep(c(1,2,3,4,5,6,7),2)
+#man &lt;- c(91, 90, 89, 89, 88, 88, 87)
+#woman&lt;- c(82, 74, 68, 65, 55, 50, 45)
+target &lt;- c(91, 90, 89, 89, 88, 88, 87,82, 74, 68, 65, 55, 50, 45)
+person&lt;- rep(c(&quot;Man Communicated with ATC&quot;,&quot;Woman Communicated with ATC&quot;),times=c(7,7))
+evalopX &lt;- data.frame(evalp,target,person)
 
-ggplot(data = evalopX, aes(x=evalp))</code></pre>
+ggplot(data = evalopX, aes(x=evalp,y=target,group=person))+
+  geom_smooth(method=lm,size=2)+
+  ylab(&quot;Evaluation of Person X&quot;)+
+  xlab(&quot;P(Target = Pilot)&quot;)+
+  ggtitle(&quot;Fig. 4 Results from Study 5&quot;)</code></pre>
 <p><img src="GGPlot_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<pre class="r"><code># stuck bc how do i get the y axis to be 2 lines</code></pre>
+<pre class="r"><code>#why does only 1 line have the gray surrounding </code></pre>
 <pre class="r"><code>#figure 2 A.visual group B.auditory group
 fac_one &lt;- rep(rep(as.factor(c(&quot;No Transient&quot;, &quot;Transient&quot;)),2),2)
 fac_two &lt;- rep(rep(as.factor(c(&quot;Outside&quot;,&quot;Inside&quot;)),2),2)
-fac_three&lt;- c(&quot;Visual Group&quot;, &quot;Auditory Group&quot;)
+fac_three&lt;- rep(as.factor(c(&quot;Visual Group&quot;, &quot;Auditory Group&quot;)),each=4)
 meanmed&lt;- c(305,300,290,275,295,290,265,250)
 er&lt;- c(23,20,22,20,17,20,15,20)
 fig2&lt;- data.frame(fac_one,
@@ -457,7 +462,21 @@ ggplot(data=fig2, aes(x=fac_one, y=meanmed, group=fac_three))+
   geom_bar(stat=&quot;identity&quot;,position=&quot;dodge&quot;)+
   facet_wrap(~fac_three)</code></pre>
 <p><img src="GGPlot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<pre class="r"><code>#data not distributed right</code></pre>
+<pre class="r"><code>#data not distributed right, should be 4 bars in each graph</code></pre>
+<pre class="r"><code># Class example redone w additional layers
+
+Namez&lt;- rep(c(&quot;Dara&quot;,&quot;Azalea&quot;,&quot;Barbi&quot;,&quot;Rowena&quot;,&quot;Fiona&quot; ),each=2)
+MF &lt;- rnorm(10,45,25)
+Condition &lt;- rep(c(&quot;Social&quot;, &quot;Nonsocial&quot;),5)
+Aversion &lt;- rep(c(&quot;A&quot;,&quot;N_A&quot;),times=c(4,6))
+Fig5&lt;- data.frame(Namez,MF,Condition,Aversion)
+
+ggplot(data=Fig5, aes(x=Condition,y=MF,group=Namez, linetype=Aversion))+ #parantheses matter,pay attention
+  geom_line()+
+  geom_text(label=Namez)+
+  theme_classic()+
+  ylab(&quot;Mean Frequency of Risky Choice&quot;)</code></pre>
+<p><img src="GGPlot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 
 
 

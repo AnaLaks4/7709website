@@ -27,12 +27,12 @@ avg_freq_r <- c(4,12,31,40,47,48,57,60)
 plot_freq_soc <- data.frame(avg_freq_r,avg_freq_nr)
 
 ggplot(data=plot_freq_soc, aes(x=avg_freq_nr,y=avg_freq_r))+
-  geom_point()+
+  geom_point(size=1)+
   geom_smooth(method = "lm", se=FALSE, color='BLACK')+
   coord_cartesian(xlim=c(0,70),ylim=c(0,70))+
   xlab("Average Frequency of Nonsocial Risk")+
   ylab("Average Frequency of Social Risk")+
-  theme_classic()+
+  theme_classic(base_size=12)+
   ggtitle("Figure 6")
   
 
@@ -43,17 +43,22 @@ ggplot(data=plot_freq_soc, aes(x=avg_freq_nr,y=avg_freq_r))+
 ```{r}
 #figure 4 evaluation of person X; man & woman communicated w ATC
 library(ggplot2)
-evalp<- c(1,2,3,4,5,6,7)
-man <- c(91, 90, 89, 89, 88, 88, 87)
-woman<- c(82, 74, 68, 65, 55, 50, 45)
-target <- c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
-evalopX <- data.frame(evalp,man,woman)
+evalp<- rep(c(1,2,3,4,5,6,7),2)
+#man <- c(91, 90, 89, 89, 88, 88, 87)
+#woman<- c(82, 74, 68, 65, 55, 50, 45)
+target <- c(91, 90, 89, 89, 88, 88, 87,82, 74, 68, 65, 55, 50, 45)
+person<- rep(c("Man Communicated with ATC","Woman Communicated with ATC"),times=c(7,7))
+evalopX <- data.frame(evalp,target,person)
 
-ggplot(data = evalopX, aes(x=evalp))
+ggplot(data = evalopX, aes(x=evalp,y=target,group=person))+
+  geom_smooth(method=lm,size=2)+
+  ylab("Evaluation of Person X")+
+  xlab("P(Target = Pilot)")+
+  ggtitle("Fig. 4 Results from Study 5")
 
 
 
-# stuck bc how do i get the y axis to be 2 lines
+#why does only 1 line have the gray surrounding 
 ```
 
 
@@ -62,7 +67,7 @@ ggplot(data = evalopX, aes(x=evalp))
 #figure 2 A.visual group B.auditory group
 fac_one <- rep(rep(as.factor(c("No Transient", "Transient")),2),2)
 fac_two <- rep(rep(as.factor(c("Outside","Inside")),2),2)
-fac_three<- c("Visual Group", "Auditory Group")
+fac_three<- rep(as.factor(c("Visual Group", "Auditory Group")),each=4)
 meanmed<- c(305,300,290,275,295,290,265,250)
 er<- c(23,20,22,20,17,20,15,20)
 fig2<- data.frame(fac_one,
@@ -81,6 +86,19 @@ ggplot(data=fig2, aes(x=fac_one, y=meanmed, group=fac_three))+
 
 
 ```{r}
+# Class example redone w additional layers
+
+Namez<- rep(c("Dara","Azalea","Barbi","Rowena","Fiona" ),each=2)
+MF <- rnorm(10,45,25)
+Condition <- rep(c("Social", "Nonsocial"),5)
+Aversion <- rep(c("A","N_A"),times=c(4,6))
+Fig5<- data.frame(Namez,MF,Condition,Aversion)
+
+ggplot(data=Fig5, aes(x=Condition,y=MF,group=Namez, linetype=Aversion))+ #parantheses matter,pay attention
+  geom_line()+
+  geom_text(label=Namez)+
+  theme_classic()+
+  ylab("Mean Frequency of Risky Choice")
 
 ```
 
