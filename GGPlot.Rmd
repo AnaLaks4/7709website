@@ -52,13 +52,17 @@ evalopX <- data.frame(evalp,target,person)
 
 ggplot(data = evalopX, aes(x=evalp,y=target,group=person))+
   geom_smooth(method=lm,size=2)+
-  ylab("Evaluation of Person X")+
-  xlab("P(Target = Pilot)")+
-  ggtitle("Fig. 4 Results from Study 5")
+  xlab("Evaluation of Person X")+
+  ylab("P(Target = Pilot)")+
+  ggtitle("Fig. 4 Results from Study 5")+
+  theme_classic(base_size=11)
+  
 
 
 
 #why does only 1 line have the gray surrounding 
+#make all tics show; add negative to 1 and positive to 7 
+
 ```
 
 
@@ -101,6 +105,19 @@ ggplot(data=Fig5, aes(x=Condition,y=MF,group=Namez, linetype=Aversion))+ #parant
   ylab("Mean Frequency of Risky Choice")
 
 ```
+
+
+
+```{r}
+
+
+
+
+
+
+```
+
+
 
 
 

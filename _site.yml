@@ -5,9 +5,9 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Class Notes"
-      href: Class Notes.html
+      href: Class_Notes.html
     - text: "Solving Problems"
-      href: Solving Problems.html
+      href: Solving_Problems.html
     - text: "Intrinsics"
       href: Intrinsics.html
     - text: "GGPlot"

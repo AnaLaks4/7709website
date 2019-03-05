@@ -380,10 +380,10 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="Class Notes.html">Class Notes</a>
+  <a href="Class_Notes.html">Class Notes</a>
 </li>
 <li>
-  <a href="Solving Problems.html">Solving Problems</a>
+  <a href="Solving_Problems.html">Solving Problems</a>
 </li>
 <li>
   <a href="Intrinsics.html">Intrinsics</a>
@@ -441,11 +441,13 @@ evalopX &lt;- data.frame(evalp,target,person)
 
 ggplot(data = evalopX, aes(x=evalp,y=target,group=person))+
   geom_smooth(method=lm,size=2)+
-  ylab(&quot;Evaluation of Person X&quot;)+
-  xlab(&quot;P(Target = Pilot)&quot;)+
-  ggtitle(&quot;Fig. 4 Results from Study 5&quot;)</code></pre>
+  xlab(&quot;Evaluation of Person X&quot;)+
+  ylab(&quot;P(Target = Pilot)&quot;)+
+  ggtitle(&quot;Fig. 4 Results from Study 5&quot;)+
+  theme_classic(base_size=11)</code></pre>
 <p><img src="GGPlot_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<pre class="r"><code>#why does only 1 line have the gray surrounding </code></pre>
+<pre class="r"><code>#why does only 1 line have the gray surrounding 
+#make all tics show; add negative to 1 and positive to 7 </code></pre>
 <pre class="r"><code>#figure 2 A.visual group B.auditory group
 fac_one &lt;- rep(rep(as.factor(c(&quot;No Transient&quot;, &quot;Transient&quot;)),2),2)
 fac_two &lt;- rep(rep(as.factor(c(&quot;Outside&quot;,&quot;Inside&quot;)),2),2)
