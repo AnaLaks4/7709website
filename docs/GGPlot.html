@@ -392,6 +392,9 @@ div.tocify {
   <a href="GGPlot.html">GGPlot</a>
 </li>
 <li>
+  <a href="DataWrangling.html">DataWrangling</a>
+</li>
+<li>
   <a href="Links.html">Links</a>
 </li>
       </ul>
@@ -446,7 +449,13 @@ ggplot(data = evalopX, aes(x=evalp,y=target,group=person))+
   ggtitle(&quot;Fig. 4 Results from Study 5&quot;)+
   theme_classic(base_size=11)</code></pre>
 <p><img src="GGPlot_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<pre class="r"><code>#why does only 1 line have the gray surrounding 
+<pre class="r"><code>  #theme(axis.ticks.x = 1:7) -- &quot;must be a element_line object?&quot;
+  #theme(axis.ticks.length = 1.00)
+  
+
+
+
+#why does only 1 line have the gray surrounding 
 #make all tics show; add negative to 1 and positive to 7 </code></pre>
 <pre class="r"><code>#figure 2 A.visual group B.auditory group
 fac_one &lt;- rep(rep(as.factor(c(&quot;No Transient&quot;, &quot;Transient&quot;)),2),2)
@@ -479,8 +488,7 @@ ggplot(data=Fig5, aes(x=Condition,y=MF,group=Namez, linetype=Aversion))+ #parant
   theme_classic()+
   ylab(&quot;Mean Frequency of Risky Choice&quot;)</code></pre>
 <p><img src="GGPlot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<pre class="r"><code>f1 &lt;- rep(c(&quot;Emotional Stability&quot;, &quot;Extraversion&quot;, &quot;Openness/Intellect&quot;, &quot;Agreeableness&quot;, &quot;Conscientiousness&quot;), 
-          each = 4)
+<pre class="r"><code>f1 &lt;- rep(c(&quot;Emotional Stability&quot;, &quot;Extraversion&quot;, &quot;Openness/Intellect&quot;, &quot;Agreeableness&quot;, &quot;Conscientiousness&quot;),4)
 f2 &lt;- c(-.1,-.2,.1,-.2,-.2,-.2,-.15,.2,-.5,-.2,-.2,-.02,.08,.00,-.08,.01,.25,.7,.4,.4)
 f3 &lt;- rep(c(&quot;Family&quot;,&quot;Friends&quot;,&quot;Colleagues&quot;,&quot;Strangers&quot;),5)
 meandif&lt;-data.frame(f1,f2,f3)
@@ -489,9 +497,14 @@ ggplot(meandif, aes(x=f1,y=f2,group=f3))+
   geom_line()+
   ggtitle(&quot;Fig1 Mean difference in effect size&quot;)+
   ylab(&quot;Mean Difference&quot;)+
-  scale_x_discrete(limits = c(&quot;Emotional Stability&quot;, &quot;Extraversion&quot;, &quot;Openness/Intellect&quot;,&quot;Agreeableness&quot;,&quot;Conscientiousness&quot;))</code></pre>
+  scale_x_discrete(limits = c(&quot;Emotional Stability&quot;, &quot;Extraversion&quot;, &quot;Openness/Intellect&quot;,&quot;Agreeableness&quot;,&quot;Conscientiousness&quot;))+
+  theme_classic()</code></pre>
 <p><img src="GGPlot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<pre class="r"><code>#dataframe needs equal values in each variable, so how do you get y axis to have all the categories once, not repeated</code></pre>
+<pre class="r"><code>  #theme(axis.line.x.top = 0)
+
+
+
+#dataframe needs equal values in each variable, so how do you get y axis to have all the categories once, not repeated</code></pre>
 
 
 

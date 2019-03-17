@@ -12,6 +12,8 @@ navbar:
       href: Intrinsics.html
     - text: "GGPlot"
       href: GGPlot.html
+    - text: "DataWrangling"
+      href: DataWrangling.html
     - text: "Links"
       href: Links.html
 

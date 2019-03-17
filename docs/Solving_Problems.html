@@ -392,6 +392,9 @@ div.tocify {
   <a href="GGPlot.html">GGPlot</a>
 </li>
 <li>
+  <a href="DataWrangling.html">DataWrangling</a>
+</li>
+<li>
   <a href="Links.html">Links</a>
 </li>
       </ul>
@@ -693,9 +696,8 @@ print(odd)</code></pre>
 ## [1] 983
 ## [1] 991
 ## [1] 997</code></pre>
-<pre class="r"><code>Prime&lt;-1:1000
-which(Prime%%Prime != 0)</code></pre>
-<pre><code>## integer(0)</code></pre>
+<pre class="r"><code>pr&lt;- data.frame(1:1000)
+pr[pr!%% pr == 0]</code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li>Generate 100 random numbers.</li>
 </ol>
@@ -1012,12 +1014,9 @@ matrix(r*c, nrow = 10, ncol = 10, byrow = TRUE )</code></pre>
 <li><p>Encrypt and Decrypt the Alphabet Turn any normal english text into an encrypted version of the text, and be able to turn any decrypted text back into normal english text. A simple encryption would be to scramble the alphabet such that each letter corresponds to a new randomly chosen (but unique) letter.</p></li>
 <li><p>Snakes and Ladders. Your task here is to write an algorithm that can simulate playing the above depicted Snakes and Ladders board. You should assume that each roll of the dice produces a random number between 1 and 6. After you are able to simulate one played game, you will then write a loop to simulate 1000 games, and estimate the average number of dice rolls needed to successfully complete the game.</p></li>
 </ol>
-<pre class="r"><code>rolldice&lt;-(sample(1:6,1))
-m&lt;-rolldice
-SnL&lt;-function(rolldice){
-     m&lt;- rolldice+rolldice
-while(m&lt;=25)
-  m
+<pre class="r"><code>SnL&lt;-function(){
+  m&lt;-0
+while(m&lt;=25){
   if(m == 3){
     m&lt;-11
   }
@@ -1042,7 +1041,11 @@ while(m&lt;=25)
   if(m==24){
     m&lt;-16
   }
-else(print(m))
+#else(print(m))
+  print(m)
+  m&lt;- m+ sample(1:6,1)
+  
+}
 }</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li><p>Dice-rolling simulations. Assume that a pair of dice are rolled. Using monte carlo-simulation, compute the probabilities of rolling a 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, and 12, respectively.</p></li>

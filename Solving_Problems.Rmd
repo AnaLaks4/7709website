@@ -133,9 +133,10 @@ for (k in 2:1000) {
 
 ```
 
-```{r}
-Prime<-1:1000
-which(Prime%%Prime != 0)
+```{r, eval = FALSE}
+pr<- data.frame(1:1000)
+pr[pr!%% pr == 0]
+
 ```
 
 
@@ -341,12 +342,9 @@ matrix(r*c, nrow = 10, ncol = 10, byrow = TRUE )
 
 6. Snakes and Ladders. Your task here is to write an algorithm that can simulate playing the above depicted Snakes and Ladders board. You should assume that each roll of the dice produces a random number between 1 and 6. After you are able to simulate one played game, you will then write a loop to simulate 1000 games, and estimate the average number of dice rolls needed to successfully complete the game.
 ```{r}
-rolldice<-(sample(1:6,1))
-m<-rolldice
-SnL<-function(rolldice){
-     m<- rolldice+rolldice
-while(m<=25)
-  m
+SnL<-function(){
+  m<-0
+while(m<=25){
   if(m == 3){
     m<-11
   }
@@ -371,11 +369,12 @@ while(m<=25)
   if(m==24){
     m<-16
   }
-else(print(m))
+#else(print(m))
+  print(m)
+  m<- m+ sample(1:6,1)
+  
 }
-
- 
-
+}
 
 
 ```
