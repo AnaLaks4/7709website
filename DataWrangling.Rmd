@@ -89,7 +89,7 @@ The stimulus_onset column gives a computer timestamp in milliseconds indicating 
 **tip:** notice that the numbers in response_time and stimulus_onset have the class integer64. Unfortunately, ggplot does not play nice with integers in this format. you will need to make sure your RT column is in the class integer or numeric.
 
 ```{r}
-new_all<- all_data %>%
+new_all<- new_all %>%
   mutate(RT = as.numeric(response_time - stimulus_onset))
   
 ```

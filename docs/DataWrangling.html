@@ -471,7 +471,7 @@ new_all&lt;- all_data %&gt;%
 <h3>Get Reaction time on each trial</h3>
 <p>The stimulus_onset column gives a computer timestamp in milliseconds indicating when the stimulus was presented. The response_time column is a timestamp in milliseconds for the response. The difference between the two (response_time - stimulus_onset) is the reaction time in milliseconds. Add a column that calculates the reaction time on each trial.</p>
 <p>**<a href="tip:**" class="uri">tip:**</a> notice that the numbers in response_time and stimulus_onset have the class integer64. Unfortunately, ggplot does not play nice with integers in this format. you will need to make sure your RT column is in the class integer or numeric.</p>
-<pre class="r"><code>new_all&lt;- all_data %&gt;%
+<pre class="r"><code>new_all&lt;- new_all %&gt;%
   mutate(RT = as.numeric(response_time - stimulus_onset))</code></pre>
 </div>
 </div>

@@ -764,11 +764,911 @@ spss &lt;- read.spss(&quot;RstudioCloud/data/02_NYC_Salary_City_2016.sav&quot;,
 </div>
 </div>
 </div>
-<div id="section-1" class="section level1">
-<h1>03/11/19</h1>
+<div id="going-over-data-wrangling" class="section level1">
+<h1>03/11/19 Going over data wrangling</h1>
 <pre class="r"><code>#strs(stimulus[1], split=&quot;&quot;)</code></pre>
 <p>fig.path = “myfigs/”, dev = c(“pdf”, “png”)</p>
 <p>^^ use in 1st chunk to save graphs</p>
+</div>
+<div id="statistics" class="section level1">
+<h1>03/18/19 Statistics</h1>
+<p>Discussing midterm assignment Part 1 (due April 1) 1. make a new github repository. put work into it. 2. find a psych paper with open data. - osf.io = open science framework - psychological science (look for blue badge) journals.sagepub.com - crumplab/statistics lab 3. load into r 4. re-analyse the data to see if you can reproduce the results from the original paper 5. write it up in reproducible report (.rmd file)</p>
+<p>Part 2 (due April 1) 1. Convert your reproducible report into an APA style research report using papaja package.</p>
+<p>Part 3 (due April 8) 1. Add a section following the results where you conduct and report a simulation based power analysis</p>
+<p><strong>The most important thing about choosing statistics, is being able to justify the statistics that you choose.</strong></p>
+<p>There are many tools in the toolbox. There are many recommendations about what to do or not to do. It is a good idea to understand the statistics that you use, so that you can justify why you are using them for your analysis.</p>
+<div id="t-tests" class="section level2">
+<h2>t-tests</h2>
+<div id="one-sample-t-test" class="section level3">
+<h3>one sample t-test</h3>
+<p>Set <code>mu</code> to test against a population value</p>
+<pre class="r"><code>x &lt;- c(1,4,3,2,3,4,3,2,3,2,3,4)
+#non-directional
+t.test(x, mu = 2)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = 3.0794, df = 11, p-value = 0.01048
+## alternative hypothesis: true mean is not equal to 2
+## 95 percent confidence interval:
+##  2.237714 3.428952
+## sample estimates:
+## mean of x 
+##  2.833333</code></pre>
+<pre class="r"><code>t.test(x, mu = 2, alternative = &quot;two.sided&quot;) # the default</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = 3.0794, df = 11, p-value = 0.01048
+## alternative hypothesis: true mean is not equal to 2
+## 95 percent confidence interval:
+##  2.237714 3.428952
+## sample estimates:
+## mean of x 
+##  2.833333</code></pre>
+<pre class="r"><code># directional
+t.test(x, mu = 2, alternative = &quot;greater&quot;)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = 3.0794, df = 11, p-value = 0.005241
+## alternative hypothesis: true mean is greater than 2
+## 95 percent confidence interval:
+##  2.34734     Inf
+## sample estimates:
+## mean of x 
+##  2.833333</code></pre>
+<pre class="r"><code>t.test(x, mu = 2, alternative = &quot;less&quot;)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = 3.0794, df = 11, p-value = 0.9948
+## alternative hypothesis: true mean is less than 2
+## 95 percent confidence interval:
+##      -Inf 3.319326
+## sample estimates:
+## mean of x 
+##  2.833333</code></pre>
+<p>t = mean/SEM SEM tells you how things vary</p>
+</div>
+<div id="paired-sample-t-test" class="section level3">
+<h3>paired-sample t-test</h3>
+<p>Set <code>paired=TRUE</code></p>
+<pre class="r"><code>x &lt;- c(1,4,3,2,3,4,3,2,3,2,3,4)
+y &lt;- c(3,2,5,4,3,2,3,2,1,2,2,3)
+#non-directional
+t.test(x, y, paired=TRUE)</code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  x and y
+## t = 0.37796, df = 11, p-value = 0.7126
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.8038766  1.1372099
+## sample estimates:
+## mean of the differences 
+##               0.1666667</code></pre>
+<pre class="r"><code>t.test(x, y, paired=TRUE, alternative = &quot;two.sided&quot;) # the default</code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  x and y
+## t = 0.37796, df = 11, p-value = 0.7126
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.8038766  1.1372099
+## sample estimates:
+## mean of the differences 
+##               0.1666667</code></pre>
+<pre class="r"><code># directional
+t.test(x, y, paired=TRUE, alternative = &quot;greater&quot;)</code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  x and y
+## t = 0.37796, df = 11, p-value = 0.3563
+## alternative hypothesis: true difference in means is greater than 0
+## 95 percent confidence interval:
+##  -0.6252441        Inf
+## sample estimates:
+## mean of the differences 
+##               0.1666667</code></pre>
+<pre class="r"><code>t.test(x, y, paired=TRUE, alternative = &quot;less&quot;)</code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  x and y
+## t = 0.37796, df = 11, p-value = 0.6437
+## alternative hypothesis: true difference in means is less than 0
+## 95 percent confidence interval:
+##       -Inf 0.9585774
+## sample estimates:
+## mean of the differences 
+##               0.1666667</code></pre>
+</div>
+<div id="independent-sample-t-test" class="section level3">
+<h3>Independent sample t-test</h3>
+<p>Note: Default is Welch test, set <code>var.equal=TRUE</code> for t-test</p>
+<pre class="r"><code>x &lt;- c(1,4,3,2,3,4,3,2,3,2,3,4)
+y &lt;- c(3,2,5,4,3,2,3,2,1,2,2,3)
+#non-directional
+t.test(x, y, var.equal=TRUE)</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  x and y
+## t = 0.40519, df = 22, p-value = 0.6893
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.6863784  1.0197117
+## sample estimates:
+## mean of x mean of y 
+##  2.833333  2.666667</code></pre>
+<pre class="r"><code>t.test(x, y, var.equal=TRUE, alternative = &quot;two.sided&quot;) # the default</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  x and y
+## t = 0.40519, df = 22, p-value = 0.6893
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.6863784  1.0197117
+## sample estimates:
+## mean of x mean of y 
+##  2.833333  2.666667</code></pre>
+<pre class="r"><code># directional
+t.test(x, y, var.equal=TRUE, alternative = &quot;greater&quot;)</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  x and y
+## t = 0.40519, df = 22, p-value = 0.3446
+## alternative hypothesis: true difference in means is greater than 0
+## 95 percent confidence interval:
+##  -0.5396454        Inf
+## sample estimates:
+## mean of x mean of y 
+##  2.833333  2.666667</code></pre>
+<pre class="r"><code>t.test(x, y, var.equal=TRUE, alternative = &quot;less&quot;)</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  x and y
+## t = 0.40519, df = 22, p-value = 0.6554
+## alternative hypothesis: true difference in means is less than 0
+## 95 percent confidence interval:
+##       -Inf 0.8729787
+## sample estimates:
+## mean of x mean of y 
+##  2.833333  2.666667</code></pre>
+</div>
+<div id="printing" class="section level3">
+<h3>printing</h3>
+<pre class="r"><code>library(broom)
+t_results &lt;- t.test(x, y, var.equal=TRUE)
+knitr::kable(tidy(t_results))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">estimate1</th>
+<th align="right">estimate2</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">parameter</th>
+<th align="right">conf.low</th>
+<th align="right">conf.high</th>
+<th align="left">method</th>
+<th align="left">alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2.833333</td>
+<td align="right">2.666667</td>
+<td align="right">0.4051902</td>
+<td align="right">0.6892509</td>
+<td align="right">22</td>
+<td align="right">-0.6863784</td>
+<td align="right">1.019712</td>
+<td align="left">Two Sample t-test</td>
+<td align="left">two.sided</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="writing" class="section level3">
+<h3>writing</h3>
+<p>The contents of R variables can be written into R Markdown documents.</p>
+<p>t(22) =0.41, p = 0.689</p>
+<pre class="r"><code># write your own function
+report_t &lt;- function(x){
+  return(paste(c(&quot;t(&quot;,round(x$parameter, digits=2),&quot;) &quot;,
+        &quot;= &quot;,round(x$statistic, digits=2),&quot;, &quot;,
+        &quot;p = &quot;,round(x$p.value, digits=3)), collapse=&quot;&quot;))
+}
+report_t(t_results)</code></pre>
+<pre><code>## [1] &quot;t(22) = 0.41, p = 0.689&quot;</code></pre>
+<pre class="r"><code>t_results</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  x and y
+## t = 0.40519, df = 22, p-value = 0.6893
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.6863784  1.0197117
+## sample estimates:
+## mean of x mean of y 
+##  2.833333  2.666667</code></pre>
+<p>The results of my t-test were t(22) = 0.41, p = 0.689.</p>
+</div>
+</div>
+<div id="anova" class="section level2">
+<h2>ANOVA</h2>
+<p>F = T^2</p>
+<p>Effect/Error</p>
+<p>SS_Effect/DF1 –&gt; M^2 Eff / SS_Error/DF2 –&gt; M^2 Error</p>
+<p>Requires data to be in long-format.</p>
+<pre class="r"><code># example creation of 2x2 data 
+Subjects &lt;- rep(1:10,each=4)
+Factor1 &lt;- rep(rep(c(&quot;A&quot;,&quot;B&quot;), each = 2), 10)
+Factor2 &lt;- rep(rep(c(&quot;1&quot;,&quot;2&quot;), 2), 10)
+DV &lt;- rnorm(40,0,1)
+all_data &lt;- data.frame(Subjects = as.factor(Subjects),
+                       DV,
+                       Factor1,
+                       Factor2)</code></pre>
+<div id="between-subjects-1-factor" class="section level3">
+<h3>between-subjects 1 factor</h3>
+<pre class="r"><code># run anova
+aov_out &lt;- aov(DV~Factor1, all_data)
+# summary
+sum_out &lt;- summary(aov_out)
+# kable xtable printing
+library(xtable)
+knitr::kable(xtable(summary(aov_out)))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Factor1</td>
+<td align="right">1</td>
+<td align="right">0.9712296</td>
+<td align="right">0.9712296</td>
+<td align="right">1.071932</td>
+<td align="right">0.3070536</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">38</td>
+<td align="right">34.4301122</td>
+<td align="right">0.9060556</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># print means
+print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</code></pre>
+<pre><code>## Tables of means
+## Grand mean
+##            
+## -0.1673187 
+## 
+##  Factor1 
+## Factor1
+##       A       B 
+## -0.3231 -0.0115</code></pre>
+<pre class="r"><code>sum_out[[1]]$`F value`[1]</code></pre>
+<pre><code>## [1] 1.071932</code></pre>
+<pre class="r"><code>#kable function good for making dataframes into pretty table</code></pre>
+</div>
+<div id="between-subjects-2-factor" class="section level3">
+<h3>between-subjects 2 factor</h3>
+<pre class="r"><code># run anova
+aov_out &lt;- aov(DV~Factor1*Factor2, all_data)
+# summary
+summary(aov_out)</code></pre>
+<pre><code>##                 Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Factor1          1   0.97  0.9712   1.093  0.303
+## Factor2          1   1.39  1.3881   1.562  0.219
+## Factor1:Factor2  1   1.05  1.0498   1.181  0.284
+## Residuals       36  31.99  0.8887</code></pre>
+<pre class="r"><code># kable xtable printing
+library(xtable)
+knitr::kable(xtable(summary(aov_out)))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Factor1</td>
+<td align="right">1</td>
+<td align="right">0.9712296</td>
+<td align="right">0.9712296</td>
+<td align="right">1.092898</td>
+<td align="right">0.3027991</td>
+</tr>
+<tr class="even">
+<td>Factor2</td>
+<td align="right">1</td>
+<td align="right">1.3880989</td>
+<td align="right">1.3880989</td>
+<td align="right">1.561989</td>
+<td align="right">0.2194384</td>
+</tr>
+<tr class="odd">
+<td>Factor1:Factor2</td>
+<td align="right">1</td>
+<td align="right">1.0497591</td>
+<td align="right">1.0497591</td>
+<td align="right">1.181265</td>
+<td align="right">0.2843224</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">36</td>
+<td align="right">31.9922542</td>
+<td align="right">0.8886737</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># print means
+print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</code></pre>
+<pre><code>## Tables of means
+## Grand mean
+##            
+## -0.1673187 
+## 
+##  Factor1 
+## Factor1
+##       A       B 
+## -0.3231 -0.0115 
+## 
+##  Factor2 
+## Factor2
+##       1       2 
+##  0.0190 -0.3536 
+## 
+##  Factor1:Factor2 
+##        Factor2
+## Factor1 1       2      
+##       A  0.0251 -0.6714
+##       B  0.0128 -0.0358</code></pre>
+</div>
+<div id="repeated-measures-1-factor" class="section level3">
+<h3>repeated-measures 1 factor</h3>
+<pre class="r"><code># run anova
+aov_out &lt;- aov(DV~Factor1 + Error(Subjects/Factor1), all_data)
+# summary
+summary(aov_out)</code></pre>
+<pre><code>## 
+## Error: Subjects
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals  9  4.337  0.4819               
+## 
+## Error: Subjects:Factor1
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Factor1    1  0.971  0.9712   0.496  0.499
+## Residuals  9 17.620  1.9578               
+## 
+## Error: Within
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals 20  12.47  0.6237</code></pre>
+<pre class="r"><code># kable xtable printing
+library(xtable)
+knitr::kable(xtable(summary(aov_out)))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">9</td>
+<td align="right">4.3369481</td>
+<td align="right">0.4818831</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Factor1</td>
+<td align="right">1</td>
+<td align="right">0.9712296</td>
+<td align="right">0.9712296</td>
+<td align="right">0.4960939</td>
+<td align="right">0.4990397</td>
+</tr>
+<tr class="odd">
+<td>Residuals1</td>
+<td align="right">9</td>
+<td align="right">17.6197832</td>
+<td align="right">1.9577537</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Residuals2</td>
+<td align="right">20</td>
+<td align="right">12.4733808</td>
+<td align="right">0.6236690</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># print means
+print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</code></pre>
+<pre><code>## Tables of means
+## Grand mean
+##            
+## -0.1673187 
+## 
+##  Factor1 
+## Factor1
+##       A       B 
+## -0.3231 -0.0115</code></pre>
+</div>
+<div id="repeated-measures-2-factor" class="section level3">
+<h3>repeated-measures 2 factor</h3>
+<pre class="r"><code># run anova
+aov_out &lt;- aov(DV~Factor1*Factor2 + Error(Subjects/(Factor1*Factor2)), all_data)
+# summary
+summary(aov_out)</code></pre>
+<pre><code>## 
+## Error: Subjects
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals  9  4.337  0.4819               
+## 
+## Error: Subjects:Factor1
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Factor1    1  0.971  0.9712   0.496  0.499
+## Residuals  9 17.620  1.9578               
+## 
+## Error: Subjects:Factor2
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Factor2    1  1.388  1.3881   1.726  0.221
+## Residuals  9  7.239  0.8043               
+## 
+## Error: Subjects:Factor1:Factor2
+##                 Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## Factor1:Factor2  1  1.050  1.0498   3.378 0.0992 .
+## Residuals        9  2.797  0.3108                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code># kable xtable printing
+library(xtable)
+knitr::kable(xtable(summary(aov_out)))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">9</td>
+<td align="right">4.3369481</td>
+<td align="right">0.4818831</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Factor1</td>
+<td align="right">1</td>
+<td align="right">0.9712296</td>
+<td align="right">0.9712296</td>
+<td align="right">0.4960939</td>
+<td align="right">0.4990397</td>
+</tr>
+<tr class="odd">
+<td>Residuals1</td>
+<td align="right">9</td>
+<td align="right">17.6197832</td>
+<td align="right">1.9577537</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Factor2</td>
+<td align="right">1</td>
+<td align="right">1.3880989</td>
+<td align="right">1.3880989</td>
+<td align="right">1.7258326</td>
+<td align="right">0.2214434</td>
+</tr>
+<tr class="odd">
+<td>Residuals2</td>
+<td align="right">9</td>
+<td align="right">7.2387614</td>
+<td align="right">0.8043068</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Factor1:Factor2</td>
+<td align="right">1</td>
+<td align="right">1.0497591</td>
+<td align="right">1.0497591</td>
+<td align="right">3.3781328</td>
+<td align="right">0.0992313</td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">9</td>
+<td align="right">2.7967614</td>
+<td align="right">0.3107513</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># print means
+print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</code></pre>
+<pre><code>## Tables of means
+## Grand mean
+##            
+## -0.1673187 
+## 
+##  Factor1 
+## Factor1
+##       A       B 
+## -0.3231 -0.0115 
+## 
+##  Factor2 
+## Factor2
+##       1       2 
+##  0.0190 -0.3536 
+## 
+##  Factor1:Factor2 
+##        Factor2
+## Factor1 1       2      
+##       A  0.0251 -0.6714
+##       B  0.0128 -0.0358</code></pre>
+</div>
+<div id="papaja" class="section level3">
+<h3>papaja</h3>
+<pre class="r"><code>#library(papaja)
+#apa_stuff &lt;- apa_print.aov(aov_out)</code></pre>
+<pre class="r"><code>#The main effect for factor 1 was, `r apa_stuff$statistic$Factor1`. The main effect for factor 2 was, `r apa_stuff$statistic$Factor2`. The interaction was, `r apa_stuff$statistic$Factor1_Factor2`</code></pre>
+</div>
+</div>
+<div id="linear-regression" class="section level2">
+<h2>Linear Regression</h2>
+<pre class="r"><code>lm(DV~Factor1, all_data)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ Factor1, data = all_data)
+## 
+## Coefficients:
+## (Intercept)     Factor1B  
+##     -0.3231       0.3116</code></pre>
+<pre class="r"><code>summary(lm(DV~Factor1, all_data))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ Factor1, data = all_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.61382 -0.56094 -0.09081  0.73849  2.01264 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)  -0.3231     0.2128  -1.518    0.137
+## Factor1B      0.3116     0.3010   1.035    0.307
+## 
+## Residual standard error: 0.9519 on 38 degrees of freedom
+## Multiple R-squared:  0.02743,    Adjusted R-squared:  0.001841 
+## F-statistic: 1.072 on 1 and 38 DF,  p-value: 0.3071</code></pre>
+<pre class="r"><code>lm(DV~Factor1+Factor2, all_data)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ Factor1 + Factor2, data = all_data)
+## 
+## Coefficients:
+## (Intercept)     Factor1B     Factor22  
+##     -0.1369       0.3116      -0.3726</code></pre>
+<pre class="r"><code>summary(lm(DV~Factor1+Factor2, all_data))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ Factor1 + Factor2, data = all_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.80011 -0.67105 -0.06665  0.60334  1.82635 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)  -0.1369     0.2588  -0.529    0.600
+## Factor1B      0.3116     0.2988   1.043    0.304
+## Factor22     -0.3726     0.2988  -1.247    0.220
+## 
+## Residual standard error: 0.945 on 37 degrees of freedom
+## Multiple R-squared:  0.06665,    Adjusted R-squared:  0.01619 
+## F-statistic: 1.321 on 2 and 37 DF,  p-value: 0.2792</code></pre>
+<pre class="r"><code>lm(DV~Factor1*Factor2, all_data)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ Factor1 * Factor2, data = all_data)
+## 
+## Coefficients:
+##       (Intercept)           Factor1B           Factor22  
+##           0.02514           -0.01235           -0.69657  
+## Factor1B:Factor22  
+##           0.64800</code></pre>
+<pre class="r"><code>summary(lm(DV~Factor1*Factor2, all_data))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ Factor1 * Factor2, data = all_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.63811 -0.60893 -0.09186  0.67585  1.66435 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)        0.02514    0.29811   0.084    0.933
+## Factor1B          -0.01235    0.42159  -0.029    0.977
+## Factor22          -0.69657    0.42159  -1.652    0.107
+## Factor1B:Factor22  0.64800    0.59621   1.087    0.284
+## 
+## Residual standard error: 0.9427 on 36 degrees of freedom
+## Multiple R-squared:  0.0963, Adjusted R-squared:  0.02099 
+## F-statistic: 1.279 on 3 and 36 DF,  p-value: 0.2964</code></pre>
+</div>
+<div id="randomization-test" class="section level2">
+<h2>Randomization Test</h2>
+<pre class="r"><code>A &lt;- c(1,2,3,4,5,6,7,8,9,10)
+B &lt;- c(2,4,6,8,10,12,14,16,18,20)
+all &lt;- c(A,B)
+mean_difference &lt;- c()
+for(i in 1:10000){
+  shuffle &lt;- sample(all)
+  newA &lt;- shuffle[1:10]
+  newB &lt;- shuffle[11:20]
+  mean_difference[i] &lt;- mean(newB)-mean(newA)
+}
+observed &lt;- mean(B)-mean(A)
+length(mean_difference[mean_difference &gt;= observed])/10000</code></pre>
+<pre><code>## [1] 0.0121</code></pre>
+<pre class="r"><code>library(EnvStats)
+twoSamplePermutationTestLocation(x=B, y=A, fcn = &quot;mean&quot;, 
+                                 alternative = &quot;greater&quot;, 
+                                 mu1.minus.mu2 = 0, 
+                                 paired = FALSE, 
+                                 exact = FALSE, 
+                                 n.permutations = 10000, 
+                                 seed = NULL, 
+                                 tol = sqrt(.Machine$double.eps))</code></pre>
+<pre><code>## 
+## Results of Hypothesis Test
+## --------------------------
+## 
+## Null Hypothesis:                 mu.x-mu.y = 0
+## 
+## Alternative Hypothesis:          True mu.x-mu.y is greater than 0
+## 
+## Test Name:                       Two-Sample Permutation Test
+##                                  Based on Differences in Means
+##                                  (Based on Sampling
+##                                  Permutation Distribution
+##                                  10000 Times)
+## 
+## Estimated Parameter(s):          mean of x = 11.0
+##                                  mean of y =  5.5
+## 
+## Data:                            x = B
+##                                  y = A
+## 
+## Sample Sizes:                    nx = 10
+##                                  ny = 10
+## 
+## Test Statistic:                  mean.x - mean.y = 5.5
+## 
+## P-value:                         0.0111</code></pre>
+</div>
+<div id="correlation" class="section level2">
+<h2>Correlation</h2>
+<pre class="r"><code>x &lt;- rnorm(10,0,1)
+y &lt;- rnorm(10,0,1)
+cor(x,y)</code></pre>
+<pre><code>## [1] -0.5337205</code></pre>
+<pre class="r"><code>ranks1 &lt;- sample(1:10) 
+ranks2 &lt;- sample(1:10)
+cor(ranks1,ranks2, method = &quot;spearman&quot;)</code></pre>
+<pre><code>## [1] -0.1393939</code></pre>
+</div>
+<div id="chi-square" class="section level2">
+<h2>Chi-square</h2>
+<pre class="r"><code>M &lt;- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))
+dimnames(M) &lt;- list(gender = c(&quot;F&quot;, &quot;M&quot;),
+                    party = c(&quot;Democrat&quot;,&quot;Independent&quot;, &quot;Republican&quot;))
+(Xsq &lt;- chisq.test(M))</code></pre>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  M
+## X-squared = 30.07, df = 2, p-value = 2.954e-07</code></pre>
+</div>
+<div id="binomial-test" class="section level2">
+<h2>binomial test</h2>
+<pre class="r"><code>number_of_successes &lt;- 100
+trials &lt;- 150
+binom.test(x=number_of_successes, n=trials, p = 0.5,
+           alternative = &quot;two.sided&quot;,
+           conf.level = 0.95)</code></pre>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  number_of_successes and trials
+## number of successes = 100, number of trials = 150, p-value =
+## 5.448e-05
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.5851570 0.7414436
+## sample estimates:
+## probability of success 
+##              0.6666667</code></pre>
+</div>
+<div id="post-hoc-tests" class="section level2">
+<h2>Post-hoc tests</h2>
+<p>Many kinds of post-hoc tests can be done in R using base R functions, or functions from other packages.</p>
+<p>At the same time, it is common for post-hoc comparison functions to be limited and specific in their functionality. So, if you can’t find an existing function to complete the analysis you want, you may have to modify, extend, or write your own function to do the job.</p>
+<div id="pairwise-t-tests" class="section level3">
+<h3>pairwise t-tests</h3>
+<p>Performs all possible t-tests between the levels of a grouping factor. Can implement different corrections for multiple comparisons.</p>
+<pre class="r"><code>df &lt;- airquality #loads the airquality data from base R
+df$Month &lt;- as.factor(df$Month)
+# default uses holm correction
+pairwise.t.test(df$Ozone,df$Month)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  df$Ozone and df$Month 
+## 
+##   5       6       7       8      
+## 6 1.00000 -       -       -      
+## 7 0.00026 0.05113 -       -      
+## 8 0.00019 0.04987 1.00000 -      
+## 9 1.00000 1.00000 0.00488 0.00388
+## 
+## P value adjustment method: holm</code></pre>
+<pre class="r"><code># use bonferroni correction
+pairwise.t.test(df$Ozone,df$Month, p.adj=&quot;bonf&quot;)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  df$Ozone and df$Month 
+## 
+##   5       6       7       8      
+## 6 1.00000 -       -       -      
+## 7 0.00029 0.10225 -       -      
+## 8 0.00019 0.08312 1.00000 -      
+## 9 1.00000 1.00000 0.00697 0.00485
+## 
+## P value adjustment method: bonferroni</code></pre>
+</div>
+<div id="tukey-hsd-test" class="section level3">
+<h3>tukey HSD test</h3>
+<p>notes: the warpbreaks data.frame should be available in base R, you do not need to load it to be able to use it.</p>
+<p>Doesn’t work with repeated measures ANOVAs.</p>
+<pre class="r"><code>summary(fm1 &lt;- aov(breaks ~ wool + tension, data = warpbreaks))</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+## wool         1    451   450.7   3.339 0.07361 . 
+## tension      2   2034  1017.1   7.537 0.00138 **
+## Residuals   50   6748   135.0                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>TukeyHSD(fm1, &quot;tension&quot;, ordered = TRUE)</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+##     factor levels have been ordered
+## 
+## Fit: aov(formula = breaks ~ wool + tension, data = warpbreaks)
+## 
+## $tension
+##          diff        lwr      upr     p adj
+## M-H  4.722222 -4.6311985 14.07564 0.4474210
+## L-H 14.722222  5.3688015 24.07564 0.0011218
+## L-M 10.000000  0.6465793 19.35342 0.0336262</code></pre>
+</div>
+<div id="fishers-lsd" class="section level3">
+<h3>Fishers LSD</h3>
+<p>Explanation of Fisher’s least significant difference test. <a href="https://www.utd.edu/~herve/abdi-LSD2010-pretty.pdf" class="uri">https://www.utd.edu/~herve/abdi-LSD2010-pretty.pdf</a></p>
+<pre class="r"><code>library(agricolae)
+data(sweetpotato)
+model &lt;- aov(yield~virus, data=sweetpotato)
+out   &lt;- LSD.test(model,&quot;virus&quot;, p.adj=&quot;bonferroni&quot;)</code></pre>
+</div>
+</div>
+<div id="linear-contrasts" class="section level2">
+<h2>Linear Contrasts</h2>
+<pre class="r"><code># Create data for a one-way BW subjects, 4 groups
+A &lt;- rnorm(n=10, mean=100, sd=25)
+B &lt;- rnorm(n=10, mean=120, sd=25)
+C &lt;- rnorm(n=10, mean=140, sd=25)
+D &lt;- rnorm(n=10, mean=80, sd=25)
+DV &lt;- c(A,B,C,D)
+Conditions &lt;- as.factor(rep(c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;), each=10))
+df &lt;- data.frame(DV,Conditions)
+# one-way ANOVA
+aov_out &lt;- aov(DV~Conditions, df)
+summary(aov_out)</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Conditions   3  22572    7524   13.83 3.72e-06 ***
+## Residuals   36  19589     544                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code># look at the order of levels
+levels(df$Conditions)</code></pre>
+<pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot;</code></pre>
+<pre class="r"><code># set up linear contrasts
+c1 &lt;- c(.5, -.5, -.5, .5) # AD vs. BC
+c2 &lt;- c(0, 0, 1, -1) # C vs. D
+c3 &lt;- c(0, -1, 1, 0) # B vs. C
+# create a contrast matrix
+mat &lt;- cbind(c1,c2,c3)
+# assign the contrasts to the group
+contrasts(df$Conditions) &lt;- mat
+# run the ANOVA
+aov_out &lt;- aov(DV~Conditions, df)
+# print the contrasts, add names for the contrasts
+summary.aov(aov_out, split=list(Conditions=list(&quot;AD vs. BC&quot;=1, &quot;C vs. D&quot; = 2, &quot;B vs. C&quot;=3))) </code></pre>
+<pre><code>##                         Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Conditions               3  22572    7524  13.827 3.72e-06 ***
+##   Conditions: AD vs. BC  1  18552   18552  34.093 1.14e-06 ***
+##   Conditions: C vs. D    1   4007    4007   7.365   0.0101 *  
+##   Conditions: B vs. C    1     12      12   0.023   0.8812    
+## Residuals               36  19589     544                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>a &lt;- replicate(10000,t.test(rnorm(10,0,1))$p.value)
+hist(a)</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<pre class="r"><code>length(a[a&lt;.05])</code></pre>
+<pre><code>## [1] 546</code></pre>
+<pre class="r"><code>Fact1 &lt;- rep(c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), each=5)
+DV &lt;- rnorm(n=15, mean=0, sd=1)
+aov(DV~Fact1, all_data)</code></pre>
+<p>anova = aov(formula, dataframe) aov(dependent variable ~ Factor, dataframe) ^ for a one factor anova</p>
+</div>
 </div>
 
 
