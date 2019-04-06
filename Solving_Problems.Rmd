@@ -29,6 +29,21 @@ names(sd)[3]<- "DOB"
 ```
 
 
+Find the longest word
+```{r}
+x<- "a dog went for a walk to the circuis"
+
+#first<- strsplit(x, split = " ")
+#first[[1]][1]
+
+longest<- function(x)
+for (j in 1:length(x))
+  x<-unlist((strsplit(x, split = " ")))
+  x<-tail(sort(x))
+
+```
+
+
 Histogram
 ```{r}
 samples<- rnorm(100, mean=50, sd=5)

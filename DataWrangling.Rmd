@@ -141,16 +141,28 @@ RT_analysis <- new_all %>%
   group_by(subject,congruency) %>%
   summarise(sub_mean = mean(RT))
 
-#accuracy not found because it keeps deleting the things i do.. WHY
+
 
 ```
 
 2. Get the overall mean RTs and SEMs (standard errors of the mean) for the congruent and incongruent condition. Make a table and graph.
 
 ```{r}
-#whats the point of doing the rest of the problems if RT doesn't exist
+overall <- RT_analysis %>%
+  group_by(congruency)%>%
+  summarise(meanRT = mean(sub_mean),
+            SEM = sd(sub_mean)/sqrt(length(sub_mean)))
   
-  
+library(xtable)
+knitr::kable(xtable(overall))
+#why are all nums zero?
+
+ggplot(overall, aes(x=congruency, y=meanRT, fill=congruency))+
+  geom_bar(stat="identity")+
+  theme_classic()+
+  geom_errorbar(aes(ymin=meanRT - SEM,
+                    ymax = meanRT + SEM),
+                position = position_dodge(width = .8), width = .4)
 ```
 
 3. Compute the flanker effect for each subject, taking the difference between their mean incongruent and congruent RT. Then plot the mean flanker effect, along with the SEM of the mean flanker effect

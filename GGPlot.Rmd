@@ -131,6 +131,25 @@ ggplot(meandif, aes(x=f1,y=f2,group=f3))+
 
 
 
+```{r}
+library(ggplot2)
+year<- rep(c(2014,2015,2016,2017), each = 12)
+changes <- rep(c(runif(12,5,15), runif(12,5,20), runif(12,13,28), runif(12,20,30)), each = 5)
+program <- c("C", "Python", "Matlab", "R", "Java")
+
+g<- data.frame(year, changes, program)
+#  year = rep(c(2014,2015,2016,2017), each = 12),
+ # var1 = 5 + c(0,runif(12,5,15),))
+ggplot(g, aes(x=year, y=changes, group=program, colour = program))+
+  geom_line()
+
+
+
+
+
+
+
+```
 
 
 
