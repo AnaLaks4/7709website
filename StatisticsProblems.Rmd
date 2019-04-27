@@ -31,8 +31,10 @@ Assume an alpha criteria of p<.05 for a directional test. What is the critical v
 Assume an alpha criteria of p<.05 for a non-directional test. What is the critical value for the absolute value of the mean difference. In other words, how large must the absolute value of the mean difference be in order to occur less than 5% of the time under the null?
 
 ```{r}
-null <- replicate(10000,rnorm(10,0,1))
-mean(null)
+nullA <- replicate(10000,rnorm(10,0,1))
+nullB <- replicate(10000,rnorm(10,0,1))
+diffs<-  nullA-nullB
+meandiff<- mean(diffs)
 
 ```
 

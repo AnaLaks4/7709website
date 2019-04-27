@@ -1414,3 +1414,100 @@ hist(save_max)
 
 Now, chance doesn't do much better than .25.
 
+
+#04/08/19 Shiny Web Apps
+first main chunk:
+lay out the website, where buttons go & layout
+ui = user interface
+"shiny widgets" = button types & etc i.e. sliderinput (name of thing,)
+fluid page = shiny function for setting up webpages, you can add a title under it
+under it is a sidebar layout and a main bar panel
+
+2nd part of the app:
+server (the R side of the app)
+
+https://crumplab.github.io/psyc7709/Presentations/Shiny_tutorial.html
+
+
+#04/15/19 More Shiny and Optimization
+
+##Memory management 
+When you create objects in R, you are assigning part of your computer’s memory to represent the parts of the object. Generally speaking, your ability to create objects in R is limited by the memory of your computer. Additionally, the process of representing your object in memory takes time. So, memory management involves understanding how to efficiently represent information in memory.
+
+The size of an object in memory depends on object class
+
+```{r}
+# numeric by default
+a <- rep(0,1000)
+object.size(a)
+
+# as.character
+a <- as.character(rep(0,1000))
+object.size(a)
+
+# as.integer
+a <- as.integer(rep(0,1000))
+object.size(a)
+
+# as.double
+a <- as.double(rep(0,1000))
+object.size(a)
+```
+
+## Matrices and data frames
+
+```{r}
+b <- matrix(0,ncol=10,nrow=100)
+object.size(b)
+
+c <- as.data.frame(matrix(0,ncol=10,nrow=100))
+object.size(c)
+```
+
+##Rprofvis
+```{r}
+Rprof(tmp <- tempfile())
+
+a <- matrix(0,nrow=2,ncol=1000)
+for(i in 1:1000){
+  a <- rbind(a,rnorm(1000,0,1))
+}
+
+Rprof()
+summaryRprof(tmp)
+```
+
+
+```{r}
+Rprof(tmp <- tempfile())
+
+a <- matrix(0,nrow=1002,ncol=1000)
+
+for(i in 3:1002){
+  a[i,] <- rnorm(1000,0,1)
+}
+
+Rprof()
+summaryRprof(tmp)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
