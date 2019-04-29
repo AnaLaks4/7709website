@@ -13,3 +13,4 @@ RnwWeave: knitr
 LaTeX: pdfLaTeX
 
 BuildType: Website
+WebsitePath: ~/Desktop/Spring 2019/R 7709 Crump/7709website
