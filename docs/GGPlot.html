@@ -395,6 +395,9 @@ div.tocify {
   <a href="DataWrangling.html">DataWrangling</a>
 </li>
 <li>
+  <a href="StatisticsProblems.html">StatisticsProblems</a>
+</li>
+<li>
   <a href="Links.html">Links</a>
 </li>
       </ul>
@@ -505,6 +508,17 @@ ggplot(meandif, aes(x=f1,y=f2,group=f3))+
 
 
 #dataframe needs equal values in each variable, so how do you get y axis to have all the categories once, not repeated</code></pre>
+<pre class="r"><code>library(ggplot2)
+year&lt;- rep(c(2014,2015,2016,2017), each = 12)
+changes &lt;- rep(c(runif(12,5,15), runif(12,5,20), runif(12,13,28), runif(12,20,30)), each = 5)
+program &lt;- c(&quot;C&quot;, &quot;Python&quot;, &quot;Matlab&quot;, &quot;R&quot;, &quot;Java&quot;)
+
+g&lt;- data.frame(year, changes, program)
+#  year = rep(c(2014,2015,2016,2017), each = 12),
+ # var1 = 5 + c(0,runif(12,5,15),))
+ggplot(g, aes(x=year, y=changes, group=program, colour = program))+
+  geom_line()</code></pre>
+<p><img src="GGPlot_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 
 
 

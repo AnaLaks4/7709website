@@ -6,8 +6,8 @@ ui <- fluidPage(
     sidebarPanel(
       # put web page elements here
       # usually shiny widgets
-      actionButton("action1", label = "Scratch me"),
-      actionButton("action2", label = "Slap me"),
+      actionButton("action1", label = "Scratch"),
+      actionButton("action2", label = "Slap"),
       sliderInput("slider1", label = h3("Slider"), min = 0, 
                   max = 100, value = 50),
       selectInput("select", label = h3("Select box"), 

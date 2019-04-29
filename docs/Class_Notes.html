@@ -43,6 +43,16 @@ if (window.hljs) {
 </script>
 
 
+<style type="text/css">
+  p.abstract{
+    text-align: center;
+    font-weight: bold;
+  }
+  div.abstract{
+    margin: auto;
+    width: 90%;
+  }
+</style>
 
 <style type="text/css">
 h1 {
@@ -395,6 +405,9 @@ div.tocify {
   <a href="DataWrangling.html">DataWrangling</a>
 </li>
 <li>
+  <a href="StatisticsProblems.html">StatisticsProblems</a>
+</li>
+<li>
   <a href="Links.html">Links</a>
 </li>
       </ul>
@@ -410,14 +423,27 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Class Notes</h1>
+<h4 class="author"><em>First Author</em></h4>
+<address class="author_afil">
+1<br><a class="author_email" href="mailto:#"><a href="mailto:my@email.com">my@email.com</a></a>
+</address>
+<h4 class="author"><em>Ernst-August Doelle</em></h4>
+<address class="author_afil">
+1,2<br><div class="abstract">
+<p class="abstract">Abstract</p>
+<p>One or two sentences providing a <strong>basic introduction</strong> to the field, comprehensible to a scientist in any discipline.</p>
+<p>Two to three sentences of <strong>more detailed background</strong>, comprehensible to scientists in related disciplines.</p>
+<p>One sentence clearly stating the <strong>general problem</strong> being addressed by this particular study.</p>
+<p>One sentence summarizing the main result (with the words “<strong>here we show</strong>” or their equivalent).</p>
+<p>Two or three sentences explaining what the <strong>main result</strong> reveals in direct comparison to what was thought to be the case previously, or how the main result adds to previous knowledge.</p>
+<p>One or two sentences to put the results into a more <strong>general context</strong>.</p>
+</div>
 
 </div>
 
 
-<div id="section" class="section level1">
-<h1>02/25/18</h1>
-<div id="ggplot2-dataframes" class="section level2">
-<h2>GGplot2 &amp; dataframes</h2>
+<div id="ggplot2-dataframes" class="section level1">
+<h1>02/25/19 GGplot2 &amp; dataframes</h1>
 <p>Table for a data frame: srt dim age subject live 200 dim 17 1 bk 300 bright</p>
 <pre class="r"><code>Namess&lt;- c(&quot;peter&quot;,&quot;paul&quot;,&quot;mary&quot;,NA)
 Ages &lt;- c(1000,1200,100,50) #if you have a 4th variable in only one category then you have to add NA in the others so it equals in length
@@ -550,7 +576,6 @@ ggplot(plot_df, aes(x=Condition, y=MF, group=Namez,linetype=Aversion))+
   geom_text(label=Namez)+
   theme_classic()</code></pre>
 <p><img src="Class_Notes_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-</div>
 </div>
 <div id="snow-day" class="section level1">
 <h1>03/04/19 Snow Day</h1>
@@ -1668,6 +1693,625 @@ hist(a)</code></pre>
 DV &lt;- rnorm(n=15, mean=0, sd=1)
 aov(DV~Fact1, all_data)</code></pre>
 <p>anova = aov(formula, dataframe) aov(dependent variable ~ Factor, dataframe) ^ for a one factor anova</p>
+<p>03/25/18 Papaja</p>
+<p>Open new project i.e. test papaja (acts as a template) Make a new r markdown – from template option</p>
+<p>back to stats bc papaja not working</p>
+<pre class="r"><code>mean(rnorm(100000,0,1))</code></pre>
+<pre><code>## [1] 0.000309264</code></pre>
+<pre class="r"><code>save_means&lt;- c()
+for(i in 1:10000){
+    save_means[i]&lt;-mean(rnorm(10,0,1))
+}
+
+
+hist(save_means)</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<pre class="r"><code>sd(save_means)</code></pre>
+<pre><code>## [1] 0.3115906</code></pre>
+<pre class="r"><code>mean(replicate(1000,mean(rnorm(10,0,1))))</code></pre>
+<pre><code>## [1] 0.001716855</code></pre>
+<pre class="r"><code>sd(replicate(1000,mean(rnorm(10,0,1))))</code></pre>
+<pre><code>## [1] 0.3176535</code></pre>
+<pre class="r"><code>hist(replicate(1000,sd(rnorm(10,0,1))))</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-50-2.png" width="672" /></p>
+<p>NULL</p>
+<pre class="r"><code>A &lt;- rnorm(n=10,mean=0,sd=1)
+B &lt;- rnorm(n=10,mean=0,sd=1)
+mean_diff &lt;- mean(A-B)
+
+mean_differ &lt;- replicate(10000, mean(rnorm(n=10,mean=0,sd=1))-mean(rnorm(n=10,mean=0,sd=1)))
+hist(mean_differ)</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<pre class="r"><code>sort(mean_differ)[9500] # critical value</code></pre>
+<pre><code>## [1] 0.7476529</code></pre>
+<p>TTEST</p>
+<pre class="r"><code>real_ps&lt;- pt(q=c(.5,1,1.5,2,2.5), df=9)
+
+t_s&lt;- replicate(100,t.test(rnorm(10,0,1),mu=0)$statistic)
+
+hist(t_s)</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<pre class="r"><code>sim_ps&lt;- c(length(t_s[t_s&lt;.5])/100,
+length(t_s[t_s&lt;1])/100,
+length(t_s[t_s&lt;1.5])/100,
+length(t_s[t_s&lt;2])/100,
+length(t_s[t_s&lt;2.5])/100)
+
+real_ps - sim_ps</code></pre>
+<pre><code>## [1]  0.075464350  0.048281802 -0.013925328 -0.008276412  0.003069086</code></pre>
+<pre class="r"><code>sum(real_ps - sim_ps)</code></pre>
+<pre><code>## [1] 0.1046135</code></pre>
+<p>CORRELATION</p>
+<pre class="r"><code>cor(rnorm(10,0,1),rnorm(10,0,1))</code></pre>
+<pre><code>## [1] 0.0456425</code></pre>
+<pre class="r"><code>hist(replicate(10000,cor(rnorm(10,0,1),rnorm(10,0,1))))</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<pre class="r"><code>sim_rs &lt;- replicate(10000,cor(rnorm(10,0,1),rnorm(10,0,1)))
+sort(abs(sim_rs))[9500]</code></pre>
+<pre><code>## [1] 0.6375356</code></pre>
+<p>F-DISTRIBUTION</p>
+<pre class="r"><code>run_anova&lt;- function(){
+A &lt;- rnorm(4,0,1)
+B &lt;- rnorm(4,0,1)
+C &lt;- rnorm(4,0,1)
+
+conds&lt;- rep(c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;),each = 4)
+DV &lt;- c(A,B,C)
+der &lt;- data.frame(conds,DV)
+sum_o &lt;-summary(aov(DV~conds,der))
+return(sum_o[[1]]$`F value`[1]) 
+}
+
+sim_fs&lt;- replicate(10000,run_anova())
+
+a.a&lt;-sort(sim_fs)[9500]
+
+a.b&lt;- qf(.95,2,9)</code></pre>
+</div>
+</div>
+<div id="more-papaja-power-analysis" class="section level1">
+<h1>04/01/19 More Papaja &amp; Power Analysis</h1>
+<p>papaja manual</p>
+<pre class="r"><code># Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)</code></pre>
+</div>
+<div id="methods" class="section level1">
+<h1>Methods</h1>
+<p>We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) --></p>
+<div id="participants" class="section level2">
+<h2>Participants</h2>
+</div>
+<div id="material" class="section level2">
+<h2>Material</h2>
+</div>
+<div id="procedure" class="section level2">
+<h2>Procedure</h2>
+</div>
+<div id="data-analysis" class="section level2">
+<h2>Data analysis</h2>
+<p>We used r cite_r(“r-references.bib”) for all our analyses.</p>
+</div>
+</div>
+<div id="results" class="section level1">
+<h1>Results</h1>
+<p>you can control sizing in the {r, fig.width, fig.height, out.height, out.width}</p>
+<p><span class="citation">@R-base</span></p>
+<pre class="r"><code>a&lt;- rnorm(100,0,1)
+hist(a)</code></pre>
+<div class="figure">
+<img src="Class_Notes_files/figure-html/myfig-1.png" alt="this figure is a histogram" width="672" />
+<p class="caption">
+this figure is a histogram
+</p>
+</div>
+<pre class="r"><code>a &lt;- c(1,2,3)
+sapply(a, FUN=function(x){
+  paste(x, &quot;a&quot;, sep = &quot;&quot;)
+})</code></pre>
+<pre><code>## [1] &quot;1a&quot; &quot;2a&quot; &quot;3a&quot;</code></pre>
+<p>Power Analysis:</p>
+<p><strong>Bold Claim</strong>: If you can’t simulate your data, you might not understand it very well.</p>
+<p>This week on simulation shows you how to generate simulated data in R. There are many reasons to do this, including:</p>
+<ol style="list-style-type: decimal">
+<li>Develop a deeper understanding of the assumptions behind statistical tests</li>
+<li>Sample-size planning and power-analysis</li>
+<li>Understand how real data ought to behave given the assumptions you are making about the data.</li>
+</ol>
+<div id="null-hypothesis" class="section level2">
+<h2>Null-hypothesis</h2>
+<p>In general, the null-hypothesis is the hypothesis that your experimental manipulation didn’t work. Or, the hypothesis of no differences.</p>
+<p>We can simulate null-hypotheses in R for any experimental design. We do this in the following way:</p>
+<ol style="list-style-type: decimal">
+<li>Use R to generate sample data in each condition of a design</li>
+<li>Make sure the sample data comes from the very same distribution for all conditions (ensure that there are no differences)</li>
+<li>Compute a test-statistic for each simulation, save it, then repeat to create the sampling distribution of the test statistic.</li>
+<li>The sampling distribution of the test-statistic is the null-distribution. We use it to set an alpha criterion, and then do hypothesis testing.</li>
+</ol>
+<div id="null-for-a-t-test" class="section level3">
+<h3>Null for a t-test</h3>
+<pre class="r"><code># samples A and B come from the same normal distribution
+A &lt;- rnorm(n=10,mean=10, sd=5)
+B &lt;- rnorm(n=10,mean=10, sd=5)
+# the pvalue for this one pretend simulation
+t.test(A,B,var.equal=TRUE)$p.value</code></pre>
+<pre><code>## [1] 0.3711599</code></pre>
+<pre class="r"><code># running the simulation
+# everytime we run this function we do one simulated experiment and return the p-value
+sim_null &lt;- function(){
+  A &lt;- rnorm(n=10,mean=10, sd=5)
+  B &lt;- rnorm(n=10,mean=10, sd=5)
+  return(t.test(A,B,var.equal=TRUE)$p.value)
+}
+# use replicate to run the sim many times
+outcomes &lt;- replicate(1000,sim_null())
+# plot the null-distribution of p-values
+hist(outcomes)</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<pre class="r"><code># proportion of simulated experiments had a p-value less than .05
+length(outcomes[outcomes&lt;.05])/1000</code></pre>
+<pre><code>## [1] 0.046</code></pre>
+<p>We ran the above simulation 1000 times. By definition, we should get approximately 5% of the simulations returning a p-value less than .05. If we increase the number of simulations, then we will get a more accurate answer that converges on 5% every time.</p>
+</div>
+</div>
+<div id="alternative-hypothesis" class="section level2">
+<h2>Alternative hypothesis</h2>
+<p>The very general alternative to the null hypothesis (no differences), is often called the <strong>alternative</strong> hypothesis: that the manipulation does cause a difference. More specifically, there are an infinite number of possible alternative hypotheses, each involving a difference of a specific size.</p>
+<p>Consider this. How often will we find a p-value less than .05 if there was a mean difference of 5 between sample A and B. Let’s use all of the same parameters as before, except this time we sample from different distributions for A and B.</p>
+<pre class="r"><code># make the mean for B 15 (5 more than A)
+sim_alternative &lt;- function(){
+  A &lt;- rnorm(n=10,mean=10, sd=5)
+  B &lt;- rnorm(n=10,mean=15, sd=5)
+  return(t.test(A,B,var.equal=TRUE)$p.value)
+}
+# use replicate to run the sim many times
+outcomes &lt;- replicate(1000,sim_alternative())
+# plot the distribution of p-values
+hist(outcomes)</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<pre class="r"><code># proportion of simulated experiments had a p-value less than .05
+length(outcomes[outcomes&lt;.05])/1000</code></pre>
+<pre><code>## [1] 0.537</code></pre>
+<p>We programmed a mean difference of 5 between our sample for A and B, and we found p-values less than .05 a much higher proportion of the time. This is sensible, as there really was a difference between the samples (we put it there).</p>
+</div>
+<div id="power-and-effect-size" class="section level2">
+<h2>Power and Effect Size</h2>
+<p><strong>Power</strong>: the probability of rejecting a null-hypothesis, given that there is a true effect of some size.</p>
+<p><strong>Effect-size</strong>: In general, it’s the assumed size of the difference. In the above example, we assumed a difference of 5, so the assumed effect-size was 5.</p>
+<p>There are many other ways to define and measure effect-size. Perhaps the most common way is Cohen’s D. Cohen’s D expresses the mean difference in terms of standard deviation units. In the above example, both distributions had a standard deviation of 5. The mean for A was 10, and the mean for B was 15. Using Cohen’s D, the effect-size was 1. This is because 15 is 1 standard deviation away from 10 (the standard deviation is also 5).</p>
+<p>When we calculated the proportion of simulations that returned a p-value less than .05, we found the power of the design to detect an effect-size of 1.</p>
+<p>Power depends on three major things:</p>
+<ol style="list-style-type: decimal">
+<li>Sample-size</li>
+<li>Effect-size</li>
+<li>Alpha-criterion</li>
+</ol>
+<p>Power is a property of a design. The power of a design increases when sample-size increases. The power of a design increases when the actual true effect-size increases. The power of a design increases then the alpha criterion increases (e.g, going from .05 to .1, making it easier to reject the null).</p>
+</div>
+<div id="power-analysis-with-r" class="section level2">
+<h2>Power analysis with R</h2>
+<p>There are many packages and functions for power analysis. Power analysis is important for planning a design. For example, you can determine how many subjects you need in order to have a high probability of detecting a true effect (of a particular size) if it is really there.</p>
+<div id="pwr-package" class="section level3">
+<h3>pwr package</h3>
+<p>Here is an example of using the <code>pwr</code> package to find the power for an independent sample t-test, with n=10, to detect an effect-size of 1. This answer is similar to our simulations answer. The simulation would converge on this answer if we increased the number of simulations.</p>
+<pre class="r"><code>library(pwr)
+pwr.t.test(n=10,
+           d=1,
+           sig.level=.05,
+           type=&quot;two.sample&quot;,
+           alternative=&quot;two.sided&quot;)</code></pre>
+<pre><code>## 
+##      Two-sample t test power calculation 
+## 
+##               n = 10
+##               d = 1
+##       sig.level = 0.05
+##           power = 0.5620066
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group</code></pre>
+<p>As I mentioned there are many functions for directly computing power in R. Feel free to use them. In this class, we learn how to use simulation to conduct power analyses. This can be a redundant approach that is not necessary, given there are other functions we can use. Additionally, we will not get exact solutions (but approximate ones). Nevertheless, the existing power functions can be limited and may not apply to your design. The simulation approach can be extended to any design. Learning how to run the simulations will also improve your statistical sensibilities, and power calculations will become less of a black box.</p>
+<p>Two more things before moving onto simulation: power-curves, and sample-size planning.</p>
+</div>
+<div id="power-curves" class="section level3">
+<h3>power-curves</h3>
+<p>A design’s power is in relation to the true effect-size. The same design has different levels of power to detect different sized effects. Let’s make a power curve to see the power of a t-test for independent samples (n=10) to detect a range of effect-sizes</p>
+<pre class="r"><code>effect_sizes &lt;- seq(.1,2,.1)
+power &lt;- sapply(effect_sizes, 
+          FUN = function(x) {
+            pwr.t.test(n=10,
+            d=x,
+            sig.level=.05,
+            type=&quot;two.sample&quot;,
+            alternative=&quot;two.sided&quot;)$power})
+plot_df &lt;- data.frame(effect_sizes,power)
+library(ggplot2)
+ggplot(plot_df, aes(x=effect_sizes,
+                    y=power))+
+  geom_point()+
+  geom_line()</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<p>This power curve applies to all independent-sample t-tests with n=10. It is a property, or fact about those designs. Every design has it’s own power curve. The power curve shows us what <strong>should</strong> happen (on average), when the <strong>true</strong> state of the world involves effects of different sizes.</p>
+<p>If you do not know the power-curve for your design, then you do not know how sensitive your design is for detecting effects of particular sizes. You might accidentally be using an under powered design, with only a very small chance of detecting an effect of a size you are interested in.</p>
+<p>If you do know the power-curve for your design, you will be in a better position to plan your experiment, for example by modifying the number of subjects that you run.</p>
+</div>
+<div id="sample-size-planning" class="section level3">
+<h3>Sample-size planning</h3>
+<p>Here is one way to plan for the number of subjects that you need to find an effect of interest.</p>
+<ol style="list-style-type: decimal">
+<li>Establish a smallest effect-size of interest</li>
+<li>Create a curve showing the power of your design as a function of number of subjects to detect the smallest effect-size of interest.</li>
+</ol>
+<p>It’s not clear how you establish a smallest effect-size of interest. But let’s say you are interested in detecting an effect of at least d = .2. This means that two conditions would differ by at least a .2 standard deviation shift. If you find something smaller than that, let’s say you wouldn’t care about it because it wouldn’t be big enough for you to care. How many subjects do you need to have a high powered design, one that would almost always reject the null-hypothesis?</p>
+<p>This is for an independent samples t-test:</p>
+<pre class="r"><code>num_subjects &lt;- seq(10,1000,10)
+power &lt;- sapply(num_subjects, 
+          FUN = function(x) {
+            pwr.t.test(n=x,
+            d=.2,
+            sig.level=.05,
+            type=&quot;two.sample&quot;,
+            alternative=&quot;two.sided&quot;)$power})
+plot_df &lt;- data.frame(num_subjects,power)
+library(ggplot2)
+ggplot(plot_df, aes(x=num_subjects,
+                    y=power))+
+  geom_point()+
+  geom_line()</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p>Well, it looks like you need many subjects to have high power. For example, if you want to detect the effect 95% of the time, you would need around 650 subjects. It’s worth doing this kind of analysis to see if your design checks out. You don’t want to waste your time running an experiment that is designed to fail (even when the true effect is real).</p>
+</div>
+</div>
+<div id="simulation-approach-to-power-calculations" class="section level2">
+<h2>Simulation approach to power calculations</h2>
+<p>The simulation approach to power analysis involves these steps:</p>
+<ol style="list-style-type: decimal">
+<li>Use R to sample numbers into each condition of any design.</li>
+<li>You can set the properties (e.g., n, mean, sd, kind of distribution etc.) of each sample in each condition, and mimic any type of expected pattern</li>
+<li>Analyze the simulated data to obtain a p-value (use any analysis appropriate to the design)</li>
+<li>Repeat many times, save the p-values</li>
+<li>Compute power by determining the proportion of simulated p-values that are less than your alpha criterion.</li>
+</ol>
+<p>For all simulations, increasing number of simulations will improve the accuracy of your results. We will use 1000 simulations throughout. 10,000 would be better, but might take just a little bit longer.</p>
+<div id="simulated-power-for-a-t-test" class="section level3">
+<h3>Simulated power for a t-test</h3>
+<p>A power curve for n=10.</p>
+<pre class="r"><code># function to run a simulated t-test
+sim_power &lt;- function(x){
+  A &lt;- rnorm(n=10,mean=0, sd=1)
+  B &lt;- rnorm(n=10,mean=(0+x), sd=1)
+  return(t.test(A,B,var.equal=TRUE)$p.value)
+}
+# vector of effect sizes
+effect_sizes &lt;- seq(.1,2,.1)
+# run simulation for each effect size 1000 times
+power &lt;- sapply(effect_sizes, 
+          FUN = function(x) {
+            sims &lt;- replicate(1000,sim_power(x))
+            sim_power &lt;- length(sims[sims&lt;.05])/length(sims)
+            return(sim_power)})
+# combine into dataframe
+plot_df &lt;- data.frame(effect_sizes,power)
+# plot the power curve
+ggplot(plot_df, aes(x=effect_sizes,
+                    y=power))+
+  geom_point()+
+  geom_line()</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p>In this case, there is no obvious benefit to computing the power-curve by simulation. The answer we get is similar to the answer we got before using the <code>pwr</code> package, but our simulation answer is more noisy. Why bother the simulation?</p>
+<p>One answer to the why bother question is that you can simulate deeper aspects of the design and get more refined answers without having to work through the math.</p>
+</div>
+<div id="simulating-cell-size" class="section level3">
+<h3>Simulating cell-size</h3>
+<p>Many experimental designs involve multiple measurements, or trials, for each subject in each condition. How many trials should we require for each subject in each condition? Traditional power analysis doesn’t make it easy to answer this question. However, the power of a design will depend not only on the number subjects, but also the number trials used to estimate the mean for each subject in each condition.</p>
+<p>Consider a simple Stroop experiment. The researcher is interested in measuring a Stroop effect of at least d=.1 (e.g., the difference between mean congruent trials is .1 standard deviations smaller than mean incongruent trials). How many subjects are required? And, how many trials should each subject perform in the congruent and incongruent conditions? Let’s use simulation to find out.</p>
+<pre class="r"><code># function to run a simulated t-test
+# nsubs sets number of subjects
+# ntrials to change number of trials
+# d sets effect size
+# this is a paired sample test to model Stroop
+sim_power &lt;- function(nsubs,ntrials,d){
+  A &lt;- replicate(nsubs,mean(rnorm(n=ntrials,mean=0, sd=1)))
+  B &lt;- replicate(nsubs,mean(rnorm(n=ntrials,mean=d, sd=1)))
+  return(t.test(A,B,paired=TRUE)$p.value)
+}
+# vectors for number of subjects and trials
+n_subs_vector &lt;- c(10,20,30,50)
+n_trials_vector &lt;- c(10,20,30,50,100)
+# a loop to run all simulations
+power &lt;- c()
+subjects &lt;- c()
+trials &lt;- c()
+i &lt;- 0 # use this as a counter for indexing
+for(s in n_subs_vector){
+  for(t in n_trials_vector){
+    i &lt;- i+1
+    sims &lt;- replicate(1000,sim_power(s,t,.1))
+    power[i] &lt;- length(sims[sims&lt;.05])/length(sims)
+    subjects[i] &lt;- s
+    trials[i] &lt;- t
+  }
+}
+# combine into dataframe
+plot_df &lt;- data.frame(power,subjects,trials)
+# plot the power curve
+ggplot(plot_df, aes(x=subjects,
+                    y=power,
+                    group=trials,
+                    color=trials))+
+  geom_point()+
+  geom_line()</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<pre class="r"><code># a vectorized version of the loop
+# run simulation for each effect size 1000 times
+# power &lt;- outer(n_subs_vector,
+#                n_trials_vector,
+#                FUN = Vectorize(function(x,y) {
+#                   sims &lt;- replicate(100,sim_power(x,y))  
+#                   sim_power &lt;- length(sims[sims&lt;.05])/length(sims)
+#                   return(sim_power)
+#                }))</code></pre>
+<p>To my eye, it looks like 30 subjects with 100 trials in each condition would give you a very high power to find a Stroop effect of d=.1.</p>
+</div>
+<div id="one-way-anova" class="section level3">
+<h3>One-Way ANOVA</h3>
+<p>Let’s extend our simulation based approach to the one-way ANOVA. Let’s assume a between-subjects design, with one factor that has four levels: A, B, C, and D. There will be 20 subjects in each group. What is the power curve for this design to detect effects of various size? Immediately, the situation becomes complicated, there are numerous ways that the means for A, B, C, and D could vary. Let’s assume the simplest case, three of them are the same, and one of them is different by some amount of standard deviations. We will compute the main effect, and report the proportion of significant experiments as we increase the effect size for the fourth group.</p>
+<pre class="r"><code># function to run a simulated t-test
+sim_power_anova &lt;- function(x){
+  A &lt;- rnorm(n=20,mean=0, sd=1)
+  B &lt;- rnorm(n=20,mean=0, sd=1)
+  C &lt;- rnorm(n=20,mean=0, sd=1)
+  D &lt;- rnorm(n=20,mean=(0+x), sd=1)
+  df &lt;- data.frame(condition = as.factor(rep(c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;),each=20)),
+                   DV = c(A,B,C,D))
+  aov_results &lt;- summary(aov(DV~condition,df))
+  #return the pvalue
+  return(aov_results[[1]]$`Pr(&gt;F)`[1])
+}
+# vector of effect sizes
+effect_sizes &lt;- seq(.1,2,.1)
+# run simulation for each effect size 1000 times
+power &lt;- sapply(effect_sizes, 
+          FUN = function(x) {
+            sims &lt;- replicate(1000,sim_power_anova(x))
+            sim_power &lt;- length(sims[sims&lt;.05])/length(sims)
+            return(sim_power)})
+# combine into dataframe
+plot_df &lt;- data.frame(effect_sizes,power)
+# plot the power curve
+ggplot(plot_df, aes(x=effect_sizes,
+                    y=power))+
+  geom_point()+
+  geom_line()</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<p>It looks like this design (1 factor, between-subjects, 20 subjects per group) has high power to detect an effect of d=1, specifically when one of the groups differs from the others by d=1.</p>
+<p>However, most effects in psychology are smalls, d=.2 is very common. How, many subjects does this design require to have high power (let’s say above .95, although most people use .8) to detect that small effect?</p>
+<pre class="r"><code>sim_power_anova &lt;- function(x){
+  A &lt;- rnorm(n=x,mean=0, sd=1)
+  B &lt;- rnorm(n=x,mean=0, sd=1)
+  C &lt;- rnorm(n=x,mean=0, sd=1)
+  D &lt;- rnorm(n=x,mean=.2, sd=1)
+  df &lt;- data.frame(condition = as.factor(rep(c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;),each=x)),
+                   DV = c(A,B,C,D))
+  aov_results &lt;- summary(aov(DV~condition,df))
+  #return the pvalue
+  return(aov_results[[1]]$`Pr(&gt;F)`[1])
+}
+# vector of effect sizes
+subjects &lt;- seq(10,1000,50)
+# run simulation for each effect size 1000 times
+power &lt;- sapply(subjects, 
+          FUN = function(x) {
+            sims &lt;- replicate(1000,sim_power_anova(x))
+            sim_power &lt;- length(sims[sims&lt;.05])/length(sims)
+            return(sim_power)})
+# combine into dataframe
+plot_df &lt;- data.frame(subjects,power)
+# plot the power curve
+ggplot(plot_df, aes(x=subjects,
+                    y=power))+
+  geom_point()+
+  geom_line()</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p>The simulations suggests we need about 560 subjects in each group to have power .95 to detect the effect (d=.2). That’s a total of 2240 subjects. Reality can be surprising when it comes to power analysis. It is better to be surprised about your design before you run your experiment, not after.</p>
+</div>
+</div>
+<div id="closing-thoughts" class="section level2">
+<h2>Closing thoughts</h2>
+<p>The simulation approach is powerful and flexible. It can be applied whenever you can formalize your assumptions about the data. And, your simulations can be highly customized to account for all kinds of nuances, like different numbers of subjects, different distributions, assumptions about noise, etc. If you are wondering what your design can do, maybe you should simulate it.</p>
+</div>
+<div id="more-examples" class="section level2">
+<h2>More example(s)</h2>
+<p>As I find time I will try to add more examples here, especially out of the box examples to illustrate how simulation can be applied.</p>
+<div id="correlation-between-traits-and-behavior" class="section level3">
+<h3>Correlation between traits and behavior</h3>
+<p>A common research strategy is to measure putative correlations between people’s traits and their behavior. For example, a researcher might prepare a questionnaire with several questions. Perhaps the questions are about their political views, or about their life satisfaction, or anything else. The research might ask some group of people to answer the questions, and to also perform some task. At the end of the experiment, they might ask if different kinds of people (measured by the questionnaire) perform differently on the behavioral measure. For example, we might have people answer several questions about their openness to new experiences, we might also measure their performance on a working memory task. A research question might be, do people who are more open to experience perform better on a working memory task? The answer would lie in a correlation between the answers on the questions, and the performance on the task. Let’s simulate this kind of situation, say for 20 subjects. Each subject answers 20 questions, and they perform a behavioral task. At the end of the experiment, we correlate the answers on each question, with the performance on the task. What kind of correlations would we expect by chance alone? Let’s say the participants are all random robots. They answer each question randomly, and their performance on the behavioral task is sampled randomly from some normal distribution. If everything is random, shouldn’t we expect to find no correlations?</p>
+<p>Details:</p>
+<p>Let’s assume that each question involves a likert scale from 1 to 7. Each person randomly picks a number from 1 to 7 for each question. Let’s assume performance on the behavioral task is sampled from a normal distribution with mean = 0, and sd = 1.</p>
+<pre class="r"><code># get 20 random answers for all 20 subjects and 20 questions
+# columns will be individual subjects 1 to 20
+# rows will be questions 1 to 20
+questionnaire &lt;- matrix(sample(1:7,20*20, replace=TRUE),ncol=20)
+# get 20 measures of performance on behavioral task
+behavioral_task &lt;- rnorm(20,0,1)
+# correlate behavior with each question
+save_correlations &lt;-c()
+for(i in 1:20){
+  save_correlations[i] &lt;- cor(behavioral_task,questionnaire[i,])
+}
+# show histogram of 20 correlations
+hist(save_correlations)</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p>The histogram shows that a range of correlations between individual questions and behavior can emerge just by chance alone. If you run the above code a few times, you will see that the histogram changes a bit because of random chance.</p>
+<p>Oftentimes researchers might not know which question on the questionnaire is the best question. That is, the one that best correlates with behavior. Consider a researcher who computes all of the correlations between each question and behavior, and then chooses the question with highest correlation (positive or negative) as the best question. After all, it has the highest correlation. After choosing this question, they might suggest that behavior is strongly correlated with how people answer this question.</p>
+<p>Let’s try to find out by simulation what kinds of large correlations can occur just by chance alone. We will run the above many times, and each time we will save the absolute value of the largest correlation between a question and behavior. Just how large can these correlations be by chance alone?</p>
+<pre class="r"><code>save_max &lt;- c()
+for( j in 1:10000){
+  questionnaire &lt;- matrix(sample(1:7,20*20, replace=TRUE),ncol=20)
+  behavioral_task &lt;- rnorm(20,0,1)
+  
+  save_correlations &lt;-c()
+  for(i in 1:20){
+    save_correlations[i] &lt;- cor(behavioral_task,questionnaire[i,])
+  }
+  save_max[j] &lt;- max(abs(save_correlations))
+}
+hist(save_max)</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p>The simulation shows that chance alone in this situation can produce very large correlations, as large as .8 or .9 (although not very often).</p>
+<p>The situation changes somewhat if many more subjects are run. Let’s do the same as above, but run 200 subjects, rather than 20.</p>
+<pre class="r"><code>save_max &lt;- c()
+for( j in 1:10000){
+  questionnaire &lt;- matrix(sample(1:7,200*20, replace=TRUE),ncol=200)
+  behavioral_task &lt;- rnorm(200,0,1)
+  
+  save_correlations &lt;-c()
+  for(i in 1:20){
+    save_correlations[i] &lt;- cor(behavioral_task,questionnaire[i,])
+  }
+  save_max[j] &lt;- max(abs(save_correlations))
+}
+hist(save_max)</code></pre>
+<p><img src="Class_Notes_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p>Now, chance doesn’t do much better than .25.</p>
+</div>
+</div>
+</div>
+<div id="shiny-web-apps" class="section level1">
+<h1>04/08/19 Shiny Web Apps</h1>
+<p>first main chunk: lay out the website, where buttons go &amp; layout ui = user interface “shiny widgets” = button types &amp; etc i.e. sliderinput (name of thing,) fluid page = shiny function for setting up webpages, you can add a title under it under it is a sidebar layout and a main bar panel</p>
+<p>2nd part of the app: server (the R side of the app)</p>
+<p><a href="https://crumplab.github.io/psyc7709/Presentations/Shiny_tutorial.html" class="uri">https://crumplab.github.io/psyc7709/Presentations/Shiny_tutorial.html</a></p>
+</div>
+<div id="more-shiny-and-optimization" class="section level1">
+<h1>04/15/19 More Shiny and Optimization</h1>
+<div id="memory-management" class="section level2">
+<h2>Memory management</h2>
+<p>When you create objects in R, you are assigning part of your computer’s memory to represent the parts of the object. Generally speaking, your ability to create objects in R is limited by the memory of your computer. Additionally, the process of representing your object in memory takes time. So, memory management involves understanding how to efficiently represent information in memory.</p>
+<p>The size of an object in memory depends on object class</p>
+<pre class="r"><code># numeric by default
+a &lt;- rep(0,1000)
+object.size(a)</code></pre>
+<pre><code>## 8048 bytes</code></pre>
+<pre class="r"><code># as.character
+a &lt;- as.character(rep(0,1000))
+object.size(a)</code></pre>
+<pre><code>## 8104 bytes</code></pre>
+<pre class="r"><code># as.integer
+a &lt;- as.integer(rep(0,1000))
+object.size(a)</code></pre>
+<pre><code>## 4048 bytes</code></pre>
+<pre class="r"><code># as.double
+a &lt;- as.double(rep(0,1000))
+object.size(a)</code></pre>
+<pre><code>## 8048 bytes</code></pre>
+</div>
+<div id="matrices-and-data-frames" class="section level2">
+<h2>Matrices and data frames</h2>
+<pre class="r"><code>b &lt;- matrix(0,ncol=10,nrow=100)
+object.size(b)</code></pre>
+<pre><code>## 8216 bytes</code></pre>
+<pre class="r"><code>c &lt;- as.data.frame(matrix(0,ncol=10,nrow=100))
+object.size(c)</code></pre>
+<pre><code>## 9904 bytes</code></pre>
+</div>
+<div id="rprofvis" class="section level2">
+<h2>Rprofvis</h2>
+<pre class="r"><code>Rprof(tmp &lt;- tempfile())
+
+a &lt;- matrix(0,nrow=2,ncol=1000)
+for(i in 1:1000){
+  a &lt;- rbind(a,rnorm(1000,0,1))
+}
+
+Rprof()
+summaryRprof(tmp)</code></pre>
+<pre><code>## $by.self
+##         self.time self.pct total.time total.pct
+## &quot;rbind&quot;      7.98    92.79       8.00     93.02
+## &quot;eval&quot;       0.60     6.98       8.60    100.00
+## &quot;rnorm&quot;      0.02     0.23       0.02      0.23
+## 
+## $by.total
+##                          total.time total.pct self.time self.pct
+## &quot;eval&quot;                         8.60    100.00      0.60     6.98
+## &quot;block_exec&quot;                   8.60    100.00      0.00     0.00
+## &quot;call_block&quot;                   8.60    100.00      0.00     0.00
+## &quot;evaluate_call&quot;                8.60    100.00      0.00     0.00
+## &quot;evaluate::evaluate&quot;           8.60    100.00      0.00     0.00
+## &quot;evaluate&quot;                     8.60    100.00      0.00     0.00
+## &quot;FUN&quot;                          8.60    100.00      0.00     0.00
+## &quot;generator$render&quot;             8.60    100.00      0.00     0.00
+## &quot;handle&quot;                       8.60    100.00      0.00     0.00
+## &quot;in_dir&quot;                       8.60    100.00      0.00     0.00
+## &quot;knitr::knit&quot;                  8.60    100.00      0.00     0.00
+## &quot;lapply&quot;                       8.60    100.00      0.00     0.00
+## &quot;process_file&quot;                 8.60    100.00      0.00     0.00
+## &quot;process_group.block&quot;          8.60    100.00      0.00     0.00
+## &quot;process_group&quot;                8.60    100.00      0.00     0.00
+## &quot;render_one&quot;                   8.60    100.00      0.00     0.00
+## &quot;rmarkdown::render_site&quot;       8.60    100.00      0.00     0.00
+## &quot;rmarkdown::render&quot;            8.60    100.00      0.00     0.00
+## &quot;sapply&quot;                       8.60    100.00      0.00     0.00
+## &quot;suppressMessages&quot;             8.60    100.00      0.00     0.00
+## &quot;timing_fn&quot;                    8.60    100.00      0.00     0.00
+## &quot;withCallingHandlers&quot;          8.60    100.00      0.00     0.00
+## &quot;withVisible&quot;                  8.60    100.00      0.00     0.00
+## &quot;rbind&quot;                        8.00     93.02      7.98    92.79
+## &quot;rnorm&quot;                        0.02      0.23      0.02     0.23
+## 
+## $sample.interval
+## [1] 0.02
+## 
+## $sampling.time
+## [1] 8.6</code></pre>
+<pre class="r"><code>Rprof(tmp &lt;- tempfile())
+
+a &lt;- matrix(0,nrow=1002,ncol=1000)
+
+for(i in 3:1002){
+  a[i,] &lt;- rnorm(1000,0,1)
+}
+
+Rprof()
+summaryRprof(tmp)</code></pre>
+<pre><code>## $by.self
+##         self.time self.pct total.time total.pct
+## &quot;rnorm&quot;      0.14     87.5       0.14      87.5
+## &quot;eval&quot;       0.02     12.5       0.16     100.0
+## 
+## $by.total
+##                          total.time total.pct self.time self.pct
+## &quot;eval&quot;                         0.16     100.0      0.02     12.5
+## &quot;block_exec&quot;                   0.16     100.0      0.00      0.0
+## &quot;call_block&quot;                   0.16     100.0      0.00      0.0
+## &quot;evaluate_call&quot;                0.16     100.0      0.00      0.0
+## &quot;evaluate::evaluate&quot;           0.16     100.0      0.00      0.0
+## &quot;evaluate&quot;                     0.16     100.0      0.00      0.0
+## &quot;FUN&quot;                          0.16     100.0      0.00      0.0
+## &quot;generator$render&quot;             0.16     100.0      0.00      0.0
+## &quot;handle&quot;                       0.16     100.0      0.00      0.0
+## &quot;in_dir&quot;                       0.16     100.0      0.00      0.0
+## &quot;knitr::knit&quot;                  0.16     100.0      0.00      0.0
+## &quot;lapply&quot;                       0.16     100.0      0.00      0.0
+## &quot;process_file&quot;                 0.16     100.0      0.00      0.0
+## &quot;process_group.block&quot;          0.16     100.0      0.00      0.0
+## &quot;process_group&quot;                0.16     100.0      0.00      0.0
+## &quot;render_one&quot;                   0.16     100.0      0.00      0.0
+## &quot;rmarkdown::render_site&quot;       0.16     100.0      0.00      0.0
+## &quot;rmarkdown::render&quot;            0.16     100.0      0.00      0.0
+## &quot;sapply&quot;                       0.16     100.0      0.00      0.0
+## &quot;suppressMessages&quot;             0.16     100.0      0.00      0.0
+## &quot;timing_fn&quot;                    0.16     100.0      0.00      0.0
+## &quot;withCallingHandlers&quot;          0.16     100.0      0.00      0.0
+## &quot;withVisible&quot;                  0.16     100.0      0.00      0.0
+## &quot;rnorm&quot;                        0.14      87.5      0.14     87.5
+## 
+## $sample.interval
+## [1] 0.02
+## 
+## $sampling.time
+## [1] 0.16</code></pre>
 </div>
 </div>
 

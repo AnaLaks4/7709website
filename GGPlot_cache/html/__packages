@@ -1,2 +1,5 @@
 base
 ggplot2
+data.table
+dplyr
+xtable

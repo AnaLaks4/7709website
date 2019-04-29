@@ -945,7 +945,7 @@ abstract: |
 keywords          : "keywords"
 wordcount         : "X"
 
-bibliography      : ["r-references.bib", "mybib.bib"]
+bibliography      : [""]
 
 floatsintext      : yes
 figurelist        : no
@@ -960,16 +960,11 @@ classoption       : "man"
 output            : papaja::apa6_pdf
 ---
 
-```{r setup, include = FALSE}
-library("papaja")
-```
-
 ```{r analysis-preferences}
 # Seed for random number generation
 set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
-
 
 
 # Methods
@@ -982,13 +977,10 @@ We report how we determined our sample size, all data exclusions (if any), all m
 ## Procedure
 
 ## Data analysis
-We used `r cite_r("r-references.bib")` for all our analyses.
+We used r cite_r("r-references.bib") for all our analyses.
 
 
 # Results
-kdsjgsd
-skjvn
-,mdfv
 you can control sizing in the {r, fig.width, fig.height, out.height, out.width}
 
 @R-base

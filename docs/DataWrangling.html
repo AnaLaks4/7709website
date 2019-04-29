@@ -395,6 +395,9 @@ div.tocify {
   <a href="DataWrangling.html">DataWrangling</a>
 </li>
 <li>
+  <a href="StatisticsProblems.html">StatisticsProblems</a>
+</li>
+<li>
   <a href="Links.html">Links</a>
 </li>
       </ul>
@@ -508,13 +511,47 @@ new_all&lt;- all_data %&gt;%
   mutate(as.factor(subject)) %&gt;%
   filter(accuracy == TRUE) %&gt;%
   group_by(subject,congruency) %&gt;%
-  summarise(sub_mean = mean(RT))
-
-#accuracy not found because it keeps deleting the things i do.. WHY</code></pre>
+  summarise(sub_mean = mean(RT))</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Get the overall mean RTs and SEMs (standard errors of the mean) for the congruent and incongruent condition. Make a table and graph.</li>
 </ol>
-<pre class="r"><code>#whats the point of doing the rest of the problems if RT doesn&#39;t exist</code></pre>
+<pre class="r"><code>overall &lt;- RT_analysis %&gt;%
+  group_by(congruency)%&gt;%
+  summarise(meanRT = mean(sub_mean),
+            SEM = sd(sub_mean)/sqrt(length(sub_mean)))
+  
+library(xtable)
+knitr::kable(xtable(overall))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">congruency</th>
+<th align="right">meanRT</th>
+<th align="right">SEM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">I</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>#why are all nums zero?
+
+ggplot(overall, aes(x=congruency, y=meanRT, fill=congruency))+
+  geom_bar(stat=&quot;identity&quot;)+
+  theme_classic()+
+  geom_errorbar(aes(ymin=meanRT - SEM,
+                    ymax = meanRT + SEM),
+                position = position_dodge(width = .8), width = .4)</code></pre>
+<p><img src="DataWrangling_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Compute the flanker effect for each subject, taking the difference between their mean incongruent and congruent RT. Then plot the mean flanker effect, along with the SEM of the mean flanker effect</li>
 </ol>
