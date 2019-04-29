@@ -417,10 +417,29 @@ div.tocify {
 </div>
 
 
+<pre class="r"><code>a &lt;- replicate(10000,t.test(rnorm(10,0,1))$p.value)
+hist(a)</code></pre>
+<p><img src="StatisticsProblems_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>length(a[a&lt;.05])</code></pre>
+<pre><code>## [1] 498</code></pre>
 <div id="null-distribution-of-mean-differences" class="section level1">
 <h1>Null distribution of mean differences</h1>
 <p>If you take two random samples from the same distribution they can be different because of random sampling. This question asks you to construct a null-distribution using simulation.</p>
 <p>Assume your samples come from a normal distribution with mean =0, sd =1. (use rnorm) Assume sample size for each sample is n =10 (e.g., rnorm(10,0,1)) Create the null-distribution: Run a simulation 10,000 times that finds the difference between means of sample A and B. You should have a vector of 10,000 difference scores Assume an alpha criteria of p&lt;.05 for a directional test. What is the critical value for a positive mean difference? In other words, how large must a positive mean difference be in order to occur less than 5% of the time under the null? Assume an alpha criteria of p&lt;.05 for a non-directional test. What is the critical value for the absolute value of the mean difference. In other words, how large must the absolute value of the mean difference be in order to occur less than 5% of the time under the null?</p>
+<pre class="r"><code>A &lt;- rnorm(n=10,mean=0,sd=1)
+B &lt;- rnorm(n=10,mean=0,sd=1)
+mean_diff &lt;- mean(A-B)
+
+mean_differ &lt;- replicate(10000, mean(rnorm(n=10,mean=0,sd=1))-mean(rnorm(n=10,mean=0,sd=1)))
+hist(mean_differ)</code></pre>
+<p><img src="StatisticsProblems_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>critvalue&lt;- sort(mean_differ)[9500]
+print(critvalue)</code></pre>
+<pre><code>## [1] 0.7435327</code></pre>
+<pre class="r"><code>nullA &lt;- replicate(10000,rnorm(10,0,1))
+nullB &lt;- replicate(10000,rnorm(10,0,1))
+diffs&lt;-  nullA-nullB
+meandiff&lt;- mean(diffs)</code></pre>
 </div>
 <div id="t-distribution" class="section level1">
 <h1>t-distribution</h1>
@@ -429,6 +448,23 @@ div.tocify {
 <p>Create a simulated t-distribution for the null hypothesis with df=9. Here, the model situation involves taking samples of size n=10 from a normal distribution. The t-value is computed for each sample (sample mean - 0)/SEM. The process is repeated 10,000 times, and each t-value is saved. The resulting 10,000 t-values are the simulated t-distribution.</p>
 <p>Using the simulated t-distribution, find the probability of t(9) &gt;= .5, 1, 1.5, 2, and 2.5</p>
 <p>Compare the two sets of probabilities to show that the difference is small. What happens to the difference if the simulation is repeated fewer times (e.g., 100) vs. more times (e.g., 100,000)</p>
+<pre><code>  - p becomes smaller as replication increases</code></pre>
+<pre class="r"><code>real_ps&lt;- pt(q=c(.5,1,1.5,2,2.5), df=9)
+
+simt&lt;- replicate(10000,t.test(rnorm(10,0,1),mu=0)$statistic)
+
+hist(simt)</code></pre>
+<p><img src="StatisticsProblems_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>sim_ps&lt;- c(length(simt[simt&lt;.5])/10000,
+length(simt[simt&lt;1])/10000,
+length(simt[simt&lt;1.5])/10000,
+length(simt[simt&lt;2])/10000,
+length(simt[simt&lt;2.5])/10000)
+
+real_ps - sim_ps</code></pre>
+<pre><code>## [1] 0.0088643501 0.0033818019 0.0019746720 0.0018235881 0.0006690862</code></pre>
+<pre class="r"><code>sum(real_ps - sim_ps)</code></pre>
+<pre><code>## [1] 0.0167135</code></pre>
 </div>
 <div id="correlation" class="section level1">
 <h1>Correlation</h1>
@@ -436,6 +472,13 @@ div.tocify {
 <p>Generate the distribution of correlations (Pearson r values) that could be obtained by chance (simulate 10,000 times)</p>
 <p>Find the critical value such that the absolute value of the correlation occurs less than 5% of the time by chance.</p>
 <p>Find the critical value when the sample-size is increased to 100</p>
+<pre class="r"><code>cor(rnorm(10,0,1),rnorm(10,0,1))</code></pre>
+<pre><code>## [1] 0.1486754</code></pre>
+<pre class="r"><code>hist(replicate(10000,cor(rnorm(10,0,1),rnorm(10,0,1))))</code></pre>
+<p><img src="StatisticsProblems_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>sim_rs &lt;- replicate(10000,cor(rnorm(10,0,1),rnorm(10,0,1)))
+sort(abs(sim_rs))[9500]</code></pre>
+<pre><code>## [1] 0.6256275</code></pre>
 </div>
 <div id="f-values" class="section level1">
 <h1>F-values</h1>
@@ -444,6 +487,36 @@ div.tocify {
 <p>Run a simulation 10,000 times to construct the simulated F-distribution. On each run, sample new numbers into the three groups, then compute F and save it.</p>
 <p>Using the simulated F-distribution, what is the critical value of F for alpha set at, p&lt;.05</p>
 <p>Compare your answer from above to the answer obtained using qf, that can compute the critical value directly.</p>
+<pre class="r"><code>A &lt;- c(1,2,3,4)
+B &lt;- c(3,4,5,6)
+C &lt;- c(5,6,7,8)
+
+conds&lt;- rep(c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;),each = 4)
+DV &lt;- c(A,B,C)
+der &lt;- data.frame(conds,DV)
+summary(aov(DV~conds,der))</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+## conds        2     32  16.000     9.6 0.00586 **
+## Residuals    9     15   1.667                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>run_anova&lt;- function(){
+A &lt;- rnorm(4,0,1)
+B &lt;- rnorm(4,0,1)
+C &lt;- rnorm(4,0,1)
+
+conds&lt;- rep(c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;),each = 4)
+DV &lt;- c(A,B,C)
+der &lt;- data.frame(conds,DV)
+sum_o &lt;-summary(aov(DV~conds,der))
+return(sum_o[[1]]$`F value`[1]) 
+}
+
+sim_fs&lt;- replicate(10000,run_anova())
+
+a.a&lt;-sort(sim_fs)[9500]
+
+a.b&lt;- qf(.95,2,9)</code></pre>
 </div>
 
 
