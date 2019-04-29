@@ -134,7 +134,7 @@ excluded <- new_all %>%
 
 1. Get the individual subject mean reaction times for **correct** congruent and incongruent trials.
 
-```{r, eval = FALSE}
+```{r}
 RT_analysis <- new_all %>%
   mutate(as.factor(subject)) %>%
   filter(accuracy == TRUE) %>%
