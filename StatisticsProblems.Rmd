@@ -39,6 +39,12 @@ mean_differ <- replicate(10000, mean(rnorm(n=10,mean=0,sd=1))-mean(rnorm(n=10,me
 hist(mean_differ)
 critvalue<- sort(mean_differ)[9500]
 print(critvalue)
+
+nullA <- replicate(10000,rnorm(10,0,1))
+nullB <- replicate(10000,rnorm(10,0,1))
+diffs<-  nullA-nullB
+meandiff<- mean(diffs)
+
 ```
 
 
