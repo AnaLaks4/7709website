@@ -33,6 +33,8 @@ This is my online R journal where i keep track of my progress in Matt Crump's Ps
 
   Happy Coding. 
 
+[Final Presentation](FinalPresentation/GGsignif_presentation.html)
+
 </div>
 <div class="col-sm-6">
 
