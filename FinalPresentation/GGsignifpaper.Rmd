@@ -31,6 +31,7 @@ ggplot(All.data, aes(x=Type,y=uptake,group=Treatment))+
   theme_light(base_size=13)+
   geom_signif(comparisons = list(c("Quebec","Mississippi")),map_signif_level = TRUE)
   
+
 ```
  
  - The first input delineates which values need to be calculated for annotation i.e. comparison = list(c(here is where enter those values)). 'Map_signif_level' is used to control whether the output graph contains the actual signficance or stars (***).

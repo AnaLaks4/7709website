@@ -39,19 +39,19 @@ class: center
  - GGsignif is a package that acts as a layer for GGplot.
 
 ---
+
 #How do you use GGsignif?
 
- - 1st: load both packages
+ - 1st: load both packages.
 
 ```r
 library(ggplot2)
 library(ggsignif)
 ```
 
----
-#How do you use GGsignif?
+--
 
-2nd: Plot your data using GGplot2 and add layer 'geom_signif'. 
+ - 2nd: Plot your data using GGplot2 and add layer 'geom_signif'.
 
 ```r
 all.data&lt;- CO2
@@ -62,23 +62,32 @@ All.data &lt;- all.data %&gt;%
 
 ggplot(All.data, aes(x=Type,y=uptake,group=Treatment))+
   geom_boxplot()+
-  geom_signif(comparisons = list(c("Quebec","Mississippi")),map_signif_level = TRUE)
+  geom_signif(comparisons = list(c("Quebec","Mississippi")),
+              map_signif_level = TRUE)
 ```
 
 ![](GGsignif_presentation_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
 
 ---
+class: center
+
+#How do you use GGsignif?
+
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+---
+class: center
 
 
 ```r
 ggplot(All.data, aes(x=Type,y=uptake,group=Treatment))+
-  geom_boxplot()+
+  geom_boxplot(fill = 'green')+
   geom_signif(comparisons = list(c("Quebec","Mississippi")),
               map_signif_level = TRUE)+
   theme_classic(base_size=18)
 ```
 
-&lt;img src="GGsignif_presentation_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="GGsignif_presentation_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
 
  - The first input delineates which values need to be calculated for annotation i.e. comparison = list(c(here is where enter those values)). 'Map_signif_level' is used to control whether the output graph contains the actual signficance or stars (***).
  
@@ -108,14 +117,16 @@ ggplot(dataf, aes(Group,Score))+
               tip_length = 0, vjust = .1)
 ```
 
-![](GGsignif_presentation_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
 
-## Now lets break this down 
+--
+
+Now lets break this down 
 
 --- 
 # With GGsignif you can change...
 ## 'y_position'
- - The placement of each individual groups' signficance annotation : y_position = c(height of first annotation, second annotation height on y-axis).
+The placement of each individual groups' signficance annotation : y_position = c(height of first annotation, second annotation height on y-axis).
  
 
 ```r
@@ -126,11 +137,16 @@ ggplot(dataf, aes(Group,Score))+
               xmax = c(1.2,2.2), annotation = c("NS","**"),
               tip_length = 0)+
   geom_signif(comparisons = list(c("G1","G2")), y_position = 30,
-              tip_length = 0, vjust = .1)
+              tip_length = 0, vjust = .1)+
+  theme_bw(base_size = 13)
 ```
 
-![](GGsignif_presentation_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
- 
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+---
+
+&lt;img src="GGsignif_presentation_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
 ---
 # With GGsignif you can change...
 ## 'xmin' and 'xmax'
@@ -145,36 +161,42 @@ ggplot(dataf, aes(Group,Score))+
               xmax = c(1.4,2.1), annotation = c("NS","**"),
               tip_length = 0)+
   geom_signif(comparisons = list(c("G1","G2")), y_position = 28,
-              tip_length = 0, vjust = .1)
+              tip_length = 0, vjust = .1)+
+  theme_bw(base_size = 13)
 ```
 
-![](GGsignif_presentation_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
  
 ---
-![](GGsignif_presentation_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+&lt;img src="GGsignif_presentation_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
  
 ---
 # With GGsignif you can change...
 ## 'annotation'
-  - Here is where you type in the desired text or symbol for each bar. 
+Here is where you type in the desired text or symbol for each bar. 
 
 ```r
 ggplot(dataf, aes(Group,Score))+
   geom_bar(aes(fill = Subject), stat = "identity", 
            position = "dodge", width = .5)+
   geom_signif(y_position = c(7.3,25.3), xmin = c(0.8,1.8), 
-              xmax = c(1.2,2.2), annotation = c("Annotation","How i want it"),
+              xmax = c(1.2,2.2), annotation = 
+                c("Annotation","How i want it"),
               tip_length = 0)+
   geom_signif(comparisons = list(c("G1","G2")), y_position = 28,
-              tip_length = 0, vjust = .1)
+              tip_length = 0, vjust = .1)+
+  theme_bw(base_size = 13)
 ```
 
-![](GGsignif_presentation_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+&lt;img src="GGsignif_presentation_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 # With GGsignif you can change...
 ## 'tip_length'
-  - This gives the option to add vertical lines coming down on both ends of annotation bar of varying length.
+This gives the option to add vertical lines coming down on both ends of annotation bar of varying length.
 
 ```r
 ggplot(dataf, aes(Group,Score))+
@@ -184,15 +206,19 @@ ggplot(dataf, aes(Group,Score))+
               xmax = c(1.2,2.2), annotation = c("NS","**"),
               tip_length = .1)+
   geom_signif(comparisons = list(c("G1","G2")), y_position = 28,
-              tip_length = 2.5, vjust = .1)
+              tip_length = 2.5, vjust = .1)+
+  theme_bw(base_size = 13)
 ```
 
-![](GGsignif_presentation_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
 
 ---
+&lt;img src="GGsignif_presentation_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+---
+
 # With GGsignif you can change...
-## 'vjust'
-  - This option allows user to control placement of the "0.33" in the graph.
+## 'vjust' 
+This option allows user to control placement of the "0.33" in the graph.
 
 ```r
 ggplot(dataf, aes(Group,Score))+
@@ -202,10 +228,41 @@ ggplot(dataf, aes(Group,Score))+
               xmax = c(1.2,2.2), annotation = c("NS","**"),
               tip_length = 0)+
   geom_signif(comparisons = list(c("G1","G2")), y_position = 28,
-              tip_length = 0, vjust = 4)
+              tip_length = 0, vjust = 6)+
+  theme_bw(base_size = 13)
 ```
 
-![](GGsignif_presentation_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+---
+&lt;img src="GGsignif_presentation_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+#What are the Pros and Cons?
+
+.pull-left[
+## Pro
+ - Relatively easy, although it definitely entails a learning curve.
+ - Able to control many features using advanced options.
+ - Works well with GGplot2
+
+]
+
+.pull-right[
+## Con
+ - Automatic version ("map_signfificance_level") is not always correct, uses wilcox test to calculate significance. 
+
+]
+
+---
+
+#References
+
+1. ggsignif intro. (n.d.). Retrieved May 13, 2019, from https://cran.r-project.org/web/packages/ggsignif/vignettes/intro.html
+
+2. ggsignif package | R Documentation. (n.d.). Retrieved May 13, 2019, from https://www.rdocumentation.org/packages/ggsignif/versions/0.5.0
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
