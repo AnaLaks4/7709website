@@ -127,6 +127,7 @@ Now lets break this down
 ---
 
 # With GGsignif you can change...
+
 ## 'y_position'
 The placement of each individual groups' signficance annotation : y_position = c(height of first annotation, second annotation height on y-axis).
  
