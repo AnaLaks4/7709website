@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>GGsignif</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Ana Lakshin" />
+    <meta name="date" content="2019-05-15" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# GGsignif
+## Final Presentation
+### Ana Lakshin
+### 05/15/19
+
+---
+
+
+
+
+class: center
+
+# What is GGsignif?
+
+--
+
+ - GGplot 2 is a popular plotting package used for data visualization.
+ 
+--
+
+ - GGplot uses a layering mechanism to achieve professional looking graphs.
+ 
+--
+
+ - GGsignif is a package that acts as a layer for GGplot.
+
+---
+#How do you use GGsignif?
+
+ - 1st: load both packages
+
+```r
+library(ggplot2)
+library(ggsignif)
+```
+
+---
+#How do you use GGsignif?
+
+2nd: Plot your data using GGplot2 and add layer 'geom_signif'. 
+
+```r
+all.data&lt;- CO2
+library(dplyr)
+
+All.data &lt;- all.data %&gt;%
+  select(Type,Treatment,conc,uptake)
+
+ggplot(All.data, aes(x=Type,y=uptake,group=Treatment))+
+  geom_boxplot()+
+  geom_signif(comparisons = list(c("Quebec","Mississippi")),map_signif_level = TRUE)
+```
+
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+---
+
+
+```r
+ggplot(All.data, aes(x=Type,y=uptake,group=Treatment))+
+  geom_boxplot()+
+  geom_signif(comparisons = list(c("Quebec","Mississippi")),
+              map_signif_level = TRUE)+
+  theme_classic(base_size=18)
+```
+
+&lt;img src="GGsignif_presentation_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+
+ - The first input delineates which values need to be calculated for annotation i.e. comparison = list(c(here is where enter those values)). 'Map_signif_level' is used to control whether the output graph contains the actual signficance or stars (***).
+ 
+---
+class: inverse, center, top
+
+#What are the advanced options?
+
+ - With GGsignif you are able to control every detail of the annotation.
+
+--
+
+ - Here are some examples:
+ 
+---
+#Advanced graph
+
+```r
+dataf&lt;- data.frame(Group&lt;- c("G1","G1","G2","G2"), Subject&lt;- c("A","B","A","B"),Score&lt;- c(5,7,20,25))
+ggplot(dataf, aes(Group,Score))+
+  geom_bar(aes(fill = Subject), stat = "identity", 
+           position = "dodge", width = .5)+
+  geom_signif(y_position = c(7.3,25.3), xmin = c(0.8,1.8), 
+              xmax = c(1.2,2.2), annotation = c("NS","**"),
+              tip_length = 0)+
+  geom_signif(comparisons = list(c("G1","G2")), y_position = 28,
+              tip_length = 0, vjust = .1)
+```
+
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+## Now lets break this down 
+
+--- 
+# With GGsignif you can change...
+## 'y_position'
+ - The placement of each individual groups' signficance annotation : y_position = c(height of first annotation, second annotation height on y-axis).
+ 
+
+```r
+ggplot(dataf, aes(Group,Score))+
+  geom_bar(aes(fill = Subject), stat = "identity", 
+           position = "dodge", width = .5)+
+  geom_signif(y_position = c(10,20), xmin = c(0.8,1.8), 
+              xmax = c(1.2,2.2), annotation = c("NS","**"),
+              tip_length = 0)+
+  geom_signif(comparisons = list(c("G1","G2")), y_position = 30,
+              tip_length = 0, vjust = .1)
+```
+
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+ 
+---
+# With GGsignif you can change...
+## 'xmin' and 'xmax'
+  - The two work together to set the length of the annotation bar where the first number within xmin's paranthesis is the starting point and the first number in xmax is the end. In the first graph xmin = c(.8,1.8) and xmax = c(1.2,2.2), this  means the first bar starts on the x-axis at .8 until 1.2 and the second bar's length is from 1.8 to 2.2. 
+  - It can also be made shorter or longer:
+
+```r
+ggplot(dataf, aes(Group,Score))+
+  geom_bar(aes(fill = Subject), stat = "identity", 
+           position = "dodge", width = .5)+
+  geom_signif(y_position = c(7.3,25.3), xmin = c(0.6,1.9), 
+              xmax = c(1.4,2.1), annotation = c("NS","**"),
+              tip_length = 0)+
+  geom_signif(comparisons = list(c("G1","G2")), y_position = 28,
+              tip_length = 0, vjust = .1)
+```
+
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+ 
+---
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+ 
+---
+# With GGsignif you can change...
+## 'annotation'
+  - Here is where you type in the desired text or symbol for each bar. 
+
+```r
+ggplot(dataf, aes(Group,Score))+
+  geom_bar(aes(fill = Subject), stat = "identity", 
+           position = "dodge", width = .5)+
+  geom_signif(y_position = c(7.3,25.3), xmin = c(0.8,1.8), 
+              xmax = c(1.2,2.2), annotation = c("Annotation","How i want it"),
+              tip_length = 0)+
+  geom_signif(comparisons = list(c("G1","G2")), y_position = 28,
+              tip_length = 0, vjust = .1)
+```
+
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+---
+# With GGsignif you can change...
+## 'tip_length'
+  - This gives the option to add vertical lines coming down on both ends of annotation bar of varying length.
+
+```r
+ggplot(dataf, aes(Group,Score))+
+  geom_bar(aes(fill = Subject), stat = "identity", 
+           position = "dodge", width = .5)+
+  geom_signif(y_position = c(7.3,25.3), xmin = c(0.8,1.8), 
+              xmax = c(1.2,2.2), annotation = c("NS","**"),
+              tip_length = .1)+
+  geom_signif(comparisons = list(c("G1","G2")), y_position = 28,
+              tip_length = 2.5, vjust = .1)
+```
+
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+---
+# With GGsignif you can change...
+## 'vjust'
+  - This option allows user to control placement of the "0.33" in the graph.
+
+```r
+ggplot(dataf, aes(Group,Score))+
+  geom_bar(aes(fill = Subject), stat = "identity", 
+           position = "dodge", width = .5)+
+  geom_signif(y_position = c(7.3,25.3), xmin = c(0.8,1.8), 
+              xmax = c(1.2,2.2), annotation = c("NS","**"),
+              tip_length = 0)+
+  geom_signif(comparisons = list(c("G1","G2")), y_position = 28,
+              tip_length = 0, vjust = 4)
+```
+
+![](GGsignif_presentation_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

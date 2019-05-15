@@ -1485,6 +1485,13 @@ summaryRprof(tmp)
 
 
 
+# 05/06/19 Bookdown & Final Presentation
+
+link on page by having name you want displayed in brackets followed by parantheses with the link
+
+Bookdown- save chapters w file name in number order 
+Index has "prerequisites"
+Bookdown themes online will give you different styles for the book
 
 
 
