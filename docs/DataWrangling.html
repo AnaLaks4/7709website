@@ -431,6 +431,7 @@ div.tocify {
 <pre class="r"><code>library(data.table)
 library(dplyr)
 library(ggplot2)
+library(bit64)
 
 
 # get the file names
@@ -439,7 +440,7 @@ file_names &lt;- list.files(path=&quot;FlankerData&quot;)
 # create headers for each column
 the_headers &lt;- c(&quot;stimulus&quot;,&quot;congruency&quot;,&quot;proportion&quot;,
                  &quot;block&quot;,&quot;condition&quot;,&quot;dualtask&quot;,&quot;unknown&quot;,
-                 &quot;stimulus_onset&quot;,&quot;response_time&quot;,&quot;response&quot;,&quot;subject&quot;)
+                 &quot;stimulus_onset&quot;,&quot;response_time&quot;,&quot;response&quot;,&quot;Subject&quot;)
 # Load data
 # create empty dataframe
 all_data&lt;-data.frame()
@@ -448,7 +449,7 @@ all_data&lt;-data.frame()
 for(i in file_names){
   one_subject &lt;- fread(paste(&quot;FlankerData/&quot;,i, sep=&quot;&quot;))
   names(one_subject) &lt;- the_headers
-  one_subject$subject &lt;- rep(i,dim(one_subject)[1])
+  one_subject$Subject &lt;- rep(i,dim(one_subject)[1])
   one_subject &lt;- cbind(one_subject, trial= 1:dim(one_subject)[1])
   all_data &lt;- rbind(all_data,one_subject)
 }</code></pre>
@@ -475,29 +476,347 @@ new_all&lt;- all_data %&gt;%
 <p>The stimulus_onset column gives a computer timestamp in milliseconds indicating when the stimulus was presented. The response_time column is a timestamp in milliseconds for the response. The difference between the two (response_time - stimulus_onset) is the reaction time in milliseconds. Add a column that calculates the reaction time on each trial.</p>
 <p>**<a href="tip:**" class="uri">tip:**</a> notice that the numbers in response_time and stimulus_onset have the class integer64. Unfortunately, ggplot does not play nice with integers in this format. you will need to make sure your RT column is in the class integer or numeric.</p>
 <pre class="r"><code>new_all&lt;- new_all %&gt;%
-  mutate(RT = as.numeric(response_time - stimulus_onset))</code></pre>
+  mutate(ReactionTime = (response_time - stimulus_onset))</code></pre>
 </div>
 </div>
 <div id="checks" class="section level2">
 <h2>Checks</h2>
 <p>Check how many trials each subject completed in the congruent and incongruent conditions, the mean accuracy for each subject in each congruency condition, and the mean RT for each subject in each congruency condition.</p>
 <pre class="r"><code>check&lt;- new_all %&gt;%
-  group_by(congruency) %&gt;%
-  summarise(num_trials = count(congruency),
-            mean_accuracy = mean(congruency),
-            mean_RT = mean(RT))</code></pre>
-<pre class="r"><code>check2&lt;- new_all %&gt;%
-  mutate(subject = as.factor(subject),
-         congruency = as.factor(congruency)) %&gt;%
-  group_by(as.character(subject), congruency) %&gt;%
-  summarise(num_trials = count(RT),
+  mutate(Subject= as.factor(Subject),
+         congruency= as.factor(congruency)) %&gt;%
+  group_by(Subject,congruency) %&gt;%
+  summarise(num_trials = length(congruency),
             mean_accuracy = mean(accuracy),
-            mean_RT = mean(RT))</code></pre>
+            mean_RT = mean(ReactionTime))
+            
+knitr::kable(check)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Subject</th>
+<th align="left">congruency</th>
+<th align="right">num_trials</th>
+<th align="right">mean_accuracy</th>
+<th align="right">mean_RT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9166667</td>
+<td align="right">550</td>
+</tr>
+<tr class="even">
+<td align="left">1.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9270833</td>
+<td align="right">548</td>
+</tr>
+<tr class="odd">
+<td align="left">10.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9479167</td>
+<td align="right">1075</td>
+</tr>
+<tr class="even">
+<td align="left">10.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9166667</td>
+<td align="right">1140</td>
+</tr>
+<tr class="odd">
+<td align="left">11.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9375000</td>
+<td align="right">708</td>
+</tr>
+<tr class="even">
+<td align="left">11.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9583333</td>
+<td align="right">852</td>
+</tr>
+<tr class="odd">
+<td align="left">12.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9270833</td>
+<td align="right">622</td>
+</tr>
+<tr class="even">
+<td align="left">12.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.0833333</td>
+<td align="right">682</td>
+</tr>
+<tr class="odd">
+<td align="left">13.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.8958333</td>
+<td align="right">545</td>
+</tr>
+<tr class="even">
+<td align="left">13.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.8229167</td>
+<td align="right">598</td>
+</tr>
+<tr class="odd">
+<td align="left">14.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9687500</td>
+<td align="right">719</td>
+</tr>
+<tr class="even">
+<td align="left">14.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9375000</td>
+<td align="right">742</td>
+</tr>
+<tr class="odd">
+<td align="left">15.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9895833</td>
+<td align="right">631</td>
+</tr>
+<tr class="even">
+<td align="left">15.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9791667</td>
+<td align="right">689</td>
+</tr>
+<tr class="odd">
+<td align="left">16.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9583333</td>
+<td align="right">572</td>
+</tr>
+<tr class="even">
+<td align="left">16.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9687500</td>
+<td align="right">584</td>
+</tr>
+<tr class="odd">
+<td align="left">17.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9687500</td>
+<td align="right">633</td>
+</tr>
+<tr class="even">
+<td align="left">17.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9479167</td>
+<td align="right">620</td>
+</tr>
+<tr class="odd">
+<td align="left">18.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">1.0000000</td>
+<td align="right">802</td>
+</tr>
+<tr class="even">
+<td align="left">18.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9583333</td>
+<td align="right">817</td>
+</tr>
+<tr class="odd">
+<td align="left">19.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9791667</td>
+<td align="right">1002</td>
+</tr>
+<tr class="even">
+<td align="left">19.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9895833</td>
+<td align="right">1105</td>
+</tr>
+<tr class="odd">
+<td align="left">2.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">1.0000000</td>
+<td align="right">1002</td>
+</tr>
+<tr class="even">
+<td align="left">2.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9583333</td>
+<td align="right">1008</td>
+</tr>
+<tr class="odd">
+<td align="left">20.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9895833</td>
+<td align="right">669</td>
+</tr>
+<tr class="even">
+<td align="left">20.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">1.0000000</td>
+<td align="right">690</td>
+</tr>
+<tr class="odd">
+<td align="left">21.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">1.0000000</td>
+<td align="right">840</td>
+</tr>
+<tr class="even">
+<td align="left">21.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">1.0000000</td>
+<td align="right">904</td>
+</tr>
+<tr class="odd">
+<td align="left">22.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9687500</td>
+<td align="right">795</td>
+</tr>
+<tr class="even">
+<td align="left">22.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9479167</td>
+<td align="right">713</td>
+</tr>
+<tr class="odd">
+<td align="left">3.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9895833</td>
+<td align="right">812</td>
+</tr>
+<tr class="even">
+<td align="left">3.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9687500</td>
+<td align="right">803</td>
+</tr>
+<tr class="odd">
+<td align="left">4.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9895833</td>
+<td align="right">815</td>
+</tr>
+<tr class="even">
+<td align="left">4.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9791667</td>
+<td align="right">901</td>
+</tr>
+<tr class="odd">
+<td align="left">5.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9791667</td>
+<td align="right">819</td>
+</tr>
+<tr class="even">
+<td align="left">5.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9687500</td>
+<td align="right">941</td>
+</tr>
+<tr class="odd">
+<td align="left">6.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9687500</td>
+<td align="right">667</td>
+</tr>
+<tr class="even">
+<td align="left">6.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9687500</td>
+<td align="right">688</td>
+</tr>
+<tr class="odd">
+<td align="left">7.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9895833</td>
+<td align="right">1053</td>
+</tr>
+<tr class="even">
+<td align="left">7.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">1.0000000</td>
+<td align="right">1146</td>
+</tr>
+<tr class="odd">
+<td align="left">8.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.8645833</td>
+<td align="right">611</td>
+</tr>
+<tr class="even">
+<td align="left">8.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9895833</td>
+<td align="right">632</td>
+</tr>
+<tr class="odd">
+<td align="left">9.txt</td>
+<td align="left">C</td>
+<td align="right">96</td>
+<td align="right">0.9687500</td>
+<td align="right">695</td>
+</tr>
+<tr class="even">
+<td align="left">9.txt</td>
+<td align="left">I</td>
+<td align="right">96</td>
+<td align="right">0.9583333</td>
+<td align="right">776</td>
+</tr>
+</tbody>
+</table>
 <div id="exclusion" class="section level3">
 <h3>Exclusion</h3>
 <p>It is common to exclude Reaction times that are very slow. There are many methods and procedures for excluding outlying reaction times. To keep it simple, exclude all RTs that are longer than 2000 ms</p>
 <pre class="r"><code>excluded &lt;- new_all %&gt;%
-  filter(RT&lt;2e-100)</code></pre>
+  filter(ReactionTime&lt;2000)</code></pre>
 </div>
 </div>
 <div id="analysis" class="section level2">
@@ -507,18 +826,253 @@ new_all&lt;- all_data %&gt;%
 <ol style="list-style-type: decimal">
 <li>Get the individual subject mean reaction times for <strong>correct</strong> congruent and incongruent trials.</li>
 </ol>
-<pre class="r"><code>RT_analysis &lt;- new_all %&gt;%
-  mutate(as.factor(subject)) %&gt;%
+<pre class="r"><code>RT_analysis &lt;- excluded %&gt;%
+  mutate(Subject= as.factor(Subject),
+         congruency= as.factor(congruency)) %&gt;%
   filter(accuracy == TRUE) %&gt;%
-  group_by(subject,congruency) %&gt;%
-  summarise(sub_mean = mean(RT))</code></pre>
+  group_by(Subject,congruency) %&gt;%
+  summarise(sub_mean = mean(ReactionTime))
+
+knitr::kable(RT_analysis)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Subject</th>
+<th align="left">congruency</th>
+<th align="right">sub_mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1.txt</td>
+<td align="left">C</td>
+<td align="right">556</td>
+</tr>
+<tr class="even">
+<td align="left">1.txt</td>
+<td align="left">I</td>
+<td align="right">551</td>
+</tr>
+<tr class="odd">
+<td align="left">10.txt</td>
+<td align="left">C</td>
+<td align="right">898</td>
+</tr>
+<tr class="even">
+<td align="left">10.txt</td>
+<td align="left">I</td>
+<td align="right">986</td>
+</tr>
+<tr class="odd">
+<td align="left">11.txt</td>
+<td align="left">C</td>
+<td align="right">714</td>
+</tr>
+<tr class="even">
+<td align="left">11.txt</td>
+<td align="left">I</td>
+<td align="right">826</td>
+</tr>
+<tr class="odd">
+<td align="left">12.txt</td>
+<td align="left">C</td>
+<td align="right">612</td>
+</tr>
+<tr class="even">
+<td align="left">12.txt</td>
+<td align="left">I</td>
+<td align="right">567</td>
+</tr>
+<tr class="odd">
+<td align="left">13.txt</td>
+<td align="left">C</td>
+<td align="right">531</td>
+</tr>
+<tr class="even">
+<td align="left">13.txt</td>
+<td align="left">I</td>
+<td align="right">635</td>
+</tr>
+<tr class="odd">
+<td align="left">14.txt</td>
+<td align="left">C</td>
+<td align="right">661</td>
+</tr>
+<tr class="even">
+<td align="left">14.txt</td>
+<td align="left">I</td>
+<td align="right">721</td>
+</tr>
+<tr class="odd">
+<td align="left">15.txt</td>
+<td align="left">C</td>
+<td align="right">631</td>
+</tr>
+<tr class="even">
+<td align="left">15.txt</td>
+<td align="left">I</td>
+<td align="right">690</td>
+</tr>
+<tr class="odd">
+<td align="left">16.txt</td>
+<td align="left">C</td>
+<td align="right">571</td>
+</tr>
+<tr class="even">
+<td align="left">16.txt</td>
+<td align="left">I</td>
+<td align="right">582</td>
+</tr>
+<tr class="odd">
+<td align="left">17.txt</td>
+<td align="left">C</td>
+<td align="right">619</td>
+</tr>
+<tr class="even">
+<td align="left">17.txt</td>
+<td align="left">I</td>
+<td align="right">622</td>
+</tr>
+<tr class="odd">
+<td align="left">18.txt</td>
+<td align="left">C</td>
+<td align="right">802</td>
+</tr>
+<tr class="even">
+<td align="left">18.txt</td>
+<td align="left">I</td>
+<td align="right">810</td>
+</tr>
+<tr class="odd">
+<td align="left">19.txt</td>
+<td align="left">C</td>
+<td align="right">984</td>
+</tr>
+<tr class="even">
+<td align="left">19.txt</td>
+<td align="left">I</td>
+<td align="right">1043</td>
+</tr>
+<tr class="odd">
+<td align="left">2.txt</td>
+<td align="left">C</td>
+<td align="right">919</td>
+</tr>
+<tr class="even">
+<td align="left">2.txt</td>
+<td align="left">I</td>
+<td align="right">952</td>
+</tr>
+<tr class="odd">
+<td align="left">20.txt</td>
+<td align="left">C</td>
+<td align="right">671</td>
+</tr>
+<tr class="even">
+<td align="left">20.txt</td>
+<td align="left">I</td>
+<td align="right">690</td>
+</tr>
+<tr class="odd">
+<td align="left">21.txt</td>
+<td align="left">C</td>
+<td align="right">840</td>
+</tr>
+<tr class="even">
+<td align="left">21.txt</td>
+<td align="left">I</td>
+<td align="right">884</td>
+</tr>
+<tr class="odd">
+<td align="left">22.txt</td>
+<td align="left">C</td>
+<td align="right">747</td>
+</tr>
+<tr class="even">
+<td align="left">22.txt</td>
+<td align="left">I</td>
+<td align="right">746</td>
+</tr>
+<tr class="odd">
+<td align="left">3.txt</td>
+<td align="left">C</td>
+<td align="right">811</td>
+</tr>
+<tr class="even">
+<td align="left">3.txt</td>
+<td align="left">I</td>
+<td align="right">809</td>
+</tr>
+<tr class="odd">
+<td align="left">4.txt</td>
+<td align="left">C</td>
+<td align="right">815</td>
+</tr>
+<tr class="even">
+<td align="left">4.txt</td>
+<td align="left">I</td>
+<td align="right">844</td>
+</tr>
+<tr class="odd">
+<td align="left">5.txt</td>
+<td align="left">C</td>
+<td align="right">784</td>
+</tr>
+<tr class="even">
+<td align="left">5.txt</td>
+<td align="left">I</td>
+<td align="right">882</td>
+</tr>
+<tr class="odd">
+<td align="left">6.txt</td>
+<td align="left">C</td>
+<td align="right">667</td>
+</tr>
+<tr class="even">
+<td align="left">6.txt</td>
+<td align="left">I</td>
+<td align="right">691</td>
+</tr>
+<tr class="odd">
+<td align="left">7.txt</td>
+<td align="left">C</td>
+<td align="right">1024</td>
+</tr>
+<tr class="even">
+<td align="left">7.txt</td>
+<td align="left">I</td>
+<td align="right">1076</td>
+</tr>
+<tr class="odd">
+<td align="left">8.txt</td>
+<td align="left">C</td>
+<td align="right">601</td>
+</tr>
+<tr class="even">
+<td align="left">8.txt</td>
+<td align="left">I</td>
+<td align="right">633</td>
+</tr>
+<tr class="odd">
+<td align="left">9.txt</td>
+<td align="left">C</td>
+<td align="right">695</td>
+</tr>
+<tr class="even">
+<td align="left">9.txt</td>
+<td align="left">I</td>
+<td align="right">779</td>
+</tr>
+</tbody>
+</table>
 <ol start="2" style="list-style-type: decimal">
 <li>Get the overall mean RTs and SEMs (standard errors of the mean) for the congruent and incongruent condition. Make a table and graph.</li>
 </ol>
 <pre class="r"><code>overall &lt;- RT_analysis %&gt;%
   group_by(congruency)%&gt;%
-  summarise(meanRT = mean(sub_mean),
-            SEM = sd(sub_mean)/sqrt(length(sub_mean)))
+  summarise(mean_RT = mean(sub_mean),
+            SEM = sd(sub_mean)/sqrt(length(sub_mean))) %&gt;%
+  mutate(mean_RT = as.numeric(mean_RT))
   
 library(xtable)
 knitr::kable(xtable(overall))</code></pre>
@@ -526,36 +1080,50 @@ knitr::kable(xtable(overall))</code></pre>
 <thead>
 <tr class="header">
 <th align="left">congruency</th>
-<th align="right">meanRT</th>
+<th align="right">mean_RT</th>
 <th align="right">SEM</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">C</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">734</td>
+<td align="right">29.80150</td>
 </tr>
 <tr class="even">
 <td align="left">I</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">773</td>
+<td align="right">32.58174</td>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>#why are all nums zero?
-
-ggplot(overall, aes(x=congruency, y=meanRT, fill=congruency))+
+<pre class="r"><code>ggplot(overall, aes(x=congruency, y=mean_RT, fill=congruency))+
   geom_bar(stat=&quot;identity&quot;)+
   theme_classic()+
-  geom_errorbar(aes(ymin=meanRT - SEM,
-                    ymax = meanRT + SEM),
+  geom_errorbar(aes(ymin=mean_RT - SEM,
+                    ymax = mean_RT + SEM),
                 position = position_dodge(width = .8), width = .4)</code></pre>
-<p><img src="DataWrangling_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="DataWrangling_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Compute the flanker effect for each subject, taking the difference between their mean incongruent and congruent RT. Then plot the mean flanker effect, along with the SEM of the mean flanker effect</li>
 </ol>
 <p>**<a href="tip:**" class="uri">tip:**</a> Not all problems have an easy solution in dplyr, this is one them. You may have an easier time using logical indexing of the dataframe to solve this part.</p>
+<pre class="r"><code>Sub_flanker &lt;- as.numeric(check[check$congruency==&quot;I&quot;,]$mean_RT - check[check$congruency==&quot;C&quot;,]$mean_RT)
+
+Sub_means &lt;- mean(Sub_flanker)
+Sub_SEM &lt;- sd(Sub_flanker)/sqrt(length(Sub_flanker))
+
+Sub_flank&lt;- data.frame(DV = &quot;flanker effect&quot;, Sub_means, Sub_SEM)
+
+ggplot(Sub_flank, aes(x = DV, y = Sub_means))+
+  geom_bar(stat = &quot;identity&quot;)+
+  theme_classic(base_size = 14)+
+  geom_errorbar(aes(ymin = Sub_means - Sub_SEM,
+                    ymax = Sub_means + Sub_SEM),
+                position = position_dodge(width = 1.2),
+                width = .4, color = &quot;green&quot;)+
+  ylab(&quot;Mean Flanker Effect&quot;)</code></pre>
+<p><img src="DataWrangling_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="exploratory-analysis" class="section level3">
 <h3>Exploratory analysis</h3>

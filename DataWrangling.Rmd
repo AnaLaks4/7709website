@@ -35,6 +35,7 @@ The code chunk below assumes that you have placed the folder FlankerData into yo
 library(data.table)
 library(dplyr)
 library(ggplot2)
+library(bit64)
 
 
 # get the file names
@@ -43,7 +44,7 @@ file_names <- list.files(path="FlankerData")
 # create headers for each column
 the_headers <- c("stimulus","congruency","proportion",
                  "block","condition","dualtask","unknown",
-                 "stimulus_onset","response_time","response","subject")
+                 "stimulus_onset","response_time","response","Subject")
 # Load data
 # create empty dataframe
 all_data<-data.frame()
@@ -52,7 +53,7 @@ all_data<-data.frame()
 for(i in file_names){
   one_subject <- fread(paste("FlankerData/",i, sep=""))
   names(one_subject) <- the_headers
-  one_subject$subject <- rep(i,dim(one_subject)[1])
+  one_subject$Subject <- rep(i,dim(one_subject)[1])
   one_subject <- cbind(one_subject, trial= 1:dim(one_subject)[1])
   all_data <- rbind(all_data,one_subject)
 }
@@ -90,7 +91,7 @@ The stimulus_onset column gives a computer timestamp in milliseconds indicating 
 
 ```{r}
 new_all<- new_all %>%
-  mutate(RT = as.numeric(response_time - stimulus_onset))
+  mutate(ReactionTime = (response_time - stimulus_onset))
   
 ```
 
@@ -99,25 +100,18 @@ new_all<- new_all %>%
 
 Check how many trials each subject completed in the congruent and incongruent conditions, the mean accuracy for each subject in each congruency condition, and the mean RT for each subject in each congruency condition.
 
-```{r, eval = FALSE}
+```{r}
 check<- new_all %>%
-  group_by(congruency) %>%
-  summarise(num_trials = count(congruency),
-            mean_accuracy = mean(congruency),
-            mean_RT = mean(RT))
-
-```
-
-```{r, eval = FALSE}
-check2<- new_all %>%
-  mutate(subject = as.factor(subject),
-         congruency = as.factor(congruency)) %>%
-  group_by(as.character(subject), congruency) %>%
-  summarise(num_trials = count(RT),
+  mutate(Subject= as.factor(Subject),
+         congruency= as.factor(congruency)) %>%
+  group_by(Subject,congruency) %>%
+  summarise(num_trials = length(congruency),
             mean_accuracy = mean(accuracy),
-            mean_RT = mean(RT))
-```
+            mean_RT = mean(ReactionTime))
+            
+knitr::kable(check)
 
+```
 
 ### Exclusion
 
@@ -125,7 +119,9 @@ It is common to exclude Reaction times that are very slow. There are many method
 
 ```{r}
 excluded <- new_all %>%
-  filter(RT<2e-100)
+  filter(ReactionTime<2000)
+
+
 ```
 
 ## Analysis
@@ -135,13 +131,14 @@ excluded <- new_all %>%
 1. Get the individual subject mean reaction times for **correct** congruent and incongruent trials.
 
 ```{r}
-RT_analysis <- new_all %>%
-  mutate(as.factor(subject)) %>%
+RT_analysis <- excluded %>%
+  mutate(Subject= as.factor(Subject),
+         congruency= as.factor(congruency)) %>%
   filter(accuracy == TRUE) %>%
-  group_by(subject,congruency) %>%
-  summarise(sub_mean = mean(RT))
+  group_by(Subject,congruency) %>%
+  summarise(sub_mean = mean(ReactionTime))
 
-
+knitr::kable(RT_analysis)
 
 ```
 
@@ -150,18 +147,18 @@ RT_analysis <- new_all %>%
 ```{r}
 overall <- RT_analysis %>%
   group_by(congruency)%>%
-  summarise(meanRT = mean(sub_mean),
-            SEM = sd(sub_mean)/sqrt(length(sub_mean)))
+  summarise(mean_RT = mean(sub_mean),
+            SEM = sd(sub_mean)/sqrt(length(sub_mean))) %>%
+  mutate(mean_RT = as.numeric(mean_RT))
   
 library(xtable)
 knitr::kable(xtable(overall))
-#why are all nums zero?
 
-ggplot(overall, aes(x=congruency, y=meanRT, fill=congruency))+
+ggplot(overall, aes(x=congruency, y=mean_RT, fill=congruency))+
   geom_bar(stat="identity")+
   theme_classic()+
-  geom_errorbar(aes(ymin=meanRT - SEM,
-                    ymax = meanRT + SEM),
+  geom_errorbar(aes(ymin=mean_RT - SEM,
+                    ymax = mean_RT + SEM),
                 position = position_dodge(width = .8), width = .4)
 ```
 
@@ -170,7 +167,21 @@ ggplot(overall, aes(x=congruency, y=meanRT, fill=congruency))+
 **tip:** Not all problems have an easy solution in dplyr, this is one them. You may have an easier time using logical indexing of the dataframe to solve this part.
 
 ```{r}
+Sub_flanker <- as.numeric(check[check$congruency=="I",]$mean_RT - check[check$congruency=="C",]$mean_RT)
 
+Sub_means <- mean(Sub_flanker)
+Sub_SEM <- sd(Sub_flanker)/sqrt(length(Sub_flanker))
+
+Sub_flank<- data.frame(DV = "flanker effect", Sub_means, Sub_SEM)
+
+ggplot(Sub_flank, aes(x = DV, y = Sub_means))+
+  geom_bar(stat = "identity")+
+  theme_classic(base_size = 14)+
+  geom_errorbar(aes(ymin = Sub_means - Sub_SEM,
+                    ymax = Sub_means + Sub_SEM),
+                position = position_dodge(width = 1.2),
+                width = .4, color = "green")+
+  ylab("Mean Flanker Effect")
   
 ```
 
